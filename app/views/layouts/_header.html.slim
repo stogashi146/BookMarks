@@ -1,7 +1,12 @@
 .conteiner-fruid
   nav
     span
-      = image_tag "bookmarks.png", :size =>'100x100', class:"navbar-brand text-left"
+      = image_tag "bookmarks.png", :width => '5%', :height => '5%', class:"navbar-brand text-left"
+
+    .search-box
+      = form_with url: books_path, method: :get, local: true do |f|
+        = f.text_field :keyword, class:"form-control"
+        = f.submit "本を検索", class:"form-control btn btn-success"
     ul.nav.ml-auto
       - if user_signed_in?
         li.nav-item

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :book_unreads,  only: [:create, :destroy]
     resources :book_comments,  only: [:create, :destroy]
   end
+  get "books/search"
 
   resources :tags, only: [:index, :create, :destroy, :edit, :update]
 end
