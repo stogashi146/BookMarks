@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
+
+ body{
+   font-family: 'Kosugi', sans-serif;
+ }
+
+.title{
+  font-weight: 900;
+  font-size: 100px;
+}
