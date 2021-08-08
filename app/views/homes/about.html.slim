@@ -1,9 +1,19 @@
-ul
-  - if user_signed_in?
-    li
-      = link_to "ログアウト", destroy_user_session_path, method: :delete
-  - else
-    li
-      = link_to "ログイン", new_user_session_path
-    li
-      = link_to "新規登録", new_user_registration_path
+
+
+.container
+  .row
+    .col-md-6
+      h1.title
+        | 表紙買いを
+        br
+        | どこでも
+        
+      = link_to 
+
+      p.start_now.btn.btn-primary
+        | 今すぐ本を探す
+
+    .col-md-5.col-offset-1
+      .bg-primary
+        h1
+          | プレビューが入る
