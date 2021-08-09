@@ -12,14 +12,44 @@
  *
  *= require_tree .
  *= require_self
- */
- @import "bootstrap";
+*/
+@import "bootstrap";
 
- body{
-   font-family: 'Kosugi', sans-serif;
- }
+body{
+ font-family: 'Kosugi', sans-serif;
+}
+
+// headerページ
+.header_find_book{
+  color: black;
+  background-color: #fff100;
+  border-bottom: 5px solid #ccc100;
+}
+
+// aboutページ
+.about_bg{
+  background-image: url("bg-image.jpg");
+  background-size: cover;
+}
 
 .title{
   font-weight: 900;
   font-size: 100px;
 }
+
+.about_find_book{
+  color: black;
+  background-color: #fff100;
+  border-bottom: 5px solid #ccc100;
+}
+
+.about_border{
+  border-bottom: 5px solid #black;
+}
+
+.about_whatjacket_left{
+  background-image: url("about_what_jacket.jpg");
+  // background-color:rgba(255,255,255,0.8);
+  background-blend-mode:lighten;
+}
+
