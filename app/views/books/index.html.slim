@@ -1,12 +1,12 @@
 .container
-  .col-md-10
-    .row.flex-wrap
+  .col-12
+    .row.flex-wrap.mt-3
     - @books.each do |book|
       = link_to  "#{book.item_url}", class:"col-2 m-1" do
         = image_tag book.large_image_url, :width => '18%', :height => '18%'
 
     .row
       - if @books.previous_page?
-        = link_to "前のページ", books_path(page: @page - 1, keyword: @keyword)
+        = link_to "前のページ", books_path(keyword: @keyword, page: @page - 1)
       - if @books.next_page?
-        = link_to "次のページ", books_path(page: @page + 1, keyword: @keyword)
+        = link_to "次のページ", books_path(keyword: @keyword, page: @page + 1, )

@@ -1,18 +1,25 @@
 .conteiner-fruid
-  nav
-    span
-      = image_tag "bookmarks.png", :width => '5%', :height => '5%', class:"navbar-brand text-left"
+  .row
+    nav.navbar
+      = link_to root_path
+        = image_tag "bookmarks.png", :width => '15%', :height => '15%', class:"navbar-brand ml-2"
 
-    .search-box
-      = form_with url: books_path, method: :get, local: true do |f|
-        = f.text_field :keyword, class:"form-control"
-        = f.submit "本を検索", class:"form-control btn btn-success"
-    ul.nav.ml-auto
+
+    ul.nav.navbar.justify-content-center
+      li.nav-item
+        = form_with url: books_path, method: :get, local: true, class:"form-inline" do |f|
+          = f.text_field :keyword, class:"form-control ml-5"
+          = f.submit "検索", class:"btn btn-secondary my-2"
+
+
+    ul.nav.navbar.ml-auto
       - if user_signed_in?
         li.nav-item
           = link_to "ログアウト", destroy_user_session_path, method: :delete, class:"nav-link"
       - else
         li.nav-item
-          = link_to "ログイン", new_user_session_path, class:"nav-link"
+          = link_to "ログイン", new_user_session_path, class:"nav-link text-secondary"
         li.nav-item
-          = link_to "新規登録", new_user_registration_path, class:"nav-link"
+          = link_to "新規登録", new_user_registration_path, class:"nav-link text-secondary"
+        li.nav-item
+          = link_to "本を探す", books_path(keyword: "少年", page: rand(100)), class:"nav-link header_find_book"
