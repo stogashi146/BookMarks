@@ -15,6 +15,5 @@ class User < ApplicationRecord
 
   has_one :sns_acount, dependent: :destroy
 
-  validates  :name, presence: true
   validates  :name_id, presence: true
 end

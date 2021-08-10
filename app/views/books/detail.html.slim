@@ -1,0 +1,37 @@
+.container.detail
+  .row.mt-5
+    .col-md-4.offset-1
+        = link_to @details["url"] do
+          = image_tag @details["image_url"], :width => '90%', :height => '100%'
+
+    .col-md-5.offset-1
+      h1
+        = @details["title"]
+      .mt-3
+        span
+          | 著者：
+        = link_to "#{@details["author"]}", books_path(author: @details["author"])
+        br
+        = "出版社：#{@details["publisher_name"]}"
+        br
+        = "発売日：#{@details["sales_date"]}"
+
+  .row
+    .col-md-6.offset-6
+      .col-md-3.d-inline
+        a type= "button" data-toggle= "modal" data-target= "#read_modal"
+          i.fas.fa-bookmark.detail_read_icon
+          span.detail_read_text.ml-3
+            | 読んだ！
+        = render "read"
+
+      .col-md-3.d-inline.detail_unread_icon
+        = link_to book_unreads_path(book: @details.permit!, model: "unread"), method: :post, local: true do
+          i.fas.fa-book.detail_unread_icon
+          span.detail_unread_text.ml-3
+            | 読みたい！
+
+      .col-md-3.d-inline
+        span.detail_comment_text.ml-3
+          | コメントする
+

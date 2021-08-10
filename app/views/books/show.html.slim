@@ -1,2 +1,45 @@
-h1 Books#show
-p Find me in app/views/books/show.html.slim
+.container.detail
+  .row.mt-5
+    .col-md-4.offset-1
+      = link_to @book.url do
+        = image_tag @book.image_url, :width => '90%', :height => '100%'
+
+    .col-md-5.offset-1
+      h1
+        = @book.title
+      .mt-3
+        span
+          | 著者：
+        = link_to @book.author, books_path(author: @book.author)
+        br
+        = "出版社：#{@book.publisher_name}"
+        br
+        = "発売日：#{@book.sales_date}"
+
+  .row
+    .col-md-6.offset-6
+      .col-md-3.d-inline
+        a type= "button" data-toggle= "modal" data-target= "#read_modal"
+          i.fas.fa-bookmark.detail_read_icon
+          span.detail_read_text.ml-3
+            | 読んだ！
+        = render "read", book: @book, book_read: @book_read
+
+      .col-md-3.d-inline.detail_unread_icon
+        - if @book.read_exists?(current_user, "unread")
+          = link_to book_book_unreads_path(@book), method: :delete, local: true do
+            i.fas.fa-book.detail_unread_icon
+            span.detail_unread_text.ml-3
+              | 読みたい！済
+
+        - else
+          = link_to book_book_unreads_path(@book), method: :post, local: true do
+            i.fas.fa-book.detail_unread_icon
+            span.detail_unread_text.ml-3
+              | 読みたい！未
+
+
+      .col-md-3.d-inline
+        span.detail_comment_text.ml-3
+          | コメントする
+
