@@ -24,18 +24,38 @@
           = form_with model: BookRead, url: book_book_reads_path(book), method: :patch, local: true do |f|
             .form-group
               = f.text_area :comment, class: "form-control", placeholder: "レビュー無記入でも投稿できます。", rows: 5, value: book_read.comment
-            .form-group
-              = f.text_field :rate, class: "form-control", placeholder: "評価を入力", value: book_read.rate
-              - f.hidden_field :is_shared, :value => false
+            .form-group#star-edit
+              = f.hidden_field :rate, class: "form-control", id: :review_star
             .modal-footer
               = link_to "削除する", book_book_reads_path(book),  method: :delete, local: true,  class: "btn btn-secondary"
               = f.submit "編集する", class: "btn btn-primary"
+          javascript:
+            $('#star-edit').raty({
+              size     : 36,
+              starOff: "#{asset_path('star-off.png')}",
+              starOn: "#{asset_path('star-on.png')}",
+              starHalf: "#{asset_path('star-half.png')}",
+              score: "#{book_read.rate}",
+              scoreName: "book_read[rate]",
+              half: false,
+            });
+
         - else
           = form_with model: BookRead, url: book_book_reads_path(book), method: :post, local: true do |f|
             .form-group
               = f.text_area :comment, class: "form-control", placeholder: "レビュー無記入でも投稿できます。", rows: 5
-            .form-group
-              = f.text_field :rate, class: "form-control", placeholder: "評価を入力"
-              - f.hidden_field :is_shared, :value => false
+            .form-group#star
+              = f.hidden_field :rate, class: "form-control", id: :review_star
             .modal-footer
               = f.submit "投稿する", class: "btn btn-primary"
+
+javascript:
+  $('#star').raty({
+    size     : 36,
+    starOff: "#{asset_path('star-off.png')}",
+    starOn: "#{asset_path('star-on.png')}",
+    starHalf: "#{asset_path('star-half.png')}",
+    scoreName: "book_read[rate]",
+    half: false,
+  });
+
