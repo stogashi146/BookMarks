@@ -1,0 +1,21 @@
+.modal.fade#read_modal tabindex= "-1" role= "dialog" aria-labelledby= "read_modal_label" aria-hidden= "true"
+  .modal-dialog.modal-dialog-scrollable role= "document"
+    .modal-content
+      .modal-header
+        h5.modal-title#read_modal_centered_label
+          | レビュー
+        button.close type= "button" data-dismiss= "modal" aria-label= "Close"
+          span aria-hidden= "true"
+            | &times;
+      .modal-body
+        = form_with model: BookRead, url: book_book_reads_path(book), method: :post, local: true do |f|
+          .form-group
+            = f.text_area :comment, class: "form-control", placeholder: "レビュー無記入でも投稿できます。", rows: 5
+          .form-group
+            = f.text_field :rate, class: "form-control", placeholder: "評価を入力"
+            - f.hidden_field :is_shared, :value => false
+
+          .modal-footer
+            - if book_read.present?
+              = link_to "削除する", book_book_reads_path(book),  method: :delete, local: true,  class: "btn btn-secondary"
+            = f.submit "投稿する", class: "btn btn-primary"

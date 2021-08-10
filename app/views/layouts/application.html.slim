@@ -5,6 +5,9 @@ html
       | BookMarks
     = csrf_meta_tags
     = csp_meta_tag
+    javascript:
+      "https://kit.fontawesome.com/7b10f1e4cc.js" crossorigin="anonymous"
+
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     link rel="preconnect" href="https://fonts.googleapis.com"
@@ -14,5 +17,5 @@ html
   body
     header
       = render "layouts/header"
-
-    = yield
+    main
+      = yield
