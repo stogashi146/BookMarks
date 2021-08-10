@@ -1,0 +1,30 @@
+p.mt-5
+  | #{@reviews.count}件のレビュー
+- reviews.each do |review|
+  .border.p-2.mt-2
+    .row
+      .col-md-1
+        review.user.image_id
+
+      .col-md-11
+        h4
+          = review.user.name_id
+
+        div id="rate_#{review.id}"
+        javascript:
+          $("#rate_#{review.id}").raty({
+            size: 20,
+            starOff: "#{asset_path('star-off.png')}",
+            starOn: "#{asset_path('star-on.png')}",
+            starHalf: "#{asset_path('star-half.png')}",
+            half: true,
+            readOnly: true,
+            score: "#{review.rate}",
+          });
+
+        p
+          = review.comment
+        p.text-right
+          = review.created_at.strftime('%Y/%m/%d')
+
+

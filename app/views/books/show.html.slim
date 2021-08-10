@@ -1,4 +1,4 @@
-.container.detail
+.container.show
   .row.mt-5
     .col-md-4.offset-1
       = link_to @book.url do
@@ -19,27 +19,21 @@
   .row
     .col-md-6.offset-6
       .col-md-3.d-inline
-        a type= "button" data-toggle= "modal" data-target= "#read_modal"
-          i.fas.fa-bookmark.detail_read_icon
-          span.detail_read_text.ml-3
-            | 読んだ！
         = render "read", book: @book, book_read: @book_read
 
-      .col-md-3.d-inline.detail_unread_icon
-        - if @book.read_exists?(current_user, "unread")
-          = link_to book_book_unreads_path(@book), method: :delete, local: true do
-            i.fas.fa-book.detail_unread_icon
-            span.detail_unread_text.ml-3
-              | 読みたい！済
+      .col-md-3.d-inline.show_unread_icon
+        = render "unread", book: @book
 
-        - else
-          = link_to book_book_unreads_path(@book), method: :post, local: true do
-            i.fas.fa-book.detail_unread_icon
-            span.detail_unread_text.ml-3
-              | 読みたい！未
 
 
       .col-md-3.d-inline
-        span.detail_comment_text.ml-3
+        span.show_comment_text.ml-3
           | コメントする
+
+  .row
+    .col-md-11.offset-1
+      = render "review", reviews: @reviews
+
+
+
 

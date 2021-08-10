@@ -7,7 +7,7 @@
  *
  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
+ * files in thisa directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
@@ -70,27 +70,65 @@ header{
 }
 
 
-//detailページ
-.detail{
+//showページ
+.show{
   color:#5B5B5B;
 }
 
-.detail_read_icon{
+.show_read_icon{
   font-size: 40px;
 }
 
-.detail_read_text{
+.show_read_text{
   font-size: 18px;
 }
 
-.detail_unread_icon{
+.show_unread_icon{
   font-size: 40px;
 }
 
-.detail_unread_text{
+.show_unread_text{
   font-size: 18px;
 }
 
-.detail_comment_text{
+.show_comment_text{
   font-size: 18px;
+}
+
+.book_show_readon{
+  background-color: #FFE100;
+  color:#5B5B5B;
+  &:hover{
+    background-color: #ffe51f;
+    color:#5B5B5B;
+  }
+}
+
+.book_show_readoff{
+  background-color: #FEF298;
+  color:#5B5B5B;
+  opacity: 0.9;
+  &:hover{
+    background-color: #FFF6B3;
+    color:#5B5B5B;
+  }
+}
+
+.book_show_unreadon{
+  background-color: #FFE100;
+  color:#5B5B5B;
+  &:hover{
+    background-color: #ffe51f;
+    color:#5B5B5B;
+  }
+}
+
+.book_show_unreadoff{
+  background-color: #FEF298;
+  color:#5B5B5B;
+  opacity: 0.9;
+  &:hover{
+    background-color: #FFF6B3;
+    color:#5B5B5B;
+  }
 }
