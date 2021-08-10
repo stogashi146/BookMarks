@@ -13,6 +13,12 @@ class BookReadsController < ApplicationController
     redirect_to request.referer
   end
 
+  def update
+    book = Book.find(params[:book_id])
+    book.book_reads.find_by(user_id: current_user.id).update(read_params)
+    redirect_to request.referer
+  end
+
   private
   def read_params
     params.require(:book_read).permit(:rate, :comment, :is_shared)

@@ -1,3 +1,15 @@
+- if book.read_exists?(current_user, "read")
+  a.book_show_readon.p-2 type= "button" data-toggle= "modal" data-target= "#read_modal"
+    i.fas.fa-bookmark.show_read_icon
+    span.show_read_text.ml-3
+      | 読んだ！
+
+-else
+  a.book_show_readoff.p-2 type= "button" data-toggle= "modal" data-target= "#read_modal"
+    i.fas.fa-bookmark.show_read_icon
+    span.show_read_text.ml-3
+      | 読んだ！
+
 .modal.fade#read_modal tabindex= "-1" role= "dialog" aria-labelledby= "read_modal_label" aria-hidden= "true"
   .modal-dialog.modal-dialog-scrollable role= "document"
     .modal-content
@@ -8,14 +20,22 @@
           span aria-hidden= "true"
             | &times;
       .modal-body
-        = form_with model: BookRead, url: book_book_reads_path(book), method: :post, local: true do |f|
-          .form-group
-            = f.text_area :comment, class: "form-control", placeholder: "レビュー無記入でも投稿できます。", rows: 5
-          .form-group
-            = f.text_field :rate, class: "form-control", placeholder: "評価を入力"
-            - f.hidden_field :is_shared, :value => false
-
-          .modal-footer
-            - if book_read.present?
+        - if book_read.present?
+          = form_with model: BookRead, url: book_book_reads_path(book), method: :patch, local: true do |f|
+            .form-group
+              = f.text_area :comment, class: "form-control", placeholder: "レビュー無記入でも投稿できます。", rows: 5, value: book_read.comment
+            .form-group
+              = f.text_field :rate, class: "form-control", placeholder: "評価を入力", value: book_read.rate
+              - f.hidden_field :is_shared, :value => false
+            .modal-footer
               = link_to "削除する", book_book_reads_path(book),  method: :delete, local: true,  class: "btn btn-secondary"
-            = f.submit "投稿する", class: "btn btn-primary"
+              = f.submit "編集する", class: "btn btn-primary"
+        - else
+          = form_with model: BookRead, url: book_book_reads_path(book), method: :post, local: true do |f|
+            .form-group
+              = f.text_area :comment, class: "form-control", placeholder: "レビュー無記入でも投稿できます。", rows: 5
+            .form-group
+              = f.text_field :rate, class: "form-control", placeholder: "評価を入力"
+              - f.hidden_field :is_shared, :value => false
+            .modal-footer
+              = f.submit "投稿する", class: "btn btn-primary"
