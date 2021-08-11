@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   def show
+    @user = User.find(params[:id])
+    @book_reads = @user.book_reads
+    @book_unreads = @user.book_unreads
   end
 
   def edit
@@ -9,6 +12,7 @@ class UsersController < ApplicationController
   end
 
   def read
+
   end
 
   def unread

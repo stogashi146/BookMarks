@@ -14,11 +14,10 @@ Rails.application.routes.draw do
 
   resources :books, only: [:index, :show, :create] do
     resources :book_comments,  only: [:create, :destroy]
-    resource :book_reads,  only: [:create, :destroy, :update]
+    resource :book_reads,  only: [:show, :create, :destroy, :update]
     resource :book_unreads,  only: [:create, :destroy]
   end
 
-  # get "books/search"
   get "book/detail" => "books#detail"
 
   resources :tags, only: [:index, :create, :destroy, :edit, :update]
