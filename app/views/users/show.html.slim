@@ -1,2 +1,72 @@
-h1 Users#show
-p Find me in app/views/users/show.html.slim
+.container
+  .row
+    .col-md-12.mt-5
+      .row
+        .col-md-3.offset-1
+          = attachment_image_tag @user, :image, size: "250x250", fallback: "cat1.jpg", class: "rounded-circle"
+        .col-md-4.offset-1.mt-5
+          h2.d-inline
+            = @user.name
+          span.d-inline.ml-5
+            | フォローする
+
+          h4.mt-5
+            = @user.introduction
+
+      .row.user_flex_box
+        .col-md-7.offset-5.mt-3.d-inline-flex
+          .user_flex_item
+            i.fas.fa-bookmark.show_read_icon.ml-3
+            span.show_read_text.ml-3
+              | 読んだ！
+            p.text-center.mt-1
+              = "#{@book_reads.count}件"
+
+          .user_flex_item
+            i.fas.fa-book.show_unread_icon.ml-3
+            span.show_unread_text.ml-3
+              | 読みたい！
+            p.text-center.mt-1
+              = "#{@book_unreads.count}件"
+
+          .user_flex_item
+            span.show_unread_text.ml-3
+              | フォロー
+            p.text-center.mt-3
+              | 何件
+
+
+          .user_flex_item
+            span.show_unread_text.ml-3
+              | フォロワー
+            p.text-center.mt-3
+              | 何件
+
+  .row
+    .col-md-12.mt-3
+      h3
+        | 読んだ本
+
+    - @book_reads.each do |book_read|
+      .col-md-3
+        h5
+          = book_read.book.title
+        div id="rate_#{book_read.id}"
+        = book_read.comment.truncate(50)
+        - if book_read.comment.size > 50
+          = link_to "続きを読む", book_book_reads_path(book_read.book_id, user: book_read.user_id)
+
+      .col-md-3
+        = link_to book_path(book_read.book.id), local: true do
+          = image_tag book_read.book.image_url.chomp("?_ex=200x200"), :width => '80%'
+
+      javascript:
+        $("#rate_#{book_read.id}").raty({
+          size: 18,
+          starOff: "#{asset_path('star-off.png')}",
+          starOn: "#{asset_path('star-on.png')}",
+          starHalf: "#{asset_path('star-half.png')}",
+          half: true,
+          readOnly: true,
+          score: "#{book_read.rate}",
+        });
