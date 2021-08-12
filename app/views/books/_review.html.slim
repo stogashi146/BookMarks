@@ -4,11 +4,13 @@ p.mt-5
   .border.p-2.mt-2
     .row
       .col-md-1
-        review.user.image_id
+        = link_to user_path(review.user.id)
+         = attachment_image_tag review.user, :image, size: "80x80", fallback: "noimage.jpg", class: "rounded-circle mr-4"
 
       .col-md-11
         h4
-          = review.user.name_id
+          = link_to user_path(review.user.id)
+            = review.user.name_id
 
         div id="rate_#{review.id}"
         javascript:

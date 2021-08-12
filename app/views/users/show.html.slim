@@ -3,7 +3,7 @@
     .col-md-12.mt-5
       .row
         .col-md-3.offset-1
-          = attachment_image_tag @user, :image, size: "250x250", fallback: "cat1.jpg", class: "rounded-circle"
+          = attachment_image_tag @user, :image, size: "250x250", fallback: "noimage.jpg", class: "rounded-circle"
         .col-md-5.offset-1.mt-5
           h2.d-inline
             = @user.name
@@ -19,32 +19,38 @@
                   | フォロー
                 i.fas.fa-user-plus.ml-2
 
-          h4.mt-5
+          - else
+            = link_to edit_user_path(current_user.id), local: true, class:"btn btn-secondary ml-5 mb-2"
+              small.d-inline
+                | プロフィール編集
+
+
+          h4.mt-3
             = @user.introduction
 
       .row.user_flex_box
         .col-md-7.offset-5.mt-3.d-inline-flex
-          a.user_flex_item#read_btn
+          a.user_flex_item.btn#read_btn
             i.fas.fa-bookmark.show_read_icon.ml-3
             span.show_read_text.ml-3
               | 読んだ！
             p.text-center.mt-1
               = "#{@book_reads.count}件"
 
-          a.user_flex_item#unread_btn
+          a.user_flex_item.btn#unread_btn
             i.fas.fa-book.show_unread_icon.ml-3
             span.show_unread_text.ml-3
               | 読みたい！
             p.text-center.mt-1
               = "#{@book_unreads.count}件"
 
-          a.user_flex_item.mt-2#follow_btn
+          a.user_flex_item.btn.mt-2#follow_btn
             span.show_unread_text.ml-3
               | フォロー
             p.text-center.mt-2
               = "#{@user.followings.count}件"
 
-          a.user_flex_item.mt-2#follower_btn
+          a.user_flex_item.btn.mt-2#follower_btn
             span.show_unread_text.ml-3
               | フォロワー
             p.text-center.mt-2

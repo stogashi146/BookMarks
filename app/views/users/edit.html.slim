@@ -1,2 +1,28 @@
-h1 Users#edit
-p Find me in app/views/users/edit.html.slim
+.container
+  .row
+    .col-md-6
+      h3.mt-5
+        | プロフィール編集
+  = form_with model: @user, local: true do |f|
+    .row
+      .col-md-3
+        .form-group
+          label
+            = attachment_image_tag @user, :image, size: "100x100", fallback: "noimage.jpg", class: "rounded-circle mt-3"
+            = f.attachment_field :image
+      .col-md-6.offset-1
+        h3
+          = @user.name_id
+
+        .form-group
+          label for="user_name_input"
+            | ニックネーム
+          = f.text_field :name, id:"user_name_input", class:"form-control"
+
+        .form-group
+          label for="user_introduction_input"
+            | プロフィール
+          = f.text_area :introduction, id:"user_introduction_input", class:"form-control"
+
+        .form-group
+          = f.submit "変更を保存する", class:"btn btn-success"
