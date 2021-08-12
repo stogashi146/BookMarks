@@ -5,8 +5,10 @@
       = link_to books_path(book: Book.book_details(book)), method: :post, local: true, class:"col-2 m-1" do
         = image_tag book.large_image_url.chomp("?_ex=200x200"), :width => '20%', :height => '20%'
 
-    .row
+    .row.d-flex.justify-content-center.my-3
       - if @books.previous_page?
-        = link_to "前のページ", books_path(keyword: @keyword, page: @page - 1)
+        h4
+          = link_to "前のページ", books_path(keyword: @keyword, page: @page - 1), class:"btn btn-secondary mx-2"
       - if @books.next_page?
-        = link_to "次のページ", books_path(keyword: @keyword, page: @page + 1, )
+        h4
+          = link_to "次のページ", books_path(keyword: @keyword, page: @page + 1, ), class:"btn btn-secondary mx-2"
