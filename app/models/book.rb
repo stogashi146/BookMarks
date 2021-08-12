@@ -18,7 +18,7 @@ class Book < ApplicationRecord
     }
   end
 
-  # 本がテーブルに存在するか？
+  # 読んだ本が既にテーブルに存在するか？
   def read_exists?(user, type)
     if type == "read"
       book_reads.where(user_id: user.id).exists?
