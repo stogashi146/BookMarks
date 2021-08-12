@@ -4,69 +4,68 @@
       .row
         .col-md-3.offset-1
           = attachment_image_tag @user, :image, size: "250x250", fallback: "cat1.jpg", class: "rounded-circle"
-        .col-md-4.offset-1.mt-5
+        .col-md-5.offset-1.mt-5
           h2.d-inline
             = @user.name
-          span.d-inline.ml-5
-            | フォローする
+          - unless @user == current_user
+            - if User.follow_include?(current_user, @user)
+              = link_to user_relationships_path(@user.id), method: :delete, local: true, class:"btn btn-secondary ml-3 mb-2"
+                span.d-inline
+                  | フォロー中
+                i.fas.fa-user-check.ml-2
+            - else
+              = link_to user_relationships_path(@user.id), method: :post, local: true, class:"btn btn-light btn-outline-secondary ml-3 mb-2"
+                span.d-inline
+                  | フォロー
+                i.fas.fa-user-plus.ml-2
 
           h4.mt-5
             = @user.introduction
 
       .row.user_flex_box
         .col-md-7.offset-5.mt-3.d-inline-flex
-          .user_flex_item
+          a.user_flex_item#read_btn
             i.fas.fa-bookmark.show_read_icon.ml-3
             span.show_read_text.ml-3
               | 読んだ！
             p.text-center.mt-1
               = "#{@book_reads.count}件"
 
-          .user_flex_item
+          a.user_flex_item#unread_btn
             i.fas.fa-book.show_unread_icon.ml-3
             span.show_unread_text.ml-3
               | 読みたい！
             p.text-center.mt-1
               = "#{@book_unreads.count}件"
 
-          .user_flex_item
+          a.user_flex_item.mt-2#follow_btn
             span.show_unread_text.ml-3
               | フォロー
-            p.text-center.mt-3
-              | 何件
+            p.text-center.mt-2
+              = "#{@user.followings.count}件"
 
-
-          .user_flex_item
+          a.user_flex_item.mt-2#follower_btn
             span.show_unread_text.ml-3
               | フォロワー
-            p.text-center.mt-3
-              | 何件
+            p.text-center.mt-2
+              = "#{@user.followers.count}件"
 
-  .row
-    .col-md-12.mt-3
-      h3
-        | 読んだ本
+  .row#user_main_item
+    = render "read", book_reads: @book_reads
 
-    - @book_reads.each do |book_read|
-      .col-md-3
-        h5
-          = book_read.book.title
-        div id="rate_#{book_read.id}"
-        = book_read.comment.truncate(50)
-        - if book_read.comment.size > 50
-          = link_to "続きを読む", book_book_reads_path(book_read.book_id, user: book_read.user_id)
+javascript:
+  $('#read_btn').on('click', function() {
+    $("#user_main_item").html("#{j(render "read", book_reads: @book_reads)}");
+  });
 
-      .col-md-3
-        = link_to book_path(book_read.book.id), local: true do
-          = image_tag book_read.book.image_url.chomp("?_ex=200x200"), :width => '80%'
+  $('#unread_btn').on('click', function() {
+    $("#user_main_item").html("#{j(render "unread", book_unreads: @book_unreads)}");
+  });
 
-      javascript:
-        $("#rate_#{book_read.id}").raty({
-          size: 18,
-          starOff: "#{asset_path('star-off.png')}",
-          starOn: "#{asset_path('star-on.png')}",
-          starHalf: "#{asset_path('star-half.png')}",
-          half: true,
-          readOnly: true,
-          score: "#{book_read.rate}",
-        });
+  $('#follow_btn').on('click', function() {
+    $("#user_main_item").html("#{j(render "follow", user: @user)}");
+  });
+
+  $('#follower_btn').on('click', function() {
+    $("#user_main_item").html("#{j(render "follower", user: @user)}");
+  });

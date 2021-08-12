@@ -19,7 +19,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @book_read = @book.book_reads.find_by(user_id: current_user.id)
+    @book_read = @book.book_reads.find_by(user_id: current_user.id) if user_signed_in?
     @reviews = @book.book_reads
   end
 

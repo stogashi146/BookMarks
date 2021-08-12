@@ -17,4 +17,9 @@ class User < ApplicationRecord
 
   validates  :name_id, presence: true
   attachment :image
+
+  def self.follow_include?(follower, follow)
+    follower.followings.include?(follow)
+  end
+
 end
