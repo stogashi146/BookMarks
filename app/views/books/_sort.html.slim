@@ -1,0 +1,6 @@
+.drop-down.d-inline
+  button.btn.btn-light.border.dropdown-toggle#dropdownMenu type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+    | ジャンル
+  .dropdown-menu aria-labelledby="dropdownMenu"
+    - Book.genre_ids.keys.each do |key|
+      = link_to key, books_path(keyword: key), class:"dropdown-item"

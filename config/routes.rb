@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resource :book_unreads,  only: [:create, :destroy]
   end
 
-  get "book/detail" => "books#detail"
+  get "book/ranking" => "books#ranking"
 
   resources :tags, only: [:index, :create, :destroy, :edit, :update]
 end
