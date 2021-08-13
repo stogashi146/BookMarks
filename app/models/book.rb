@@ -6,6 +6,7 @@ class Book < ApplicationRecord
 
   validates  :isbn, presence: true
 
+  # Bookモデルに登録するハッシュ
   def self.book_details(book)
     {
       "title" => book.title,
@@ -25,7 +26,40 @@ class Book < ApplicationRecord
     else
       book_unreads.where(user_id: user.id).exists?
     end
+  end
 
+  # 楽天ブックスのジャンルID
+  enum genre_id:
+    { 少年: "001001001",
+      少女: "001001002",
+      青年: "001001003",
+      レディース: "001001004",
+      文庫: "001001006",
+      その他: "001001012",
+    }
+
+  #  本を検索する
+  def self.search_books(keyword:"本", author:"", sort:"standard", genre:"", hits:"28")
+    RakutenWebService::Books::Total.search(
+      keyword: keyword,
+      author: author,
+      sort: sort,
+      booksGenreId:"001001" + genre,
+      orFlag: "1",
+      hits: hits)
+  end
+
+  # 読んだ順
+  def self.reads_rank
+    BookRead.all.group(:book_id).order("count(:book_id) desc")
+  end
+
+  def self.unreads_rank
+    BookUnread.all.group(:book_id).order("count(:book_id) desc")
+  end
+
+  def self.reviews_avg
+      self.book_reads.sum(:rate) / self.book_reads.count
   end
 
 end

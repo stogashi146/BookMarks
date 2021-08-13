@@ -16,7 +16,9 @@
           li.nav-item
             = link_to "About", root_path, class:"nav-link text-secondary"
           li.nav-item
-            = link_to "本を探す", books_path(keyword: "少年", page: rand(100)), class:"nav-link header_find_book"
+            = link_to "ランキング", book_ranking_path(genre: "", sort: "sales"), class:"nav-link text-secondary"
+          li.nav-item
+            = link_to "本を探す", books_path(keyword: "本", page: rand(100)), class:"nav-link header_find_book"
           li.nav-item
             = link_to "ログアウト", destroy_user_session_path, method: :delete, class:"nav-link"
           li.nav-item
@@ -26,6 +28,8 @@
         - else
           li.nav-item
             = link_to "About", root_path, class:"nav-link text-secondary"
+          li.nav-item
+            = link_to "ランキング", book_ranking_path(genre: "", sort: "sales"), class:"nav-link text-secondary"
           li.nav-item
             = link_to "ログイン", new_user_session_path, class:"nav-link text-secondary"
           li.nav-item

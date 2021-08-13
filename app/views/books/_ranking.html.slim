@@ -1,0 +1,35 @@
+table.table.table-hover
+  - books_rank.to_a.each.with_index(1) do |book_rank, i|
+    tr
+      td.text-center
+        - if params[:marks_sort]
+          = link_to book_path(book_rank.book.id), local: true do
+           = image_tag book_rank.book.image_url, :width => '50%'
+        - else
+          = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
+            = image_tag book_rank.large_image_url.chomp("?_ex=200x200"), :width => '50%'
+      td
+        h4
+          = i
+          br
+        h5
+         - if params[:marks_sort]
+          = link_to book_path(book_rank.id), local: true do
+            = book_rank.book.title
+            div id="rate_#{book_rank.id}"
+            - if params[:marks_sort] == "read"
+              javascript:
+                $("#rate_#{book_rank.id}").raty({
+                  size: 20,
+                  starOff: "#{asset_path('star-off.png')}",
+                  starOn: "#{asset_path('star-on.png')}",
+                  starHalf: "#{asset_path('star-half.png')}",
+                  half: true,
+                  readOnly: true,
+                  score: "#{book_rank.rate}",
+                });
+
+         -else
+          = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
+            = book_rank.title
+

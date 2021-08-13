@@ -10,7 +10,7 @@
       .mt-3
         span
           | 著者：
-        = link_to @book.author, books_path(author: @book.author)
+        = link_to @book.author, books_path(author: @book.author.gsub(" ", "") )
         br
         = "出版社：#{@book.publisher_name}"
         br

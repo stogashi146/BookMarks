@@ -2,17 +2,19 @@ class BooksController < ApplicationController
 
   def index
     @keyword = params[:keyword]
+    # 普通の検索時
     if @keyword && params[:page].nil?
       @page = 1
-      @books = RakutenWebService::Books::Total.search(keyword: @keyword, booksGenreId: "001001001", hits: 28).page(1)
+      @books = Book.search_books(keyword: @keyword).page(1)
+    # 本を探すから検索したとき
     elsif params[:page].present?
       @page = params[:page].to_i
-      @books = RakutenWebService::Books::Total.search(keyword: @keyword, booksGenreId: "001001001", hits: 28).page(params[:page])
+      @books = Book.search_books(keyword: @keyword).page(params[:page])
     end
-
+    # 本詳細から著者で検索したとき
     if params[:author]
       @page = 1
-      @books = RakutenWebService::Books::Total.search(keyword: params[:author].gsub(" ", "") ,author: params[:author].gsub(" ", ""), booksGenreId: "001001", hits: 28).page(1)
+      @books = Book.search_books(keyword: @keyword = params[:author],author: params[:author]).page(1)
     end
 
   end
@@ -36,7 +38,15 @@ class BooksController < ApplicationController
     redirect_to book_path(book)
   end
 
-  def search
+  def ranking
+    if params[:marks_sort] == "read"
+      @books_rank = Book.reads_rank
+    elsif params[:marks_sort] == "unread"
+      @books_rank = Book.unreads_rank
+    else
+      @books_rank = Book.search_books(genre:params[:genre], sort:"sales", hits:"30")
+    end
+
   end
 
   def review
