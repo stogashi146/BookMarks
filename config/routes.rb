@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "homes#about"
   resources :users, only: [:show, :edit, :update] do
-    get "read" => "users#read"
-    get "unread" => "users#unread"
     get "follows" => "users#follows"
     get "followers" => "users#followers"
     get "welcome" => "users#welcome"
@@ -20,5 +18,4 @@ Rails.application.routes.draw do
 
   get "book/ranking" => "books#ranking"
 
-  resources :tags, only: [:index, :create, :destroy, :edit, :update]
 end
