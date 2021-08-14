@@ -15,6 +15,7 @@ class BooksController < ApplicationController
     if params[:author]
       @page = 1
       @books = Book.search_books(keyword: @keyword = params[:author],author: params[:author]).page(1)
+    elsif params[:author]
     end
 
   end

@@ -8,13 +8,14 @@
       h1
         = @book.title
       .mt-3
-        span
+        p
           | 著者：
-        = link_to @book.author, books_path(author: @book.author.gsub(" ", "") )
-        br
-        = "出版社：#{@book.publisher_name}"
-        br
-        = "発売日：#{@book.sales_date}"
+          = link_to @book.author, books_path(author: @book.author.gsub(" ", "") )
+        p
+          | 出版社：
+          = link_to @book.publisher_name, books_path(author: @book.publisher_name)
+        p
+          = "発売日：#{@book.sales_date}"
 
   .row
     .col-md-6.offset-6
