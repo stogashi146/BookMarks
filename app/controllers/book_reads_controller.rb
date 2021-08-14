@@ -29,7 +29,7 @@ class BookReadsController < ApplicationController
 
   private
   def read_params
-    params.require(:book_read).permit(:rate, :comment, :is_shared)
+    params.require(:book_read).permit(:rate, :comment, :is_shared, :tag_list)
   end
 
 end

@@ -22,6 +22,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @book_read_new = BookRead.new
     @book_read = @book.book_reads.find_by(user_id: current_user.id) if user_signed_in?
     @reviews = @book.book_reads
   end
@@ -57,5 +58,6 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :isbn, :author, :publisher_name, :sales_date, :image_url, :url)
   end
+
 
 end

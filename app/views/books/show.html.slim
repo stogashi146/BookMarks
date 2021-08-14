@@ -21,14 +21,11 @@
     .col-md-6.offset-6
       - if user_signed_in?
         .col-md-3.d-inline
-          = render "read", book: @book, book_read: @book_read
+          = render "read", book: @book, book_read: @book_read, book_read_new: @book_read_new
 
         .col-md-3.d-inline.show_unread_icon
           = render "unread", book: @book
 
-        .col-md-3.d-inline
-          span.show_comment_text.ml-3
-            | コメントする
       - else
         .col-md-3.d-inline
           = link_to new_user_session_path, method: :post, local: true, class: "book_show_readoff btn p-2 mb-3" do
@@ -41,11 +38,6 @@
             i.fas.fa-book.show_unread_icon
             span.show_unread_text.ml-3
               | 読みたい！
-
-        .col-md-3.d-inline
-          span.show_comment_text.ml-3
-            | コメントする
-
 
   .row
     .col-md-11.offset-1
