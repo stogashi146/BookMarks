@@ -5,11 +5,13 @@ html
       | BookMarks
     = csrf_meta_tags
     = csp_meta_tag
-    javascript:
-      "https://kit.fontawesome.com/7b10f1e4cc.js" crossorigin="anonymous"
 
+    script "https://kit.fontawesome.com/7b10f1e4cc.js" crossorigin="anonymous"
+    script type="text/javascript" src="js/slick.min.js"
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    link href="js/slick-theme.scss" rel="stylesheet" type="text/css"
+    link href="js/slick.scss" rel="stylesheet" type="text/css"
     link rel="preconnect" href="https://fonts.googleapis.com"
     link rel="preconnect" href="https://fonts.gstatic.com"
     link href="https://fonts.googleapis.com/css2?family=Kosugi&display=swap" rel="stylesheet"
