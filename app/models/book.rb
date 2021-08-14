@@ -28,7 +28,7 @@ class Book < ApplicationRecord
     end
   end
 
-  # 楽天ブックスのジャンルID
+  # 楽天ブックスのジャンルID（カテゴリ）
   enum genre_id:
     { 少年: "001001001",
       少女: "001001002",
@@ -37,6 +37,15 @@ class Book < ApplicationRecord
       文庫: "001001006",
       その他: "001001012",
     }
+  # 楽天ブックスのジャンルID（出版社名）
+  # enum publisher_id:
+  #   { 秋田書店 少年チャンピオン: "001001001001",
+  #     スクウェア・エニックス ガンガンC: "001001002",
+  #     青年: "001001003",
+  #     レディース: "001001004",
+  #     文庫: "001001006",
+  #     その他: "001001012",
+  #   }
 
   #  本を検索する
   def self.search_books(keyword:"本", author:"", sort:"standard", genre:"", hits:"28")
