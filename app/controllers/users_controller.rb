@@ -18,19 +18,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def read
-
-  end
-
-  def unread
-  end
-
-  def follows
-  end
-
-  def followers
-  end
-
   def welcome
   end
 
