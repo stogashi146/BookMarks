@@ -47,10 +47,18 @@ header{
   background-image: url("bg-image.jpg");
   background-size: cover;
 }
-
-.title{
+.about_vw{
+  height:85vh;
+  padding-top: 20vh;
+}
+.about_h1_item{
   font-weight: 900;
-  font-size: 100px;
+  font-size: 90px;
+}
+
+.about_slide_box{
+  height:110%;
+  width:110%;
 }
 
 .about_find_book{
@@ -143,4 +151,5 @@ header{
     color:#5B5B5B;
   }
 }
+
 
