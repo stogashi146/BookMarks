@@ -6,6 +6,8 @@ class Book < ApplicationRecord
 
   validates  :isbn, presence: true
 
+  acts_as_taggable
+
   # Bookモデルに登録するハッシュ
   def self.book_details(book)
     {

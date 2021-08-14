@@ -26,6 +26,8 @@ p.mt-5
 
         p.mt-2
           = review.comment
+        p
+          = render 'tag_list', tag_list: review.tag_list
         p.text-right
           = review.created_at.strftime('%Y/%m/%d')
 

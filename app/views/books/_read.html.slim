@@ -7,8 +7,6 @@
 -else
   a.book_show_readoff.p-2 type= "button" data-toggle= "modal" data-target= "#read_modal"
     i.fas.fa-bookmark.show_read_icon.d-inline
-    p
-      | aa
     p.show_read_text.ml-3.d-inline
       | 読んだ！
 
@@ -43,11 +41,13 @@
             });
 
         - else
-          = form_with model: BookRead, url: book_book_reads_path(book), method: :post, local: true do |f|
+          = form_with model: book_read_new, url: book_book_reads_path(book), method: :post, local: true do |f|
             .form-group
               = f.text_area :comment, class: "form-control", placeholder: "レビュー無記入でも投稿できます。", rows: 5
             .form-group#star
-              = f.hidden_field :rate, class: "form-control", id: :review_star
+              = f.hidden_field :rate, class: "form-control"
+            .form_group
+              = f.text_field :tag_list, value: book_read_new.tag_list.join(","), class:"form-control"
             .modal-footer
               = f.submit "投稿する", class: "btn btn-primary"
 
