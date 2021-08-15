@@ -11,10 +11,13 @@ Rails.application.routes.draw do
   patch "mypage" => "users#cancel"
 
   resources :books, only: [:index, :show, :create] do
-    resources :book_comments,  only: [:create, :destroy]
-    resource :book_reads,  only: [:show, :create, :destroy, :update]
+    resources :book_reads,  only: [:show, :create, :destroy, :update] do
+      resources :read_comments,  only: [:create, :destroy]
+      resource :read_favorites,  only: [:create, :destroy]
+    end
     resource :book_unreads,  only: [:create, :destroy]
   end
+
 
   get "book/ranking" => "books#ranking"
 

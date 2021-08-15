@@ -21,13 +21,13 @@
             | &times;
       .modal-body
         - if book_read.present?
-          = form_with model: BookRead, url: book_book_reads_path(book), method: :patch, local: true do |f|
+          = form_with model: BookRead, url: book_book_read_path(book, book_read), method: :patch, local: true do |f|
             .form-group
               = f.text_area :comment, class: "form-control", placeholder: "レビュー無記入でも投稿できます。", rows: 5, value: book_read.comment
             .form-group#star-edit
               = f.hidden_field :rate, class: "form-control", id: :review_star
             .modal-footer
-              = link_to "削除する", book_book_reads_path(book),  method: :delete, local: true,  class: "btn btn-secondary"
+              = link_to "削除する", book_book_read_path(book, book_read),  method: :delete, local: true,  class: "btn btn-secondary"
               = f.submit "編集する", class: "btn btn-primary"
           javascript:
             $('#star-edit').raty({
