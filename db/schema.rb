@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_14_112842) do
+ActiveRecord::Schema.define(version: 2021_08_15_015420) do
 
   create_table "book_reads", force: :cascade do |t|
     t.integer "user_id"
@@ -37,6 +37,21 @@ ActiveRecord::Schema.define(version: 2021_08_14_112842) do
     t.string "sales_date"
     t.string "image_url"
     t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "read_comments", force: :cascade do |t|
+    t.integer "book_read_id"
+    t.integer "user_id"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "read_favorites", force: :cascade do |t|
+    t.integer "book_read_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
