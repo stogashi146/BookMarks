@@ -44,7 +44,7 @@ header{
 
 // aboutページ
 .about_bg{
-  background-image: url("bg-image.jpg");
+  background-image: image-url("bg-image.jpg");
   background-size: cover;
 }
 .about_vw{
@@ -72,7 +72,7 @@ header{
 }
 
 .about_whatjacket_left{
-  background-image: url("about_what_jacket.jpg");
+  background-image: image-url("about_what_jacket.jpg");
   background-blend-mode:lighten;
 }
 
