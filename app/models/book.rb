@@ -61,11 +61,12 @@ class Book < ApplicationRecord
 
   # 読んだ順
   def self.reads_rank
-    BookRead.all.group(:book_id).order("count(:book_id) desc")
+    # BookRead.all.group(:book_id).order("count(:book_id) desc")
+    BookRead.all.group(:book_id).sort {|a,b| b.book_id.size <=> a.book_id.size}
   end
 
   def self.unreads_rank
-    BookUnread.all.group(:book_id).order("count(:book_id) desc")
+    BookUnread.all.group(:book_id).sort {|a,b| b.book_id.size <=> a.book_id.size}
   end
 
   def self.reviews_avg
