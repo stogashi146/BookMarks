@@ -18,6 +18,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def calender
+    @books = current_user.unread_books
+  end
+
   def welcome
   end
 

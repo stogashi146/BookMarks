@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get "follows" => "users#follows"
     get "followers" => "users#followers"
     get "welcome" => "users#welcome"
+    get "calender" => "users#calender"
     resource :relationships, only: [:create, :destroy]
   end
   get "mypage/cancel" => "users#cancel"

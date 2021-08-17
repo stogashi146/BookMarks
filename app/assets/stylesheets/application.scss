@@ -16,6 +16,7 @@
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "simple_calendar";
 
 * {
   margin: 0;
@@ -150,6 +151,28 @@ header{
     background-color: #FFF6B3;
     color:#5B5B5B;
   }
+}
+
+// simple-calendar
+.simple-calendar {
+ .day {}
+ .wday-0 {}
+ .wday-1 {}
+ .wday-2 {}
+ .wday-3 {}
+ .wday-4 {}
+ .wday-5 {}
+ .wday-6 {}
+ .today {}
+ .past {}
+ .future {}
+ .start-date {}
+ .prev-month {}
+ .next-month { }
+ .current-month {}
+ .has-events {
+   background: #FFE100;
+ }
 }
 
 

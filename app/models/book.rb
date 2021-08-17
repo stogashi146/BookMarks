@@ -15,7 +15,7 @@ class Book < ApplicationRecord
       "author" => book.author,
       "publisher_name" => book.publisher_name,
       "image_url" => book.large_image_url.chomp("?_ex=200x200"),
-      "sales_date" => book.sales_date,
+      "sales_date" => book.sales_date.gsub(/年|月|日|頃/, ""),
       "url" => book.item_url,
     }
   end

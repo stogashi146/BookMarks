@@ -5,7 +5,7 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.string :isbn
       t.string :author
       t.string :publisher_name
-      t.string :sales_date
+      t.date :sales_date
       t.string :image_url
       t.string :url
 
