@@ -18,12 +18,15 @@
           li.nav-item
             = link_to "ランキング", book_ranking_path(genre: "", sort: "sales"), class:"nav-link text-secondary"
           li.nav-item
-            = link_to "本を探す", books_path(keyword: "本", page: rand(100)), class:"nav-link header_find_book"
+            = link_to "本を探す", books_path(keyword: "本", page: rand(1..100)), class:"nav-link header_find_book"
           li.nav-item
             = link_to "ログアウト", destroy_user_session_path, method: :delete, class:"nav-link"
           li.nav-item
             = link_to user_path(current_user.id), class:"nav-link" do
               i.fas.fa-user
+          li.nav-item
+            = link_to user_calender_path(current_user.id), class:"nav-link" do
+              i.far.fa-calendar-alt
 
         - else
           li.nav-item

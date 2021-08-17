@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_08_15_015420) do
     t.string "isbn"
     t.string "author"
     t.string "publisher_name"
-    t.string "sales_date"
+    t.date "sales_date"
     t.string "image_url"
     t.string "url"
     t.datetime "created_at", null: false

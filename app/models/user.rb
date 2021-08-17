@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :book_reads, dependent: :destroy
   has_many :book_unreads, dependent: :destroy
+  has_many :read_books, through: :book_reads, source: :book
+  has_many :unread_books, through: :book_unreads, source: :book
   has_many :read_comments, dependent: :destroy
   has_many :read_favorites, dependent: :destroy
 
