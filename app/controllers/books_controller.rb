@@ -15,7 +15,6 @@ class BooksController < ApplicationController
     if params[:author]
       @page = 1
       @books = Book.search_books(keyword: @keyword = params[:author],author: params[:author]).page(1)
-    elsif params[:author]
     end
 
   end
@@ -42,19 +41,17 @@ class BooksController < ApplicationController
 
   def ranking
     if params[:marks_sort] == "read"
-      @books_rank = Book.reads_rank
+      @books_rank = Book.find(Book.reads_rank(BookRead))
     elsif params[:marks_sort] == "unread"
-      @books_rank = Book.unreads_rank
+      @books_rank = Book.find(Book.reads_rank(BookUnread))
     else
       @books_rank = Book.search_books(genre:params[:genre], sort:"sales", hits:"30")
     end
-
   end
 
   private
   def book_params
     params.require(:book).permit(:title, :isbn, :author, :publisher_name, :sales_date, :image_url, :url)
   end
-
 
 end

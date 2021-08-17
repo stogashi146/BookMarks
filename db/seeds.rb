@@ -59,31 +59,28 @@ BookRead.create!(
   )
 BookRead.create!(
   user_id: 2,
-  book_id: 1,
+  book_id: 2,
   rate: 5,
   comment: "会話の一つ一つがなんともいえず、登場人物の優しさや個性がしみて癖になります。",
   is_shared: nil
   )
 BookRead.create!(
-  user_id: 2,
+  user_id: 3,
   book_id: 2,
   rate: 3,
   comment: "キャラの魅力が本当にすばらしいと思う。ずっと読んでいると実在の人物かのように思えてきて親しみがわく。ワクワクする展開も素晴らしい",
   is_shared: nil
   )
 BookRead.create!(
-  user_id: 2,
+  user_id: 3,
   book_id: 3,
   rate: 5,
   comment: "アニメ化おめでとうございます！！\r\nキャラクター達がどんな動きをするのが楽しみです^^",
   is_shared: nil
   )
  BookUnread.create!(book_id: 1, user_id: 1)
- BookUnread.create!(book_id: 1, user_id: 1)
- BookUnread.create!(book_id: 1, user_id: 1)
+ BookUnread.create!(book_id: 2, user_id: 1)
+ BookUnread.create!(book_id: 3, user_id: 1)
  BookUnread.create!(book_id: 2, user_id: 2)
- BookUnread.create!(book_id: 2, user_id: 2)
- BookUnread.create!(book_id: 2, user_id: 2)
- BookUnread.create!(book_id: 3, user_id: 3)
- BookUnread.create!(book_id: 3, user_id: 3)
+ BookUnread.create!(book_id: 2, user_id: 3)
  BookUnread.create!(book_id: 3, user_id: 3)
