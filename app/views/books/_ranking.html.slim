@@ -1,0 +1,53 @@
+table.table.table-hover
+  - books_rank.to_a.each.with_index(1) do |book_rank, i|
+    - if params[:marks_sort]
+      tr
+        td.text-center
+          = link_to book_path(book_rank.id), local: true do
+           = image_tag book_rank.image_url, :width => '50%'
+        td
+          h4
+            = i
+          = link_to book_path(book_rank.id), local: true do
+            h5
+             = book_rank.title
+
+          div id="rate_#{book_rank.id}"
+          p
+            | 著者名：
+            = link_to book_rank.author, books_path(author: book_rank.author.gsub(" ", "") )
+          p
+            | 出版社：
+            = link_to book_rank.publisher_name, books_path(author: book_rank.publisher_name )
+          p
+            = "発売日：#{book_rank.sales_date}"
+
+          javascript:
+             $("#rate_#{book_rank.id}").raty({
+             size: 20,
+             starOff: "#{asset_path('star-off.png')}",
+             starOn: "#{asset_path('star-on.png')}",
+             starHalf: "#{asset_path('star-half.png')}",
+             half: true,
+             readOnly: true,
+             score: "#{Book.reviews_avg(book_rank)}",
+             });
+    - else
+      tr
+        td.text-center
+          = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
+            = image_tag book_rank.large_image_url.chomp("?_ex=200x200"), :width => '50%'
+        td
+          h4
+            = i
+          h5
+            = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
+              = book_rank.title
+          p
+            |著者名：
+            = link_to book_rank.author, books_path(author: book_rank.author.gsub(" ", "") )
+          p
+            |出版社：
+            = link_to book_rank.publisher_name, books_path(keyword: book_rank.publisher_name)
+          p
+            = "発売日：#{book_rank.sales_date}"

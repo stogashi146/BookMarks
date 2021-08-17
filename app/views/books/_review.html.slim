@@ -1,0 +1,56 @@
+p.mt-5
+  | #{@reviews.count}件のレビュー
+- reviews.each do |review|
+  .border.p-2.mt-2
+    .row
+      .col-md-1
+        = link_to user_path(review.user.id)
+         = attachment_image_tag review.user, :image, size: "80x80", fallback: "noimage.jpg", class: "rounded-circle mr-4"
+
+      .col-md-11
+        h4
+          = link_to user_path(review.user.id)
+            = review.user.name_id
+
+        div id="rate_#{review.id}"
+        javascript:
+          $("#rate_#{review.id}").raty({
+            size: 20,
+            starOff: "#{asset_path('star-off.png')}",
+            starOn: "#{asset_path('star-on.png')}",
+            starHalf: "#{asset_path('star-half.png')}",
+            half: true,
+            readOnly: true,
+            score: "#{review.rate}",
+          });
+
+        p.mt-2
+          = review.comment
+        p
+          = render 'tag_list', tag_list: review.tag_list
+        p.text-right
+          = review.created_at.strftime('%Y/%m/%d')
+
+
+      .col-md-6.ml-3
+        - if user_signed_in?
+          - if review.favorited_by?(current_user)
+            span
+              = link_to book_book_read_read_favorites_path(review.book, review), method: :delete do
+                i.fas.fa-heart いいね済
+          - else
+            span
+              = link_to book_book_read_read_favorites_path(review.book, review), method: :post do
+                i.fas.fa-heart いいね
+
+          span.ml-3
+            = link_to book_book_read_path(review.book, review, user: review.user_id)
+              i.fas.fa-comments コメントする
+        - else
+            span
+              = link_to new_user_session_path
+                i.fas.fa-heart いいね
+
+            span.ml-3
+              = link_to new_user_session_path
+                i.fas.fa-comments コメントする

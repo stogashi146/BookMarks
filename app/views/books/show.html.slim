@@ -1,2 +1,48 @@
-h1 Books#show
-p Find me in app/views/books/show.html.slim
+.container.show
+  .row.mt-5
+    .col-md-4.offset-1
+      = link_to @book.url do
+        = image_tag @book.image_url, :width => '90%', :height => '100%'
+
+    .col-md-5.offset-1
+      h1
+        = @book.title
+      .mt-3
+        p
+          | 著者：
+          = link_to @book.author, books_path(author: @book.author.gsub(" ", "") )
+        p
+          | 出版社：
+          = link_to @book.publisher_name, books_path(author: @book.publisher_name)
+        p
+          = "発売日：#{@book.sales_date}"
+
+  .row
+    .col-md-6.offset-6
+      - if user_signed_in?
+        .col-md-3.d-inline
+          = render "read", book: @book, book_read: @book_read, book_read_new: @book_read_new
+
+        .col-md-3.d-inline.show_unread_icon
+          = render "unread", book: @book
+
+      - else
+        .col-md-3.d-inline
+          = link_to new_user_session_path, method: :post, local: true, class: "book_show_readoff btn p-2 mb-3" do
+            i.fas.fa-bookmark.show_read_icon
+            span.show_read_text.ml-3
+              | 読んだ！
+
+        .col-md-3.d-inline.show_unread_icon
+          = link_to new_user_session_path, method: :post, local: true, class: "book_show_unreadoff btn p-2" do
+            i.fas.fa-book.show_unread_icon
+            span.show_unread_text.ml-3
+              | 読みたい！
+
+  .row
+    .col-md-11.offset-1
+      = render "review", reviews: @reviews
+
+
+
+

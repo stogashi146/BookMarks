@@ -1,0 +1,21 @@
+.col-md-12.mt-3
+  h3
+    | フォロー一覧
+
+- user.followings.each do |follow_user|
+  .col-md-12
+    .user_follow_list.mt-3
+      .user_follow_info.d-inline-block
+        = link_to user_path(follow_user.id) do
+          = attachment_image_tag follow_user, :image, size: "80x80", fallback: "noimage.jpg", class: "rounded-circle mr-4"
+          = follow_user.name
+
+      .user_follow_detail.offset-1
+        span.ml-3
+          = "読んだ本#{follow_user.book_reads.count}"
+        span.ml-3
+          = "読みたい本#{follow_user.book_unreads.count}"
+        span.ml-3
+          = "フォロー#{follow_user.followings.count}"
+        span.ml-3
+          = "フォロワー#{follow_user.followers.count}"

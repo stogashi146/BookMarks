@@ -1,0 +1,29 @@
+.col-md-12.mt-3
+  h3
+    | 読んだ本
+
+- book_reads.each do |book_read|
+  .col-md-3
+    h5
+      = book_read.book.title
+    div id="rate_#{book_read.id}"
+    = book_read.comment.truncate(50)
+    - if book_read.comment.size > 50
+      = link_to "続きを読む", book_book_read_path(book_read.book_id,book_read, user: book_read.user_id)
+    p.mt-3
+      = book_read.created_at.strftime('%Y/%m/%d')
+
+  .col-md-3
+    = link_to book_path(book_read.book.id), local: true do
+      = image_tag book_read.book.image_url.chomp("?_ex=200x200"), :width => '80%'
+
+  javascript:
+    $("#rate_#{book_read.id}").raty({
+      size: 18,
+      starOff: "#{asset_path('star-off.png')}",
+      starOn: "#{asset_path('star-on.png')}",
+      starHalf: "#{asset_path('star-half.png')}",
+      half: true,
+      readOnly: true,
+      score: "#{book_read.rate}",
+    });

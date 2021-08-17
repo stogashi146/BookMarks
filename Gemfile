@@ -87,3 +87,4 @@ gem "cancancan"
 gem 'rakuten_web_service'
 gem "slim-rails"
 gem 'html2slim'
+gem 'acts-as-taggable-on', '~> 6.0'

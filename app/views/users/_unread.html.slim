@@ -1,0 +1,12 @@
+.col-md-12.mt-3
+  h3
+    | 読みたい本
+
+- book_unreads.each do |book_unread|
+  .col-md-3
+    h5
+      = book_unread.book.title
+
+  .col-md-3
+    = link_to book_path(book_unread.book.id), local: true do
+      = image_tag book_unread.book.image_url.chomp("?_ex=200x200"), :width => '80%'
