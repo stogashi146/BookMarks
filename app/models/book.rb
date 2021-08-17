@@ -60,17 +60,14 @@ class Book < ApplicationRecord
   end
 
   # 読んだ順
-  def self.reads_rank
-    # BookRead.all.group(:book_id).order("count(:book_id) desc")
-    BookRead.all.group(:book_id).sort {|a,b| b.book_id.size <=> a.book_id.size}
+  def self.reads_rank(model)
+    #book_idを件数順にソート後、ハッシュキーのみ取り出す
+    model.all.group(:book_id).count(:book_id).sort_by{|_, v| v}.reverse.to_h.keys
   end
 
-  def self.unreads_rank
-    BookUnread.all.group(:book_id).sort {|a,b| b.book_id.size <=> a.book_id.size}
-  end
-
-  def self.reviews_avg
-      self.book_reads.sum(:rate) / self.book_reads.count
+  # レビュー平均
+  def self.reviews_avg(book)
+    book.book_reads.sum(:rate).to_f / book.book_reads.count
   end
 
 end

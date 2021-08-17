@@ -3,36 +3,35 @@ table.table.table-hover
     - if params[:marks_sort]
       tr
         td.text-center
-          = link_to book_path(book_rank.book.id), local: true do
-           = image_tag book_rank.book.image_url, :width => '50%'
+          = link_to book_path(book_rank.id), local: true do
+           = image_tag book_rank.image_url, :width => '50%'
         td
           h4
             = i
           = link_to book_path(book_rank.id), local: true do
             h5
-             = book_rank.book.title
+             = book_rank.title
 
           div id="rate_#{book_rank.id}"
           p
             | 著者名：
-            = link_to book_rank.book.author, books_path(author: book_rank.book.author.gsub(" ", "") )
+            = link_to book_rank.author, books_path(author: book_rank.author.gsub(" ", "") )
           p
             | 出版社：
-            = link_to book_rank.book.publisher_name, books_path(author: book_rank.book.publisher_name )
+            = link_to book_rank.publisher_name, books_path(author: book_rank.publisher_name )
           p
-            = "発売日：#{book_rank.book.sales_date}"
-          - if params[:marks_sort] == "read"
-            javascript:
-              $("#rate_#{book_rank.id}").raty({
-                size: 20,
-                starOff: "#{asset_path('star-off.png')}",
-                starOn: "#{asset_path('star-on.png')}",
-                starHalf: "#{asset_path('star-half.png')}",
-                half: true,
-                readOnly: true,
-                score: "#{book_rank.rate}",
-              });
+            = "発売日：#{book_rank.sales_date}"
 
+           javascript:
+            $("#rate_#{book_rank.id}").raty({
+              size: 20,
+              starOff: "#{asset_path('star-off.png')}",
+              starOn: "#{asset_path('star-on.png')}",
+              starHalf: "#{asset_path('star-half.png')}",
+              half: true,
+              readOnly: true,
+              score: "#{Book.reviews_avg(book_rank)}",
+            });
     - else
       tr
         td.text-center
