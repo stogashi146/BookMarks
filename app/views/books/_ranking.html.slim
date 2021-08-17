@@ -22,16 +22,16 @@ table.table.table-hover
           p
             = "発売日：#{book_rank.sales_date}"
 
-           javascript:
-            $("#rate_#{book_rank.id}").raty({
-              size: 20,
-              starOff: "#{asset_path('star-off.png')}",
-              starOn: "#{asset_path('star-on.png')}",
-              starHalf: "#{asset_path('star-half.png')}",
-              half: true,
-              readOnly: true,
-              score: "#{Book.reviews_avg(book_rank)}",
-            });
+          javascript:
+             $("#rate_#{book_rank.id}").raty({
+             size: 20,
+             starOff: "#{asset_path('star-off.png')}",
+             starOn: "#{asset_path('star-on.png')}",
+             starHalf: "#{asset_path('star-half.png')}",
+             half: true,
+             readOnly: true,
+             score: "#{Book.reviews_avg(book_rank)}",
+             });
     - else
       tr
         td.text-center
