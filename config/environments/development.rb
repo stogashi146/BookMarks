@@ -60,4 +60,8 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
+
+  # メール設定
+  config.action_mailer.default_url_options = { host: 'https://book-marks.net' }
+  config.action_mailer.delivery_method = :aws_sdk
 end
