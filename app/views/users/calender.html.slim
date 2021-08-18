@@ -1,0 +1,19 @@
+.container-fruid
+    .row
+        .col-md-3
+            h3 読みたいリスト
+            table.table.table-hover
+                - @books.order(:sales_date).each do |book|
+                    - if book.sales_date > Date.today-30
+                        tr
+                            td = book.sales_date
+                            td = book.title
+
+        .col-md-8
+            h3 発売カレンダー
+            = month_calendar(events: @books, attribute: :sales_date) do |date, books|
+              = date.day
+
+              - books.each do |book|
+                div
+                    = link_to book.title.truncate(30), book_path(book.id)
