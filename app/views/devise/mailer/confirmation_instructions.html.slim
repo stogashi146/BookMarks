@@ -1,8 +1,8 @@
 p
-  | Welcome 
+  = t(".welcome")
   = @email
   | !
 p
-  | You can confirm your account email through the link below:
+  = t(".instruction")
 p
-  = link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token)
+  = link_to confirmation_url(@resource, confirmation_token: @token), confirmation_url(@resource, confirmation_token: @token)
