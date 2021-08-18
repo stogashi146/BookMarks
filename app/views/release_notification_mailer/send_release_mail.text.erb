@@ -1,0 +1,14 @@
+<%= @user.name %> 様
+
+発売日前日のご連絡です。
+読みたいリストの以下の本が明日発売となります。
+
+<% @books.each do |book| %>
+    <%= book.title %>
+    <%= book.author %>
+    <%= book.publisher_name %>
+    <%= book.sales_date %>
+    <%= book.url %>
+
+<% end %>
+

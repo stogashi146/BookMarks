@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2021_08_15_015420) do
     t.string "name_id", null: false
     t.text "introduction"
     t.string "image_id"
+    t.boolean "is_mail_send", default: false, null: false
     t.boolean "is_deleted", default: false, null: false
     t.string "confirmation_token"
     t.datetime "confirmed_at"
