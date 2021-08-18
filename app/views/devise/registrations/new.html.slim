@@ -4,20 +4,18 @@ h2
   = render "devise/shared/error_messages", resource: resource
   .field
     = f.label :email
-    small
-      | ※必須
     br
     = f.email_field :email, autofocus: true, autocomplete: "email"
 
   .field
-    = f.label :name_id
-    small
-      | ※必須
+    = f.label :name_id, "ユーザーID"
     br
     = f.text_field :name_id, autocomplete: "name_id"
 
   .field
-    - f.hidden_field :name, :value => @user.name_id
+    = f.label :name, "ニックネーム"
+    br
+    = f.text_field :name, autocomplete: "name"
 
   .field
     = f.label :password
@@ -32,6 +30,16 @@ h2
     = f.label :password_confirmation
     br
     = f.password_field :password_confirmation, autocomplete: "new-password"
+
+  .form-check.form-check-inline
+    = f.label :is_mail_send, "発売前日にメールを受け取る", class:"form-check-label"
+    = f.check_box :is_mail_send, checked_value: true, unchecked_value: false, class:"form-check-input"
+  .form
+    small
+      | ※読みたいリストに入れた本が発売前日に通知されます。
+
+
+
   .actions
     = f.submit "Sign up"
 = render "devise/shared/links"
