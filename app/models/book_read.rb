@@ -1,6 +1,7 @@
 class BookRead < ApplicationRecord
   has_many :read_comments, dependent: :destroy
   has_many :read_favorites, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   belongs_to :user
   belongs_to :book
 

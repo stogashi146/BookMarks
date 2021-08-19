@@ -2,6 +2,7 @@ class Book < ApplicationRecord
   has_many :book_reads, dependent: :destroy
   has_many :book_unreads, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   validates  :isbn, presence: true
 
