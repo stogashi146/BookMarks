@@ -20,7 +20,7 @@
   .row
     .col-md-6.offset-6
       - if user_signed_in?
-        .col-md-3.d-inline
+        .col-md-3.d-inline.show_read_icon
           = render "read", book: @book, book_read: @book_read, book_read_new: @book_read_new
 
         .col-md-3.d-inline.show_unread_icon
@@ -31,16 +31,16 @@
           = link_to new_user_session_path, method: :post, local: true, class: "book_show_readoff btn p-2 mb-3" do
             i.fas.fa-bookmark.show_read_icon
             span.show_read_text.ml-3
-              | 読んだ！
+              | 読んだ#{@book.book_reads.count}
 
         .col-md-3.d-inline.show_unread_icon
           = link_to new_user_session_path, method: :post, local: true, class: "book_show_unreadoff btn p-2" do
             i.fas.fa-book.show_unread_icon
             span.show_unread_text.ml-3
-              | 読みたい！
+              | 読みたい#{@book.book_unreads.count}
 
   .row
-    .col-md-11.offset-1
+    .col-md-11.offset-1#book_show_reviews
       = render "review", reviews: @reviews
 
 

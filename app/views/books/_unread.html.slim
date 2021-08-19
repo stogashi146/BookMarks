@@ -1,11 +1,11 @@
 - if book.read_exists?(current_user, "unread")
-  = link_to book_book_unreads_path(book), method: :delete, local: true, class: "book_show_unreadon p-2" do
+  = link_to book_book_unreads_path(book), method: :delete, remote: true, class: "book_show_unreadon p-2" do
     i.fas.fa-book.show_unread_icon
     span.show_unread_text.ml-3
-      | 読みたい！
+      | 読みたい#{book.book_unreads.count}
 
 - else
-  = link_to book_book_unreads_path(book), method: :post, local: true, class: "book_show_unreadoff p-2" do
+  = link_to book_book_unreads_path(book), method: :post, remote: true, class: "book_show_unreadoff p-2" do
     i.fas.fa-book.show_unread_icon
     span.show_unread_text.ml-3
-      | 読みたい！
+      | 読みたい#{book.book_unreads.count}
