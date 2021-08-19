@@ -90,3 +90,4 @@ gem 'html2slim'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'simple_calendar', '~> 2.0'
 gem 'aws-sdk-rails'
+gem 'whenever', require: false
