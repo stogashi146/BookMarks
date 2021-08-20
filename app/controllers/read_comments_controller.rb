@@ -5,7 +5,7 @@ class ReadCommentsController < ApplicationController
     read_comment = @book_read.read_comments.new(comment_params)
     read_comment.user_id = current_user.id
     read_comment.save
-    # redirect_to request.referer
+    @book_read.create_notification_comment(current_user, read_comment.id )
   end
 
   def destroy
