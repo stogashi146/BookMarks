@@ -21,6 +21,7 @@ module BookMarks
     # the framework and any gems in your application.
     # 自動的にslimファイルを生成する
     config.generators.template_engine = :slim
-
+    config.autoload_paths += Dir["#{config.root}/lib"]
+    config.eager_load_paths += Dir["#{config.root}/lib/**/"]
   end
 end

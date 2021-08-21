@@ -26,10 +26,9 @@ rails_env = Rails.env.to_sym
 set :environment, rails_env
 set :output, 'log/cron.log'
 
-
-every 1.days, at: '11:55 am' do
+every 1.days, at: '11:00 pm' do
   begin
-    runner "ReleaseNotificationMailer.book_release_mail"
+    runner "ReleaseMailSender.book_release_mail"
   rescue => e
     Rails.logger.error("aborted rails runner")
     raise e

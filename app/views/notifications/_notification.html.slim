@@ -1,32 +1,48 @@
 - visitor = notification.visitor
 - visited = notification.visited
-.col-md-6.mx-auto
-  .form-inline
-    span
-      = link_to user_path(visitor) do
-        = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle mr-4"
-        strong
-          = visitor.name
-      span さんが
 
-      - case notification.action
-      - when "follow" then
-        = "あなたをフォローしました"
-      - when "favorite" then
-        = link_to "#{notification.book.title}の投稿", book_book_read_path(notification.book_read.book_id,notification.book_read.id, user: visited), style: "font-weight: bold;"
-        = "にいいねしました"
-      - when "comment" then
-        - if notification.book_read.user_id == visited.id
+.col-md-5.mx-auto.bg-white.pt-3
+  .form-inline
+    - case notification.action
+    - when "follow" then
+      span
+        = link_to user_path(visitor) do
+          = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle mr-4"
+          strong
+            = visitor.name
+        span さんが
+      = "あなたをフォローしました"
+
+    - when "favorite" then
+      span
+        = link_to user_path(visitor) do
+          = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle mr-4"
+          strong
+            = visitor.name
+        span さんが
+      = link_to "#{notification.book.title}の投稿", book_book_read_path(notification.book_read.book_id,notification.book_read.id, user: visited), style: "font-weight: bold;"
+      = "にいいねしました"
+
+    - when "comment" then
+      - if notification.book_read.user_id == visited.id
+        span
+          = link_to user_path(visitor) do
+            = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle mr-4"
+            strong
+              = visitor.name
+          span さんが
           = link_to "#{notification.book.title}の投稿", book_book_read_path(notification.book_read.book_id,notification.book_read.id, user: visited), style: "font-weight: bold;"
-        - else
-          span
-            = link_to book_book_read_path(notification.book_id, notification.book_read_id) do
-              = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle mr-4"
-              strong
-                = notification.book_read.user.name + "さんの投稿"
+
         span にコメントしました
         p.text-muted.mb-0
           = ReadComment.find_by(id: notification.read_comment_id)&.comment
+
+    - when "release" then
+      span
+        = image_tag notification.book.image_url.chomp("?_ex=200x200"), :width => '10%', :height => '10%'
+        span 読みたいリストの
+        = link_to notification.book.title, book_path(notification.book)
+        span が、本日発売です
 
   .small.text-muted.text-right
     = time_ago_in_words(notification.created_at).upcase

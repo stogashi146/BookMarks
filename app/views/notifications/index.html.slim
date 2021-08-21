@@ -1,6 +1,16 @@
-- notifications = @notifications.where.not(visitor_id: current_user.id)
+- notifications = @notifications.where.not("visitor_id = ? and action = ?", current_user.id, "favorite").where.not("visitor_id = ? and action = ?", current_user.id, "comment")
+
+- notifications.where(action:"release").each do |notification|
+ - unless notification.book.sales_date == Time.current.to_date
+    - notifications = notifications.where.not(id:notification.id)
+
 - if notifications.exists?
+    = link_to destroy_all_path, method: :delete do
+      i.fas.fa-trash style="color: black;"
+      h7 style="color: black;"全削除
     = render notifications
 - else
-    p
+    p.text-center
         | 通知はありません
+
+

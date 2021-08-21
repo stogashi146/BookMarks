@@ -41,4 +41,21 @@ class User < ApplicationRecord
     end
   end
 
+  # メール送信
+  def self.notify_release_book
+    self.all.each do |user|
+      user.notify_mail_book
+    end
+  end
+
+  def notify_mail_book
+    if self.is_mail_send == true
+      books = []
+      self.unread_books.each do |book|
+        books << book if book.sales_date == Time.current.tomorrow.to_date
+      end
+      ReleaseNotificationMailer.send_release_mail(books, self).deliver if books.present?
+    end
+  end
+
 end
