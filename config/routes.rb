@@ -18,7 +18,8 @@ Rails.application.routes.draw do
     end
     resource :book_unreads,  only: [:create, :destroy]
   end
-  resources :notifications, only: [:index, ]
+  resources :timelines, only: [:index]
+  resources :notifications, only: [:index]
   delete "destroy_all" => "notifications#destroy_all"
 
 

@@ -58,4 +58,11 @@ class User < ApplicationRecord
     end
   end
 
+  # フォローユーザーのアクティビティを取得
+  def follow_user_timeline(current_user)
+    current_user.followings.each do |follow_user|
+      follow_user.active_notifications.where("action = ? or action = ?", "read", "release")
+    end
+  end
+
 end
