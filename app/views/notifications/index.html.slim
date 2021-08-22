@@ -1,4 +1,4 @@
-- notifications = @notifications.where.not("visitor_id = ? and action = ?", current_user.id, "favorite").where.not("visitor_id = ? and action = ?", current_user.id, "comment")
+- notifications = @notifications.where.not("visitor_id = ? and action = ?", current_user.id, "favorite").where.not("visitor_id = ? and action = ?", current_user.id, "comment").where.not("action = ?", "read")
 
 - notifications.where(action:"release").each do |notification|
  - unless notification.book.sales_date == Time.current.to_date

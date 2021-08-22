@@ -1,0 +1,48 @@
+h3 タイムライン
+- timelines.each do |timeline|
+  .col-md-6.mx-auto.bg-white.pt-3
+    - visitor = timeline.visitor
+    - visited = timeline.visited
+    .form-inline
+      - case timeline.action
+      - when "release" then
+          - if visitor == current_user
+            = link_to user_path(visitor) do
+              = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle mr-4"
+              p
+                = visitor.name
+              = link_to timeline.book.title.truncate(30), book_path(timeline.book)
+            span を読みたいに追加しました
+            = image_tag timeline.book.image_url.chomp("?_ex=200x200"), :width => '10%', :height => '10%'
+
+          - else
+            = link_to user_path(visitor) do
+              = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle mr-4"
+              p
+                = visitor.name
+              = link_to timeline.book.title.truncate(30), book_path(timeline.book)
+            span を読みたいに追加しました
+            = image_tag timeline.book.image_url.chomp("?_ex=200x200"), :width => '10%', :height => '10%'
+
+      - when "read" then
+          - if visitor == current_user
+            = link_to user_path(visitor) do
+              = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle mr-4"
+              p
+                = visitor.name
+              = link_to timeline.book.title.truncate(30), book_path(timeline.book)
+            span を読んだに追加しました
+            = image_tag timeline.book.image_url.chomp("?_ex=200x200"), :width => '10%', :height => '10%'
+
+          - else
+            = link_to user_path(visitor) do
+              = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle mr-4"
+              p
+                = visitor.name
+              = link_to timeline.book.title.truncate(30), book_path(timeline.book)
+            span を読んだに追加しました
+            = image_tag timeline.book.image_url.chomp("?_ex=200x200"), :width => '10%', :height => '10%'
+
+    .small.text-muted.text-right
+      = time_ago_in_words(timeline.created_at).upcase
+    hr

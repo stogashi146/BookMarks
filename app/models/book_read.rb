@@ -11,6 +11,29 @@ class BookRead < ApplicationRecord
     read_favorites.where(user_id: user.id).exists?
   end
 
+  # 読みたい通知メソッド（通知モデルに登録するが、タイムラインにのみ使用）
+  def create_notification_read(current_user)
+    notification = current_user.active_notifications.new(
+      book_id: book_id,
+      book_read_id: id,
+      visited_id: current_user.id,
+      checked: true,
+      action: "read"
+      )
+    notification.save if notification.present?
+  end
+
+  # 読みたいリストから外したら、通知モデルからも削除する
+  def destroy_notification_read(current_user)
+    notification = current_user.active_notifications.find_by(
+        book_id: book_id,
+        book_read_id: id,
+        visited_id: current_user.id,
+        action: "read"
+        )
+    notification.destroy if notification.present?
+  end
+
   # いいねの通知メソッド
   def create_notification_fav(current_user)
     # 既にいいねされているか検索

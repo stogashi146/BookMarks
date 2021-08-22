@@ -22,7 +22,10 @@ nav.navbar.navbar-expand-lg.border-bottom.shadow-sm
           .dropdown-menu
             = link_to user_path(current_user.id), class:"dropdown-item" do
               i.fas.fa-user.fa-fw
-              span  マイページ
+              span マイページ
+            = link_to timelines_path, class:"dropdown-item" do
+              i.fas.fa-user.fa-fw
+              span タイムライン
             = link_to book_ranking_path(genre: "", sort: "sales"), class:"dropdown-item pr-2" do
               i.fas.fa-crown.fa-fw
               span  ランキング
