@@ -4,7 +4,7 @@
             h3 読みたいリスト
             table.table.table-hover
                 - @books.order(:sales_date).each do |book|
-                    - if book.sales_date > Date.today-30
+                    - if book.sales_date.present? && book.sales_date > Date.today-30
                         tr
                             td = book.sales_date
                             td = book.title
