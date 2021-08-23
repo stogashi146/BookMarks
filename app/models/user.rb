@@ -23,7 +23,6 @@ class User < ApplicationRecord
 
   has_one :sns_acount, dependent: :destroy
 
-  validates  :name_id, presence: true
   attachment :image
 
   def self.follow_include?(follower, follow)

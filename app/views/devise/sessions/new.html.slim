@@ -2,9 +2,9 @@ h2
   = t(".sign_in")
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   .field
-    = f.label :name_id
+    = f.label :email
     br
-    = f.text_field :name_id, autofocus: true, autocomplete: "name_id"
+    = f.text_field :email, autofocus: true, autocomplete: "email"
   .field
     = f.label :password
     br

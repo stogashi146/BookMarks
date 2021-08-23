@@ -1,12 +1,31 @@
-.col-md-12.mt-3
-  h3
-    | 読みたい本
+.col-md-12.col-md-12.mt-4
+  .row
+    - book_unreads.each do |book_unread|
+      .col-md-6
+        .card.flex-md-row.mb-4.shadow-sm.h-md-250
+          .card-body.d-flex.flex-column.align-items-start.w-100
+            strong = link_to book_unread.book.title, book_path(book_unread.book.id), class:"text-dark", local: true
+            p.mb-0.small
+              | 著者：
+              = link_to book_unread.book.author, books_path(author: book_unread.book.author.gsub(" ", "") )
+            p.mb-0.small
+              | 出版社：
+              = link_to book_unread.book.publisher_name, books_path(author: book_unread.book.publisher_name)
+            p.mb-0.small
+              = "発売日：#{book_unread.book.sales_date}"
 
-- book_unreads.each do |book_unread|
-  .col-md-3
-    h5
-      = book_unread.book.title
+            .d-inline-flex.btn-group.btn-group-md
+              .btn.btn-light.align-items-end
+                i.fas.fa-book-reader.text-dark.pr-1
+                span.text-center
+                  = "#{book_unread.book.book_reads.count}"
+              .btn.btn-light.align-items-end
+                i.fas.fa-plus-square.text-dark.pr-1
+                span.text-center
+                  = "#{book_unread.book.book_unreads.count}"
 
-  .col-md-3
-    = link_to book_path(book_unread.book.id), local: true do
-      = image_tag book_unread.book.image_url.chomp("?_ex=200x200"), :width => '80%'
+            small.align-self-end
+              = book_unread.created_at.strftime('%Y/%m/%d')
+
+          = link_to book_path(book_unread.book.id), local: true, class:"flex-auto text-right" do
+            = image_tag book_unread.book.image_url.chomp("?_ex=200x200"), :width => '60%', class:"text-right"

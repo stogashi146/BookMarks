@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   protected
   # サインアップ時にnameとname_idの登録を許可する
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys:[:email, :name_id, :name, :is_mail_send])
+    devise_parameter_sanitizer.permit(:sign_up, keys:[:email, :name, :is_mail_send])
   end
 end

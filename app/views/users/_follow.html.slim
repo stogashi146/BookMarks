@@ -1,21 +1,38 @@
-.col-md-12.mt-3
-  h3
-    | フォロー一覧
-
 - user.followings.each do |follow_user|
-  .col-md-12
-    .user_follow_list.mt-3
-      .user_follow_info.d-inline-block
+  .col-md-4.mt-4
+    .bg-white.p-3.border
+      .d-flex
         = link_to user_path(follow_user.id) do
-          = attachment_image_tag follow_user, :image, size: "80x80", fallback: "noimage.jpg", class: "rounded-circle mr-4"
-          = follow_user.name
+          = attachment_image_tag follow_user, :image, :fill, 80, 80, fallback:"noimage.jpg", size: "80x80", class: "rounded-circle shadow-sm mr-4"
+        strong
+          = link_to follow_user.name, user_path(follow_user.id), class:"text-dark"
 
-      .user_follow_detail.offset-1
-        span.ml-3
-          = "読んだ本#{follow_user.book_reads.count}"
-        span.ml-3
-          = "読みたい本#{follow_user.book_unreads.count}"
-        span.ml-3
-          = "フォロー#{follow_user.followings.count}"
-        span.ml-3
-          = "フォロワー#{follow_user.followers.count}"
+        .flex-column
+          - unless follow_user == current_user
+            - if User.follow_include?(current_user, follow_user)
+              = link_to user_relationships_path(follow_user.id), method: :delete, local: true, class:"btn btn-sm btn-secondary align-items-center px-1 ml-4"
+                i.fas.fa-user-check.mx-1
+                span フォロー中
+
+            - else
+              = link_to user_relationships_path(follow_user.id), method: :post, local: true, class:"btn btn-sm btn-light btn-outline-secondary px-1 ml-4"
+                i.fas.fa-user-plus.mx-1
+                span フォロー
+
+      .d-flex.mt-3
+        .flex-column.w-25.text-center
+          i.fas.fa-book-reader.fa-2x.text-dark
+          p.text-center
+            = "#{follow_user.book_reads.count}"
+        .flex-column.w-25.text-center
+          i.fas.fa-plus-square.fa-2x.text-dark
+          p.text-center
+            = "#{follow_user.book_unreads.count}"
+        .flex-column.w-25.text-center.mt-2
+          small フォロー
+          p.text-center
+            = "#{follow_user.followings.count}"
+        .flex-column.w-25.text-center.mt-2
+            small フォロワー
+            p.text-center
+              = "#{follow_user.followers.count}"

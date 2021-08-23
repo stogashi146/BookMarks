@@ -1,60 +1,60 @@
 .container
   .row
-    .col-md-12.mt-5
-      .row
-        .col-md-3.offset-1
-          = attachment_image_tag @user, :image, size: "250x250", fallback: "noimage.jpg", class: "rounded-circle"
-        .col-md-5.offset-1.mt-5
-          h2.d-inline
-            = @user.name
-          - unless @user == current_user
-            - if User.follow_include?(current_user, @user)
-              = link_to user_relationships_path(@user.id), method: :delete, local: true, class:"btn btn-secondary ml-3 mb-2"
-                span.d-inline
-                  | フォロー中
-                i.fas.fa-user-check.ml-2
+    .col-md-12
+      .bg-white.pt-1
+        .row.mt-5
+          .col-md-8
+            .d-inline-flex.align-items-center
+              = attachment_image_tag @user, :image, :fill, 130, 130, fallback:"noimage.jpg", size: "130x130", class: "rounded-circle shadow-sm ml-5"
+              .d-block.ml-5
+                h3
+                  = @user.name
+                p
+                  = @user.introduction
+
+          .col-md-3.d-flex.align-items-center.justify-content-end
+            - unless @user == current_user
+              - if User.follow_include?(current_user, @user)
+                = link_to user_relationships_path(@user.id), method: :delete, local: true, class:"btn btn-secondary px-3 align-items-center"
+                  i.fas.fa-user-check.mx-1
+                  span フォロー中
+
+              - else
+                = link_to user_relationships_path(@user.id), method: :post, local: true, class:"btn btn-light btn-outline-secondary px-3"
+                  i.fas.fa-user-plus.mx-1
+                  span フォロー
+
             - else
-              = link_to user_relationships_path(@user.id), method: :post, local: true, class:"btn btn-light btn-outline-secondary ml-3 mb-2"
-                span.d-inline
-                  | フォロー
-                i.fas.fa-user-plus.ml-2
+              = link_to edit_user_path(current_user.id), local: true, class:"btn btn-outline-secondary px-3" do
+                i.fas.fa-cogs.mx-1
+                span プロフィール編集
+        hr.mb-0.mt-5
+        .row
+          .col-md-12.d-inline-flex
+            .d-block
+              .btn.btn-light.user_show_btn.read_btn_active#read_btn
+                i.fas.fa-book-reader.fa-2x.text-dark
+                p.text-center
+                  = "#{@book_reads.count}"
 
-          - else
-            = link_to edit_user_path(current_user.id), local: true, class:"btn btn-secondary ml-5 mb-2"
-              small.d-inline
-                | プロフィール編集
+            .d-block
+              .btn.btn-light.user_show_btn#unread_btn
+                span
+                  i.fas.fa-plus-square.fa-2x
+                p.text-center
+                  = "#{@book_unreads.count}"
 
+            .d-block
+              .btn.btn-light.user_show_btn.pt-2#follow_btn
+                small フォロー
+                p.text-center
+                  = "#{@user.followings.count}"
 
-          h4.mt-3
-            = @user.introduction
-
-      .row.user_flex_box
-        .col-md-7.offset-5.mt-3.d-inline-flex
-          a.user_flex_item.btn#read_btn
-            i.fas.fa-bookmark.show_read_icon.ml-3
-            span.show_read_text.ml-3
-              | 読んだ！
-            p.text-center.mt-1
-              = "#{@book_reads.count}件"
-
-          a.user_flex_item.btn#unread_btn
-            i.fas.fa-book.show_unread_icon.ml-3
-            span.show_unread_text.ml-3
-              | 読みたい！
-            p.text-center.mt-1
-              = "#{@book_unreads.count}件"
-
-          a.user_flex_item.btn.mt-2#follow_btn
-            span.show_unread_text.ml-3
-              | フォロー
-            p.text-center.mt-2
-              = "#{@user.followings.count}件"
-
-          a.user_flex_item.btn.mt-2#follower_btn
-            span.show_unread_text.ml-3
-              | フォロワー
-            p.text-center.mt-2
-              = "#{@user.followers.count}件"
+            .d-block
+              .btn.btn-light.user_show_btn.pt-2#follower_btn
+                small フォロワー
+                p.text-center
+                  = "#{@user.followers.count}"
 
   .row#user_main_item
     = render "read", book_reads: @book_reads
@@ -62,16 +62,24 @@
 javascript:
   $('#read_btn').on('click', function() {
     $("#user_main_item").html("#{j(render "read", book_reads: @book_reads)}");
+    $('.user_show_btn').removeClass('read_btn_active');
+    $(this).addClass('read_btn_active');
   });
 
   $('#unread_btn').on('click', function() {
     $("#user_main_item").html("#{j(render "unread", book_unreads: @book_unreads)}");
+    $('.user_show_btn').removeClass('read_btn_active');
+    $(this).addClass('read_btn_active');
   });
 
   $('#follow_btn').on('click', function() {
     $("#user_main_item").html("#{j(render "follow", user: @user)}");
+    $('.user_show_btn').removeClass('read_btn_active');
+    $(this).addClass('read_btn_active');
   });
 
   $('#follower_btn').on('click', function() {
     $("#user_main_item").html("#{j(render "follower", user: @user)}");
+    $('.user_show_btn').removeClass('read_btn_active');
+    $(this).addClass('read_btn_active');
   });

@@ -123,7 +123,6 @@ ActiveRecord::Schema.define(version: 2021_08_20_014759) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
-    t.string "name_id", null: false
     t.text "introduction"
     t.string "image_id"
     t.boolean "is_mail_send", default: false, null: false
