@@ -1,0 +1,8 @@
+- if flash[:notice]
+  p#notice.pl-4.py-1
+    i.far.fa-check-circle.pr-2
+    = flash[:notice]
+- elsif flash[:alert]
+  p#alert.pl-4.py-1
+    i.fas.fa-exclamation-triangle.pr-2
+    = flash[:alert]

@@ -1,14 +1,14 @@
 nav.navbar.navbar-expand-lg.border-bottom.shadow-sm
   .container-fluid.header
     = link_to root_path, class:"navbar-brand"
-      = image_tag asset_path("bookmarks.png"),  :height => '65'
+      = image_tag asset_path("bookmarks.png"),  :height => '60'
     button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
       span.navbar-toggler-icon
 
 
     = form_with url: books_path, method: :get, local: true, class:"d-flex mr-auto" do |f|
-      = f.text_field :keyword, required: true, class:"form-control me-2"
-      = f.submit "検索", class:"btn btn-secondary"
+      = f.text_field :keyword, required: true, class:"form-control-sm me-2"
+      = f.submit "検索", class:"btn btn-sm btn-secondary"
 
     ul.nav.nav-pills
       - if user_signed_in?

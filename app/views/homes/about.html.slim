@@ -1,61 +1,70 @@
 .about_bg
-  .container
+  .container-fluid
     .row.about_vw
-      .col-md-6.d-flex.flex-column
+      .col-md-5.col-sm-5.d-flex.flex-column
         .flex-item.text-center
           h1.about_h1_item
             | 表紙買いを
             br
             .ml-4
               | どこでも
-        .flex-item.text-center
-          = link_to "今すぐ本を探す", books_path(keyword: "本", page: rand(100)), class:"btn about_find_book"
+        .flex-item.text-center.mt-5
+          = link_to "今すぐ本を探す", books_path(keyword: "本", page: rand(100)), class:"btn about_find_book p-3"
 
-      .col-md-6
+      .col-md-6.col-sm-6
         .about_slide_box
           - @book.each do |book|
               = image_tag book.image_url.chomp("?_ex=200x200"), class:"mx-3"
 
-    .about_border
     .row
-      .about_whatjacket_left.col-md-5
-        = image_tag asset_path("about_what_jacket.jpg"), :width => '150%', :height => '150%', class:"img-fluid"
-      .about_whatjacket_right.col-md-6
-        h1
-          | 表紙買い
-          span
-            | って何？
-        p
-          | 書店で表紙のデザインだけを見て直感で買うこと
-
-    .about_border
-    .row
-      .col-md-12
-        h1
-          | BookMarksってなに？
-        p
-          | インターネットで表紙買いできるサービス
+      .col-md-12.bg-white.py-5
+        .col-md-5.mx-auto
+          h2.about_what_h1.text-center.pb-3
+            | BookMarksについて
+          .text-center.mt-3
+            span
+              | インターネットで
+            span.about_what_span.p-1.mx-1
+              | 表紙買い
+            span
+              | ができるサービス
 
     .row
-      .col-md-12.d-inline-block
-        .col-4.d-md-inline-block
-          = image_tag asset_path("about1.png"), :width => '130%', :height => '130%', class:"img-fluid　h-100"
-          h2
-            | 本を読むすべての方に！
-          p
-            | 読みたい本がすぐに見つかる！
-        .col-4.d-md-inline-block
-          = image_tag asset_path("about2.png"), :width => '130%', :height => '130%', class:"img-fluid　h-100"
-          h2
-            | インターネットでも表紙買いしたい方に！
-          p
-            | 表紙を一気に見ることができる！
-        .col-4.d-md-inline-block
-          = image_tag asset_path("about3.png"), :width => '130%', :height => '130%', class:"img-fluid　h-100"
-          h2
-            | 本好きな人同士繋がりたい方に！
-          p
-            | SNS機能でコミュニティが広がる！
+      .col-md-12.py-5.about_what_text
+        .col-md-7.mx-auto
+          p.text-center
+            | BookMarksはインターネットで表紙買いができるサービスです。
+          p.text-center
+            | また、
+            = link_to "ログイン", new_user_session_path
+            | することでコミュニティを広げることができます。
+
+
+    .row.mb-5
+      .col-md-12.col-sm-12.d-inline-block
+        .col-md-3.col-sm-3.d-inline-block.text-center
+          i.fas.fa-book-open.fa-5x.rounded-circle.bg-white.p-5.about_intro_orangeicon
+          .col-md-6.col-sm-6.mx-auto
+            p.about_intro_orangetext.mt-3
+              | 本を見つける
+
+        .col-md-3.col-sm-3.d-inline-block.text-center
+          i.fas.fa-bell.fa-5x.rounded-circle.bg-white.p-5.about_intro_orangeicon
+          .col-md-9.col-sm-9.mx-auto
+            p.about_intro_orangetext.mt-3
+              | 発売日に通知を受け取る
+
+        .col-md-3.col-sm-3.d-inline-block.text-center
+          i.fas.fa-comments.fa-5x.rounded-circle.bg-white.p-5.about_intro_blueicon
+          .col-md-5.col-sm-5.mx-auto
+            p.about_intro_bluetext.mt-3
+              | 交流する
+
+        .col-md-3.col-sm-3.d-inline-block.text-center
+          i.fas.fa-book-reader.fa-5x.rounded-circle.bg-white.p-5.about_intro_blueicon
+          .col-md-8.col-sm-8.mx-auto
+            p.about_intro_bluetext.mt-3
+              | 新しい本が見つかる
 
 javascript:
   $('.about_slide_box').slick({
@@ -63,7 +72,7 @@ javascript:
     autoplaySpeed:0, //自動スクロールの切り替え時間
     speed: 4500, //スクロール速度
     cssEase: "linear", //スライドの切り替えを等速にする
-    slidesToShow: 2, //表示するスライドの数
+    slidesToShow: 3, //表示するスライドの数
     swipe: false, //ユーザー操作禁止
     arrows: false, //矢印非表示
     pauseOnFocus: false, //要素をクリックでアクティブしたときに、スライドを停止させるか
