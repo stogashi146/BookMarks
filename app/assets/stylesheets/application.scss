@@ -24,16 +24,21 @@
   box-sizing: border-box;
 }
 
-body{
- font-family: 'Kosugi', sans-serif;
- background-color:  #f5f5f5;
+html{
+  font-family: 'Noto Sans JP', sans-serif, "Kosugi";
 }
 
+body{
+// background-color: #f5f5f5;
+ background-color: #f1f1f2;
+ font-family: 'Noto Sans JP', sans-serif, "Kosugi";
+}
+
+// headerページ
 header{
   background-color: white;
 }
 
-// headerページ
 .header_find_book{
   color: black;
   background-color: #FFE100;
@@ -47,10 +52,48 @@ header{
   color: #efa04c;
 }
 
+// header開閉
+.sidebar{
+  position: relative;
+}
+
+.sidebar > aside{
+  background-color:rgba(76,84,130,0.8);
+  width: 350px;
+  height: 100%;
+  top: 0;
+  // right: -350px;
+  right: 100px;
+  position: fixed;
+}
+.sidebar > aside ul{
+  margin:0;
+  padding:0;
+  top: 50px;
+  right: 114px;
+  position: absolute;
+}
+.sidebar > aside li{
+  margin: 20px auto;
+  list-style: none;
+}
+.sidebar > aside button{
+  background-color: rgba(76, 84, 130, 0.8);
+  display: block;
+  position: absolute;
+  top: 15px;
+  right: 350px;
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 5px 5px 0;
+}
+
+
 // aboutページ
 .about_bg{
-  background-image: image-url("bg-image.jpg");
-  background-size: cover;
+  overflow-x: hidden;
 }
 .about_vw{
   height:85vh;
@@ -58,7 +101,7 @@ header{
 }
 .about_h1_item{
   font-weight: 900;
-  font-size: 90px;
+  font-size: 80px;
 }
 
 .about_slide_box{
@@ -72,51 +115,57 @@ header{
   border-bottom: 5px solid #ccc100;
 }
 
-.about_border{
-  border-bottom: 1px solid #5B5B5B;
+.about_what_h1{
+  border-bottom: medium solid #2089f1;
+}
+.about_what_span{
+  font-size: 20px;
+  background-color: #ff9800;
+  color: white;
 }
 
-.about_whatjacket_left{
-  background-image: image-url("about_what_jacket.jpg");
-  background-blend-mode:lighten;
+.about_what_text{
+  font-size: 18px;
+}
+
+.about_intro_orangeicon{
+  color: #f7a02f;
+}
+
+.about_intro_orangetext{
+  color: #f7a02f;
+  background-color: #ff9800;
+  color: white;
+}
+
+.about_intro_blueicon{
+  color: #2f94f7;
+}
+
+.about_intro_bluetext{
+  color: #2f94f7;
+  background-color: #2f94f7;
+  color: white;
 }
 
 // user-showページ
-.user_flex_box{
-  border-bottom: 1px solid #707070;
+.user_show_readcomment{
+  font-size:14px;
+
 }
 
-.user_follow_list{
-  border-bottom: 1px solid #707070;
+.user_show_btn{
+  width:120px;
+  height:70px;
+  opacity: 50%;
+  &:hover {
+    opacity: 100%;
+    background-color:#FFE100;
+  }
 }
-
-// .user-review-item{
-//   border-bottom: 1px solid #707070;
-// }
-
-//book-showページ
-.show{
-  // color:#5B5B5B;
-}
-
-.show_read_icon{
-  font-size: 40px;
-}
-
-.show_read_text{
-  font-size: 18px;
-}
-
-.show_unread_icon{
-  font-size: 40px;
-}
-
-.show_unread_text{
-  font-size: 18px;
-}
-
-.show_comment_text{
-  font-size: 18px;
+.read_btn_active{
+  opacity: 100%;
+  background-color:#FFE100;
 }
 
 .book_show_readon{

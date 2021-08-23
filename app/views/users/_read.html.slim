@@ -1,29 +1,48 @@
-.col-md-12.mt-3
-  h3
-    | 読んだ本
+.col-md-12.col-md-12.mt-4
+  .row
+    - book_reads.each do |book_read|
+      .col-md-6
+        .card.flex-md-row.mb-4.shadow-sm.h-md-250
+          .card-body.d-flex.flex-column.align-items-start.w-100
+            strong = link_to book_read.book.title, book_path(book_read.book.id), class:"text-dark", local: true
+            div id="rate_#{book_read.id}" class="my-1"
+            p.mb-0.small
+              | 著者：
+              = link_to book_read.book.author, books_path(author: book_read.book.author.gsub(" ", "") )
+            p.mb-0.small
+              | 出版社：
+              = link_to book_read.book.publisher_name, books_path(author: book_read.book.publisher_name)
+            p.mb-0.small
+              = "発売日：#{book_read.book.sales_date}"
+            .mt-1.user_show_readcomment
+              = book_read.comment.truncate(30)
+              - if book_read.comment.size > 30
+                small
+                  = link_to "続きを読む", book_book_read_path(book_read.book_id,book_read, user: book_read.user_id)
 
-- book_reads.each do |book_read|
-  .col-md-3
-    h5
-      = book_read.book.title
-    div id="rate_#{book_read.id}"
-    = book_read.comment.truncate(50)
-    - if book_read.comment.size > 50
-      = link_to "続きを読む", book_book_read_path(book_read.book_id,book_read, user: book_read.user_id)
-    p.mt-3
-      = book_read.created_at.strftime('%Y/%m/%d')
+            .d-inline-flex.btn-group.btn-group-md
+              .btn.btn-light.align-items-end
+                i.fas.fa-book-reader.text-dark.pr-1
+                span.text-center
+                  = "#{book_read.book.book_reads.count}"
+              .btn.btn-light.align-items-end
+                i.fas.fa-plus-square.text-dark.pr-1
+                span.text-center
+                  = "#{book_read.book.book_unreads.count}"
 
-  .col-md-3
-    = link_to book_path(book_read.book.id), local: true do
-      = image_tag book_read.book.image_url.chomp("?_ex=200x200"), :width => '80%'
+            small.align-self-end
+              = book_read.created_at.strftime('%Y/%m/%d')
 
-  javascript:
-    $("#rate_#{book_read.id}").raty({
-      size: 18,
-      starOff: "#{asset_path('star-off.png')}",
-      starOn: "#{asset_path('star-on.png')}",
-      starHalf: "#{asset_path('star-half.png')}",
-      half: true,
-      readOnly: true,
-      score: "#{book_read.rate}",
-    });
+          = link_to book_path(book_read.book.id), local: true, class:"flex-auto text-right" do
+            = image_tag book_read.book.image_url.chomp("?_ex=200x200"), :width => '60%', class:"text-right"
+
+      javascript:
+        $("#rate_#{book_read.id}").raty({
+          size: 10,
+          starOff: "#{asset_path('star-off.png')}",
+          starOn: "#{asset_path('star-on.png')}",
+          starHalf: "#{asset_path('star-half.png')}",
+          half: true,
+          readOnly: true,
+          score: "#{book_read.rate}",
+        });

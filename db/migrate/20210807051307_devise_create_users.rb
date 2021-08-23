@@ -15,7 +15,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.datetime :remember_created_at
 
       t.string :name, null:false
-      t.string :name_id, null:false
       t.text :introduction
       t.string :image_id
       t.boolean :is_mail_send, null:false, default: false
