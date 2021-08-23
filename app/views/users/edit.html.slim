@@ -1,7 +1,9 @@
 .container
   .row
-    .col-md-12.bg-white.text-center.p-3
-      h3 プロフィール編集
+    .col-md-12
+      .bg-white.text-center.py-3
+        h3 プロフィール編集
+    = render "layouts/error_messages", obj: @user, column: :name
   .row
     .col-md-12.text-center.mt-4
       .bg-white.py-5
@@ -44,3 +46,8 @@
               .form-group.mt-3
                 = f.submit "変更を保存する", class:"btn btn-success"
                 = link_to "戻る", :back, class:"btn btn-secondary ml-3"
+
+              .form-group.mt-5
+                small
+                  = link_to "退会する", user_cancel_path(current_user), local: true, class:"btn btn-danger btn-sm"
+

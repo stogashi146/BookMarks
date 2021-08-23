@@ -6,10 +6,11 @@ Rails.application.routes.draw do
     get "followers" => "users#followers"
     get "welcome" => "users#welcome"
     get "calender" => "users#calender"
+    get "cancel" => "users#cancel"
+    patch "cancel" => "users#unsubscribe"
     resource :relationships, only: [:create, :destroy]
   end
-  get "mypage/cancel" => "users#cancel"
-  patch "mypage" => "users#cancel"
+
 
   resources :books, only: [:index, :show, :create] do
     resources :book_reads,  only: [:show, :create, :destroy, :update] do
