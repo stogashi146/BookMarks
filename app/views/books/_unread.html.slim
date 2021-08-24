@@ -1,4 +1,4 @@
-- if book.read_exists?(current_user, "unread")
+- if book.read_present?(current_user, "unread")
   .d-block
     = link_to book_book_unreads_path(book), method: :delete, remote: true do
       .btn.btn-light.shadow-sm.book_show_onbtn
