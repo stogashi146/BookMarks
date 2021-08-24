@@ -1,28 +1,29 @@
 .container
   .row
+    .col-md-12
+      .bg-white.text-center.py-3
+        h3 ランキング
+  .row.mt-3
     .col-md-4
-      h3
-        | ランキング
-
       table.table.table-hover
         tr.thead-light
           th
             | ジャンル
 
-        tr.ranking_genre_item
-          td = link_to "総合", book_ranking_path(genre: "")
+        tr.ranking_genre_item.text-secondary
+          td = link_to "総合", book_ranking_path(genre: ""), class:"text-dark"
         tr
-          td = link_to "少年漫画", book_ranking_path(genre: "001")
+          td = link_to "少年漫画", book_ranking_path(genre: "001"), class:"text-dark"
         tr
-          td = link_to "少女漫画", book_ranking_path(genre: "002")
+          td = link_to "少女漫画", book_ranking_path(genre: "002"), class:"text-dark"
         tr
-          td = link_to "青年漫画", book_ranking_path(genre: "003")
+          td = link_to "青年漫画", book_ranking_path(genre: "003"), class:"text-dark"
         tr
-          td = link_to "レディース", book_ranking_path(genre: "004")
+          td = link_to "レディース", book_ranking_path(genre: "004"), class:"text-dark"
         tr
-          td = link_to "文庫", book_ranking_path(genre: "006")
+          td = link_to "文庫", book_ranking_path(genre: "006"), class:"text-dark"
         tr
-          td = link_to "その他", book_ranking_path(genre: "012")
+          td = link_to "その他", book_ranking_path(genre: "012"), class:"text-dark"
 
       table.table.table-hover
         tr.thead-light
@@ -30,12 +31,11 @@
             | BookMark内ランキング
 
         tr.ranking_genre_item.mt-3
-          td = link_to "読んだ", book_ranking_path(marks_sort: "read")
+          td = link_to "読んだ", book_ranking_path(marks_sort: "read"), class:"text-dark"
         tr
-          td = link_to "読みたい", book_ranking_path(marks_sort: "unread")
-
-    .col-md-8
-      = render "ranking", books_rank: @books_rank
+          td = link_to "読みたい", book_ranking_path(marks_sort: "unread"), class:"text-dark"
+    .col-md-8.ml-auto
+      = render "ranking", books_rank: @books_rank, book_read_new: @book_read_new
 
 
 

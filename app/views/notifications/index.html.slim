@@ -3,14 +3,15 @@
  - unless notification.book.sales_date == Time.current.to_date
     - notifications = notifications.where.not(id:notification.id)
 .container
-    .col-md-12
+  .row
+    .col-md-8.mx-auto
       .bg-white.text-center.py-3
         h3 通知
 
-    - if notifications.exists?
-        = render notifications
-    - else
-        p.text-center
-            | 通知はありません
+  - if notifications.exists?
+      = render notifications
+  - else
+      p.text-center
+          | 通知はありません
 
 

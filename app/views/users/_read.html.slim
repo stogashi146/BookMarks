@@ -1,7 +1,7 @@
 .col-md-12.col-md-12.mt-4
   .row
     - book_reads.each do |book_read|
-      .col-md-6
+      .col-md-6.h-100
         .card.flex-md-row.mb-4.shadow-sm.h-md-250
           .card-body.d-flex.flex-column.align-items-start.w-100
             strong = link_to book_read.book.title, book_path(book_read.book.id), class:"text-dark", local: true
@@ -41,8 +41,8 @@
                   = link_to book_book_read_path(book_read.book_id, book_read.id, user: book_read.user_id), class:"text-secondary" do
                     i.fa.fa-comments コメント#{book_read.read_comments.count}
 
-          = link_to book_path(book_read.book.id), local: true, class:"flex-auto text-right" do
-            = image_tag book_read.book.image_url.chomp("?_ex=200x200"), :width => '85%', class:"text-right"
+          = link_to book_path(book_read.book.id), local: true, class:"flex-auto text-right h-100" do
+            = image_tag book_read.book.image_url.chomp("?_ex=200x200"), :width => '90%', class:"text-right"
 
       javascript:
         $("#rate_#{book_read.id}").raty({

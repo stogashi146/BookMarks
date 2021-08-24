@@ -1,4 +1,4 @@
-- if book.read_exists?(current_user, "read")
+- if book.read_present?(current_user, "read")
   .d-block
     a.btn.btn-light.shadow-sm.book_show_onbtn type= "button" data-toggle= "modal" data-target= "#read_modal"
       i.fas.fa-book-reader.fa-2x.text-dark

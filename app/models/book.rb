@@ -22,11 +22,11 @@ class Book < ApplicationRecord
   end
 
   # 読んだ本が既にテーブルに存在するか？
-  def read_exists?(user, type)
+  def read_present?(user, type)
     if type == "read"
-      book_reads.where(user_id: user.id).exists?
+      book_reads.where(user_id: user.id).present?
     else
-      book_unreads.where(user_id: user.id).exists?
+      book_unreads.where(user_id: user.id).present?
     end
   end
 
