@@ -28,4 +28,4 @@
               = book_unread.created_at.strftime('%Y/%m/%d')
 
           = link_to book_path(book_unread.book.id), local: true, class:"flex-auto text-right" do
-            = image_tag book_unread.book.image_url.chomp("?_ex=200x200"), :width => '60%', class:"text-right"
+            = image_tag book_unread.book.image_url.chomp("?_ex=200x200"), :width => '80%', class:"text-right"

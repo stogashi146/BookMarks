@@ -27,6 +27,10 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   protected
+  def after_sign_in_path_for(resource_or_scope)
+    stored_location_for(resource_or_scope) || timelines_path
+  end
+
   def reject_deleted_user
     user = User.find_by(email: params[:user][:email])
     if user

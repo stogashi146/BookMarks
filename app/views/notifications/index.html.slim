@@ -1,13 +1,16 @@
 - notifications = @notifications.where.not("visitor_id = ? and action = ?", current_user.id, "favorite").where.not("visitor_id = ? and action = ?", current_user.id, "comment").where.not("action = ?", "read")
-
 - notifications.where(action:"release").each do |notification|
  - unless notification.book.sales_date == Time.current.to_date
     - notifications = notifications.where.not(id:notification.id)
+.container
+    .col-md-12
+      .bg-white.text-center.py-3
+        h3 通知
 
-- if notifications.exists?
-    = render notifications
-- else
-    p.text-center
-        | 通知はありません
+    - if notifications.exists?
+        = render notifications
+    - else
+        p.text-center
+            | 通知はありません
 
 

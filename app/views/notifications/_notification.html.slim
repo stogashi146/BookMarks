@@ -1,48 +1,85 @@
 - visitor = notification.visitor
 - visited = notification.visited
 
-.col-md-5.mx-auto.bg-white.pt-3
-  .form-inline
+.col-md-7.mx-auto.bg-white.mt-3
+  .form-inline.py-2
     - case notification.action
+
     - when "follow" then
-      span
-        = link_to user_path(visitor) do
-          = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle mr-4"
-          strong
-            = visitor.name
-        span さんが
-      = "あなたをフォローしました"
+      .d-flex.flex-row.bg-white.py-2
+        .flex-column
+          .d-flex.flex-row.mb-1
+            = link_to user_path(visitor) do
+              = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle"
+            .flex-column.ml-3
+              = link_to visitor.name, user_path(visitor), class:"text-dark"
+              .small.text-muted
+                = time_ago_in_words(notification.created_at).upcase
+          span
+            = link_to visitor.name, user_path(visitor), class:"text-info"
+            | さんがあなたをフォローしました
+
 
     - when "favorite" then
-      span
-        = link_to user_path(visitor) do
-          = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle mr-4"
-          strong
-            = visitor.name
-        span さんが
-      = link_to "#{notification.book.title}の投稿", book_book_read_path(notification.book_read.book_id,notification.book_read.id, user: visited), style: "font-weight: bold;"
-      = "にいいねしました"
+      .d-flex.flex-row.bg-white.py-2
+        .flex-column
+          .d-flex.flex-row.mb-1
+            = link_to user_path(visitor) do
+              = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle"
+            .flex-column.ml-3
+              = link_to visitor.name, user_path(visitor), class:"text-dark"
+              .small.text-muted
+                = time_ago_in_words(notification.created_at).upcase
+          span
+            strong = link_to visitor.name, user_path(visitor), class:"text-dark"
+            span さんが
+            = link_to "#{notification.book.title}の投稿", book_book_read_path(notification.book_read.book_id,notification.book_read.id, user: visited), class:"text-info"
+            | にいいねしました
+        = link_to book_path(notification.book.id), class:"ml-auto text-right", style:"width: 150px;" do
+          = image_tag(notification.book.image_url.chomp("?_ex=200x200"), :width => '60%')
 
     - when "comment" then
-      span
-        = link_to user_path(visitor) do
-          = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle mr-4"
-          strong
-            = visitor.name
-        span さんが
-        = link_to "#{notification.book.title}の投稿", book_book_read_path(notification.book_read.book_id,notification.book_read.id, user: notification.book_read.user_id), style: "font-weight: bold;"
+      .d-flex.flex-row.bg-white.py-2
+        .flex-column
+          .d-flex.flex-row.mb-1
+            = link_to user_path(visitor) do
+              = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle"
+            .flex-column.ml-3
+              = link_to visitor.name, user_path(visitor), class:"text-dark"
+              .small.text-muted
+                = time_ago_in_words(notification.created_at).upcase
+          span
+            strong = link_to visitor.name, user_path(visitor), class:"text-dark"
+            span さんが
+            = link_to "#{notification.book.title}の投稿", book_book_read_path(notification.book_read.book_id,notification.book_read.id, user: visited), class:"text-info"
+            | にコメントしました
 
-      span にコメントしました
-      p.text-muted.mb-0
-        = ReadComment.find_by(id: notification.read_comment_id)&.comment
+          p = notification.read_comment.comment.truncate(50)
+            - if notification.read_comment.comment.size > 50
+              small
+                = link_to "続きを読む", book_book_read_path(notification.book_id, notification.book_read_id, user: notification.visitor)
+
+        = link_to book_path(notification.book.id), class:"ml-auto text-right", style:"width: 150px;" do
+          = image_tag(notification.book.image_url.chomp("?_ex=200x200"), :width => '60%')
+
 
     - when "release" then
-      span
-        = image_tag notification.book.image_url.chomp("?_ex=200x200"), :width => '10%', :height => '10%'
-        span 読みたいリストの
-        = link_to notification.book.title, book_path(notification.book)
-        span が、本日発売です
+      .d-flex.flex-row.bg-white
+        .flex-column.pb-4
+          .d-flex.flex-row.mb-1
+            = link_to user_path(visitor) do
+              = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle"
+            .flex-column.ml-3
+              = link_to visitor.name, user_path(visitor), class:"text-dark"
+              .small.text-muted
+                = time_ago_in_words(notification.created_at).upcase
+          span
+            span 読みたいリストの
+            = link_to notification.book.title, book_path(notification.book), class:"text-info"
+            | が、本日発売です
 
-  .small.text-muted.text-right
+      = link_to book_path(notification.book.id), class:"ml-auto text-right", style:"width: 150px;" do
+        = image_tag(notification.book.image_url.chomp("?_ex=200x200"), :width => '60%')
+
+  .small.text-muted.text-right.pb-2
     = time_ago_in_words(notification.created_at).upcase
-  hr

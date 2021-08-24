@@ -14,7 +14,7 @@
               = link_to book_read.book.publisher_name, books_path(author: book_read.book.publisher_name)
             p.mb-0.small
               = "発売日：#{book_read.book.sales_date}"
-            .mt-1.user_show_readcomment
+            .mt-1
               = book_read.comment.truncate(30)
               - if book_read.comment.size > 30
                 small
@@ -29,12 +29,20 @@
                 i.fas.fa-plus-square.text-dark.pr-1
                 span.text-center
                   = "#{book_read.book.book_unreads.count}"
-
             small.align-self-end
               = book_read.created_at.strftime('%Y/%m/%d')
 
+            .d-flex.flex-row.mt-4
+              span id="favorite_btn_#{book_read.id}"
+                = render "read_favorites/favorite_btn", review: book_read
+
+              .badge.badge-pill.badge-light.pt-2
+                h6
+                  = link_to book_book_read_path(book_read.book_id, book_read.id, user: book_read.user_id), class:"text-secondary" do
+                    i.fa.fa-comments コメント#{book_read.read_comments.count}
+
           = link_to book_path(book_read.book.id), local: true, class:"flex-auto text-right" do
-            = image_tag book_read.book.image_url.chomp("?_ex=200x200"), :width => '60%', class:"text-right"
+            = image_tag book_read.book.image_url.chomp("?_ex=200x200"), :width => '85%', class:"text-right"
 
       javascript:
         $("#rate_#{book_read.id}").raty({

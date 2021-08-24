@@ -1,20 +1,22 @@
 - if book.read_exists?(current_user, "read")
-  a.book_show_readon.p-2 type= "button" data-toggle= "modal" data-target= "#read_modal"
-    i.fas.fa-bookmark.show_read_icon
-    span.show_read_text.ml-3
-      | 読んだ#{book.book_reads.count}
+  .d-block
+    a.btn.btn-light.shadow-sm.book_show_onbtn type= "button" data-toggle= "modal" data-target= "#read_modal"
+      i.fas.fa-book-reader.fa-2x.text-dark
+      p.text-center
+        = "#{book.book_reads.count}"
 
 -else
-  a.book_show_readoff.p-2 type= "button" data-toggle= "modal" data-target= "#read_modal"
-    i.fas.fa-bookmark.show_read_icon.d-inline
-    p.show_read_text.ml-3.d-inline
-      | 読んだ#{book.book_reads.count}
+  .d-block
+    a.btn.btn-light.shadow.book_show_btn type= "button" data-toggle= "modal" data-target= "#read_modal"
+      i.fas.fa-book-reader.fa-2x.text-dark
+      p.text-center
+        = "#{book.book_reads.count}"
 
 .modal.fade#read_modal tabindex= "-1" role= "dialog" aria-labelledby= "read_modal_label" aria-hidden= "true"
   .modal-dialog.modal-dialog-scrollable role= "document"
     .modal-content
-      .modal-header
-        h5.modal-title#read_modal_centered_label
+      .modal-header.read_modal_header
+        h4.modal-title#read_modal_centered_label
           | レビュー
         button.close type= "button" data-dismiss= "modal" aria-label= "Close"
           span aria-hidden= "true"
@@ -26,7 +28,10 @@
               = f.text_area :comment, class: "form-control", placeholder: "レビュー無記入でも投稿できます。", rows: 5, value: book_read.comment
             .form-group#star-edit
               = f.hidden_field :rate, class: "form-control", id: :review_star
-            .modal-footer
+            .form_group
+              = f.text_field :tag_list, value: book_read.tag_list.join(","), placeholder: "「,」区切りで複数のタグを追加できます", class:"form-control"
+
+            .modal-footer.bg-light.px-5
               = link_to "削除する", book_book_read_path(book, book_read),  method: :delete, remote: true,  class: "btn btn-secondary"
               = f.submit "編集する", class: "btn btn-primary"
           javascript:
@@ -43,12 +48,12 @@
         - else
           = form_with model: book_read_new, url: book_book_reads_path(book), method: :post, remote: true do |f|
             .form-group
-              = f.text_area :comment, class: "form-control", placeholder: "レビュー無記入でも投稿できます。", rows: 5
+              = f.text_area :comment, class: "form-control", placeholder: "レビュー無記入でも投稿できます", rows: 5
             .form-group#star
               = f.hidden_field :rate, class: "form-control"
             .form_group
-              = f.text_field :tag_list, value: book_read_new.tag_list.join(","), class:"form-control"
-            .modal-footer
+              = f.text_field :tag_list, value: book_read_new.tag_list.join(","), placeholder: "「,」区切りで複数のタグを追加できます", class:"form-control"
+            .modal-footer.bg-light.px-5
               = f.submit "投稿する", class: "btn btn-primary"
 
 javascript:
