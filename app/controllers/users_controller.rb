@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_correct_user, only: [:edit, :update]
-  before_action :set_correct_canceluser, only: [:cancel]
+  before_action :set_correct_canceluser, only: [:cancel, :unsubscribe]
 
   def show
     @user = User.find(params[:id])
@@ -31,6 +31,9 @@ class UsersController < ApplicationController
   end
 
   def unsubscribe
+    @user.update(is_deleted: true)
+    reset_session
+    redirect_to root_path, notice: "退会処理が完了しました。ご利用いただきありがとうございました。"
   end
 
   private
@@ -42,6 +45,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to root_path unless @user == current_user
   end
+
   def set_correct_canceluser
     @user = User.find(params[:user_id])
     redirect_to root_path unless @user == current_user
