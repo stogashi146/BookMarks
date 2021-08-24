@@ -1,7 +1,13 @@
-- if @timelines.present?
-    = render "timeline", timelines: @timelines
-- else
-    p.text-center
+.container
+  .row
+    .col-md-12
+      .bg-white.text-center.py-3
+        h3 タイムライン
+
+      - if @timelines.present?
+        = render "timeline", timelines: @timelines
+      - else
+        p.text-center
         | タイムラインには何もありません
 
 

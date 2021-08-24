@@ -1,50 +1,46 @@
-p.mt-5
-  | #{@reviews.count}件のレビュー
-- reviews.each do |review|
-  .border
-    .row
-      .col-md-1
-        = link_to user_path(review.user.id)
-         = attachment_image_tag review.user, :image, size: "80x80", fallback: "noimage.jpg", class: "rounded-circle mr-4"
+.row
+  .col-md-12
+   .bg-light.text-center.py-3.mt-3
+      h3 #{reviews.count}件のレビュー
+.row
+  - reviews.each do |review|
+    .col-md-6
+      .bg-white.my-3.p-3
+        .d-flex.flex-row
+          .flex-column
+            .d-flex.flex-row.mb-1
+              = link_to user_path(review.user_id) do
+                = attachment_image_tag review.user, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle"
+              strong.flex-column.ml-3
+                = link_to "#{review.user.name}の感想・レビュー", book_book_read_path(review.book_id, review, user: review.user), class:"text-dark"
+                .small.text-muted
+                  = time_ago_in_words(review.created_at).upcase
+            .ml-1
+              div id="rate_#{review.id}" class="my-1"
 
-      .col-md-11
-        h4
-          = link_to user_path(review.user.id)
-            = review.user.name_id
+              .mt-1.mr-3
+                = review.comment.truncate(50)
+                - if review.comment.size > 50
+                  small
+                    = link_to "続きを読む", book_book_read_path(review.book_id, review.id, user: review.user)
 
-        div id="rate_#{review.id}"
-        javascript:
-          $("#rate_#{review.id}").raty({
-            size: 20,
-            starOff: "#{asset_path('star-off.png')}",
-            starOn: "#{asset_path('star-on.png')}",
-            starHalf: "#{asset_path('star-half.png')}",
-            half: true,
-            readOnly: true,
-            score: "#{review.rate}",
-          });
-
-        p.mt-2
-          = review.comment
-        p
-          = render 'tag_list', tag_list: review.tag_list
-        p.text-right
-          = review.created_at.strftime('%Y/%m/%d')
-
-
-      .col-md-6.ml-3
-        - if user_signed_in?
+        hr
+        .d-flex.flex-row
           span id="favorite_btn_#{review.id}"
             = render "read_favorites/favorite_btn", review: review
 
-          span.ml-3
-            = link_to book_book_read_path(review.book, review, user: review.user_id)
-              i.fas.fa-comments #{review.read_comments.count}コメントする
-        - else
-            span
-              = link_to new_user_session_path
-                i.fas.fa-heart #{review.read_favorites.count}いいね
+          .badge.badge-pill.badge-light.pt-2
+            h6
+              = link_to book_book_read_path(review.book_id, review, user: review.user), class:"text-secondary" do
+                i.fa.fa-comments コメント#{review.read_comments.count}
 
-            span.ml-3
-              = link_to new_user_session_path
-                i.fas.fa-comments #{review.read_read_comments.count}コメントする
+    javascript:
+      $("#rate_#{review.id}").raty({
+        size: 10,
+        starOff: "#{asset_path('star-off.png')}",
+        starOn: "#{asset_path('star-on.png')}",
+        starHalf: "#{asset_path('star-half.png')}",
+        half: true,
+        readOnly: true,
+        score: "#{review.rate}",
+      });
