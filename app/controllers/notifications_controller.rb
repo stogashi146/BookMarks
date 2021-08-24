@@ -6,9 +6,4 @@ class NotificationsController < ApplicationController
     end
   end
 
-  def destroy_all
-    @notifications = current_user.passive_notifications.destroy_all
-    redirect_to request.referer
-  end
-
 end

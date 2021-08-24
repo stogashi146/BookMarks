@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # devise_for :users
+  devise_for :users, controllers: {
+    sessions: "users/sessions",
+    registrations: "users/registrations",
+  }
   root to: "homes#about"
   resources :users, only: [:show, :edit, :update] do
     get "follows" => "users#follows"
@@ -11,7 +15,6 @@ Rails.application.routes.draw do
     resource :relationships, only: [:create, :destroy]
   end
 
-
   resources :books, only: [:index, :show, :create] do
     resources :book_reads,  only: [:show, :create, :destroy, :update] do
       resources :read_comments,  only: [:create, :destroy]
@@ -21,9 +24,6 @@ Rails.application.routes.draw do
   end
   resources :timelines, only: [:index]
   resources :notifications, only: [:index]
-  delete "destroy_all" => "notifications#destroy_all"
-
-
   get "book/ranking" => "books#ranking"
 
 end

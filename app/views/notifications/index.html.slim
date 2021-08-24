@@ -5,9 +5,6 @@
     - notifications = notifications.where.not(id:notification.id)
 
 - if notifications.exists?
-    = link_to destroy_all_path, method: :delete do
-      i.fas.fa-trash style="color: black;"
-      h7 style="color: black;"全削除
     = render notifications
 - else
     p.text-center
