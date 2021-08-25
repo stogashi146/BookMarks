@@ -12,21 +12,21 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
 
     ul.navbar-nav.ml-auto
       - if user_signed_in?
-        li.nav-item.active.mr-4
+        li.nav-item.active.mr-3
           = link_to "本を探す", books_path(keyword: "本", page: rand(1..100)), class:"nav-link header_find_book px-3"
         li.nav-item.active.mr-4
           = link_to user_path(current_user.id), class:"nav-link" do
               i.fas.fa-user.fa-fw
               span  マイページ
-        li.nav-item.active.mr-4
+        li.nav-item.active.mr-3
           = link_to timelines_path, class:"nav-link" do
             i.fa.fa-tasks
             span タイムライン
-        li.nav-item.active.mr-4
+        li.nav-item.active.mr-3
           = link_to book_ranking_path(genre: "", sort: "sales"), class:"nav-link" do
             i.fas.fa-crown.fa-fw
             span  ランキング
-        li.nav-item.active.mr-4
+        li.nav-item.active.mr-
           = link_to user_calender_path(current_user.id), class:"nav-link" do
             i.far.fa-calendar-alt.fa-fw
             span  発売カレンダー
@@ -51,8 +51,9 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
               i.fas.fa-sign-out-alt.fa-fw
               span  ログアウト
 
-
       - else
+        li.nav-item.active.mr-4
+          = link_to "本を探す", books_path(keyword: "本", page: rand(1..100)), class:"header_find_book p-3"
         li.nav-item.active.mr-4
           = link_to root_path, class:"text-secondary" do
             i.fas.fa-book-reader.fa-fw

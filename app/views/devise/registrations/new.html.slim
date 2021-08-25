@@ -1,40 +1,37 @@
-h2
-  = t(".sign_up")
-= form_with model: @user, url: user_registration_path, local: true do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+.container
+  .col-md-6.mx-auto.bg-white.shadow.p-3.mt-5
+    h2.mb-4
+      = t(".sign_up")
+    = form_with model: @user, url: user_registration_path, local: true do |f|
+      = render "devise/shared/error_messages", resource: resource
+      .form-group
+        = f.label :email
+        = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class:"form-control"
 
-  .field
-    = f.label :name, "ニックネーム"
-    br
-    = f.text_field :name, autocomplete: "name"
+      .form-group
+        = f.label :name, "ニックネーム"
+        = f.text_field :name, autocomplete: "name", placeholder: "ニックネーム", class:"form-control"
 
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      em
-        | (
-        = @minimum_password_length
-        |  characters minimum)
-    br
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "new-password"
+      .form-group
+        = f.label :password
+        - if @minimum_password_length
+          em
+            | (
+            = @minimum_password_length
+            |  characters minimum)
+        = f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class:"form-control"
 
-  .form-check.form-check-inline
-    = f.label :is_mail_send, "発売前日にメールを受け取る", class:"form-check-label"
-    = f.check_box :is_mail_send, checked_value: true, unchecked_value: false, class:"form-check-input"
-  .form
-    small
-      | ※読みたいリストに入れた本が発売前日に通知されます。
+      .form-group
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード再入力", class:"form-control"
 
+      .form-group.form-check
+        = f.check_box :is_mail_send, checked_value: true, unchecked_value: false, class:"form-check-input"
+        = f.label :is_mail_send, "発売前日にメールを受け取る", class:"form-check-label"
+        small.form-text.text-muted ※読みたいリストに入れた本を発売前日にメールで通知します
 
+      .actions
+        = f.submit t(".sign_up"), class:"btn btn-primary btn-block"
+    .my-3
+      = render "devise/shared/links"
 
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
