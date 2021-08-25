@@ -37,7 +37,7 @@
               .badge.badge-pill.badge-light.pt-2
                 h6
                   = link_to book_book_read_path(book_read.book_id, book_read.id, user: book_read.user_id), class:"text-secondary" do
-                    i.fa.fa-comments コメント#{book_read.read_comments.count}
+                    i.fa.fa-comment コメント#{book_read.read_comments.count}
 
             small.align-self-end
               = book_read.created_at.strftime('%Y/%m/%d')

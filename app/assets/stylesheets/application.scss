@@ -25,13 +25,14 @@
 }
 
 html{
-  font-family: 'Noto Sans JP', sans-serif, "Kosugi";
+  // font-family: 'Noto Sans JP', sans-serif, "Kosugi";
+  font-family: "Hiragino Kaku Gothic ProN","Hiragino Sans",'Noto Sans JP', sans-serif, "Kosugi";
 }
 
 body{
-// background-color: #f5f5f5;
  background-color: #f1f1f2;
- font-family: 'Noto Sans JP', sans-serif, "Kosugi";
+ font-family: "Hiragino Kaku Gothic ProN","Hiragino Sans",'Noto Sans JP', sans-serif, "Kosugi";
+
 }
 
 // headerページ
@@ -50,6 +51,10 @@ header{
   bottom: 10px;
   left: 10px;
   color: #efa04c;
+}
+
+.dropleft .dropdown-toggle::before{
+  display:none;
 }
 
 // header開閉
