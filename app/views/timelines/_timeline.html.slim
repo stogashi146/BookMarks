@@ -4,11 +4,11 @@
     - visited = timeline.visited
     - case timeline.action
     - when "release" then
-      .d-flex.flex-row.bg-white.my-3.p-3
+      .d-flex.flex-row.bg-white.border.shadow.my-3.p-3
         .flex-column
           .d-flex.flex-row.mb-1
             = link_to user_path(visitor) do
-              = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle"
+              = attachment_image_tag visitor, :image, :fill, 50, 50, fallback:"noimage.jpg", size: "50x50", class: "rounded-circle"
             .flex-column.ml-3
               = link_to visitor.name, user_path(visitor), class:"text-dark"
               .small.text-muted
@@ -20,12 +20,12 @@
           = image_tag(timeline.book.image_url.chomp("?_ex=200x200"), :width => '60%')
 
     - when "read" then
-      .bg-white.my-3.p-3
+      .bg-white.border.shadow.my-3.p-3
         .d-flex.flex-row
           .flex-column
             .d-flex.flex-row.mb-1
               = link_to user_path(visitor) do
-                = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle"
+                = attachment_image_tag visitor, :image, :fill, 50, 50, fallback:"noimage.jpg", size: "50x50", class: "rounded-circle"
               strong.flex-column.ml-3
                 = link_to "#{visitor.name}の感想・レビュー", book_book_read_path(timeline.book_id, timeline.book_read_id, user: visited), class:"text-dark"
                 .small.text-muted

@@ -1,12 +1,12 @@
 - visitor = notification.visitor
 - visited = notification.visited
 
-.col-md-8.mx-auto.bg-white.mt-3
+.col-md-8.mx-auto.bg-white.border.shadow.mt-3
   .form-inline.py-2
     - case notification.action
 
     - when "follow" then
-      .d-flex.flex-row.bg-white.py-2
+      .d-flex.flex-row.py-2
         .flex-column
           .d-flex.flex-row.mb-1
             = link_to user_path(visitor) do
@@ -21,7 +21,7 @@
 
 
     - when "favorite" then
-      .d-flex.flex-row.bg-white.py-2
+      .d-flex.flex-row.py-2
         .flex-column.mb-5
           .d-flex.flex-row.mb-1
             = link_to user_path(visitor) do
@@ -39,7 +39,7 @@
         = image_tag(notification.book.image_url.chomp("?_ex=200x200"), :width => '60%')
 
     - when "comment" then
-      .d-flex.flex-row.bg-white.py-2
+      .d-flex.flex-row.py-2
         .flex-column
           .d-flex.flex-row.mb-1
             = link_to user_path(visitor) do
@@ -64,7 +64,7 @@
 
 
     - when "release" then
-      .d-flex.flex-row.bg-white
+      .d-flex.flex-row
         .flex-column.pb-5
           .d-flex.flex-row.mb-1
             = link_to user_path(visitor) do

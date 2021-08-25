@@ -10,19 +10,12 @@
                 h3
                   = @user.name
                 p
-                  = @user.introduction
+                  = simple_format(@user.introduction)
 
           .col-md-3.d-flex.align-items-center.justify-content-end
             - unless @user == current_user
-              - if User.follow_include?(current_user, @user)
-                = link_to user_relationships_path(@user.id), method: :delete, local: true, class:"btn btn-secondary px-3 align-items-center"
-                  i.fas.fa-user-check.mx-1
-                  span フォロー中
-
-              - else
-                = link_to user_relationships_path(@user.id), method: :post, local: true, class:"btn btn-light btn-outline-secondary px-3"
-                  i.fas.fa-user-plus.mx-1
-                  span フォロー
+              .follow_ajax_btn
+                = render "relationships/follow_btn", user: @user
 
             - else
               = link_to edit_user_path(current_user.id), local: true, class:"btn btn-outline-secondary px-3" do

@@ -13,7 +13,7 @@ class BookUnread < ApplicationRecord
       action: "release"
       )
       #発売後の本については、通知済みとする
-      if notification.book.sales_date < Time.current.to_date
+      if notification.book.sales_date.present? && notification.book.sales_date < Time.current.to_date
         notification.checked = true
       end
       notification.save if notification.valid?

@@ -62,7 +62,6 @@ header{
   width: 350px;
   height: 100%;
   top: 0;
-  // right: -350px;
   right: 100px;
   position: fixed;
 }
@@ -96,7 +95,7 @@ header{
   overflow-x: hidden;
 }
 .about_vw{
-  height:85vh;
+  height:100vh;
   padding-top: 20vh;
 }
 .about_h1_item{
@@ -186,27 +185,30 @@ header{
   height: 50px;
 }
 
+.ranking_item_activebtn{
+  background-color:#FFE100;
+}
 
 // simple-calendar
 .simple-calendar {
- .day {}
- .wday-0 {}
+ .day {width:100px}
+ .wday-0 {background-color:#FFD1D1;}
  .wday-1 {}
  .wday-2 {}
  .wday-3 {}
  .wday-4 {}
  .wday-5 {}
- .wday-6 {}
- .today {}
+ .wday-6 {background-color:#FFD1D1;}
+ .today {background-color:#87CEFA;}
  .past {}
  .future {}
  .start-date {}
  .prev-month {}
  .next-month { }
  .current-month {}
- .has-events {
-   background: #FFE100;
- }
+ .has-events {}
+ .callender_event_text{}
 }
+.callender_table_text{font-size: 15px;}
 
 

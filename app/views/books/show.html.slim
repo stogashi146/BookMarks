@@ -16,6 +16,7 @@
           = link_to @book.publisher_name, books_path(author: @book.publisher_name)
         p.mb-0
           = "発売日：#{@book.sales_date}"
+        div id="avg_rate_#{@book.id}"
       = link_to "楽天ブックスで購入する", @book.url, class:"btn btn-danger text-white mt-3"
 
       .d-flex.flex-column
@@ -44,6 +45,13 @@
 
   = render "review", reviews: @reviews
 
-
-
-
+javascript:
+  $("#avg_rate_#{@book.id}").raty({
+    size: 10,
+    starOff: "#{asset_path('star-off.png')}",
+    starOn: "#{asset_path('star-on.png')}",
+    starHalf: "#{asset_path('star-half.png')}",
+    half: true,
+    readOnly: true,
+    score: "#{Book.reviews_avg(@book)}",
+  });

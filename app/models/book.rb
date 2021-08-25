@@ -50,14 +50,16 @@ class Book < ApplicationRecord
   #   }
 
   #  本を検索する
-  def self.search_books(keyword:"本", author:"", sort:"standard", genre:"", hits:"28")
+  def self.search_books(keyword:"本", author:"", sort:"standard", genre:"",hits: 28)
     RakutenWebService::Books::Total.search(
       keyword: keyword,
       author: author,
       sort: sort,
       booksGenreId:"001001" + genre,
       orFlag: "1",
-      hits: hits)
+      NGKeyword: "BL Jパブリッシング シュークリーム 祥伝社 英和出版社",
+      hits: hits
+      )
   end
 
   # 読んだ順

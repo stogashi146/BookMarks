@@ -8,7 +8,7 @@ class BookRead < ApplicationRecord
   acts_as_taggable
 
   def favorited_by?(user)
-    read_favorites.where(user_id: user.id).exists?
+    read_favorites.where(user_id: user.id).present?
   end
 
   # 読みたい通知メソッド（通知モデルに登録するが、タイムラインにのみ使用）

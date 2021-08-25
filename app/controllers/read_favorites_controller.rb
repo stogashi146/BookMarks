@@ -1,4 +1,6 @@
 class ReadFavoritesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @book_read = BookRead.find(params[:book_read_id])
     read_fav = @book_read.read_favorites.new(user_id: current_user.id)
