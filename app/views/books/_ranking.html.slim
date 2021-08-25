@@ -19,14 +19,14 @@
         .d-flex.flex-row.mt-auto
           .d-block
             = link_to book_path(book_rank), local: true do
-              .badge.badge-light.text-dark.shadow-sm.ranking_item_btn.pt-2
+              div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2 #{"ranking_item_activebtn" if user_signed_in? && current_user.book_reads.find_by(book_id: book_rank) }"
                 i.fas.fa-book-reader.fa-2x
                 p.text-center
                   = "#{book_rank.book_reads.count}"
 
           .d-block
             = link_to book_path(book_rank), local: true do
-              .badge.badge-light.text-dark.shadow-sm.ranking_item_btn.pt-2
+              div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2 #{"ranking_item_activebtn" if user_signed_in? && current_user.book_unreads.find_by(book_id: book_rank) }"
                 i.fas.fa-plus-square.fa-2x
                 p.text-center
                   = "#{book_rank.book_unreads.count}"
@@ -65,17 +65,30 @@
           .d-flex.flex-row.mt-auto
             .d-block
               = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
-                .badge.badge-light.text-dark.shadow-sm.ranking_item_btn.pt-2
+                div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2 #{"ranking_item_activebtn" if user_signed_in? && current_user.book_reads.find_by(book_id: book) }"
                   i.fas.fa-book-reader.fa-2x
                   p.text-center
                     = "#{book.book_reads.count}"
-
             .d-block
               = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
-                .badge.badge-light.text-dark.shadow-sm.ranking_item_btn.pt-2
+                div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2 #{"ranking_item_activebtn" if user_signed_in? && current_user.book_unreads.find_by(book_id: book) }"
                   i.fas.fa-plus-square.fa-2x
                   p.text-center
                     = "#{book.book_unreads.count}"
+
+        - else
+          .d-flex.flex-row.mt-auto
+            .d-block
+              = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
+                div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2"
+                  i.fas.fa-book-reader.fa-2x
+                  p.text-center 0
+
+            .d-block
+              = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
+                div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2"
+                  i.fas.fa-plus-square.fa-2x
+                  p.text-center 0
 
       = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true, class:"text-right" do
         = image_tag book_rank.large_image_url.chomp("?_ex=200x200"), :width => '60%', class:"text-right"

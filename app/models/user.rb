@@ -22,7 +22,7 @@ class User < ApplicationRecord
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
   has_one :sns_acount, dependent: :destroy
 
-  validates :name, presence: true, length: { maximum: 20 }
+  validates :name, presence: true, length: { maximum: 15 }
   validates :email, presence: true
   validates :introduction, length: { maximum: 50 }
 

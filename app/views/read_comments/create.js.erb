@@ -1,2 +1,3 @@
-$("#book_read_comments").html("<%= j(render "book_reads/book_read_comments", book: @book, book_read: @book_read) %>");
+$("#book_read_comments").html("<%= j(render "book_reads/read_comments", book: @book, book_read: @book_read) %>");
 $("#book_read_comment_form")[0].reset();
+$("#comment_count").html("<%= j("#{@book_read.read_comments.count}") %>");

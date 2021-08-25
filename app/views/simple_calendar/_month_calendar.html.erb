@@ -1,8 +1,10 @@
 <div class="simple-calendar">
   <div class="calendar-heading">
-    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
-    <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
-    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
+    <h4 class="text-center my-3">
+      <%= link_to t('simple_calendar.previous', default: '<<'), calendar.url_for_previous_view, class:"badge badge-secondary p-2" %>
+      <span class="calendar-title my-5"><%= "#{start_date.year}年" %><%= t('date.month_names')[start_date.month] %> </span>
+      <%= link_to t('simple_calendar.next', default: '>>'), calendar.url_for_next_view, class:"badge badge-secondary p-2" %>
+    </h4>
   </div>
 
   <table class="table table-striped">
