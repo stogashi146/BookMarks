@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_014759) do
     t.integer "user_id"
     t.integer "book_id"
     t.integer "rate"
-    t.text "comment", default: ""
+    t.text "comment"
     t.boolean "is_shared"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
