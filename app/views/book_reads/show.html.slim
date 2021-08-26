@@ -1,6 +1,6 @@
 .container
   .row
-    .col-md-10.mx-auto
+    .col-md-11.mx-auto
       .bg-white.mt-3.p-3
           .d-flex.flex-row
             .flex-column
@@ -26,10 +26,10 @@
                 p.mb-0
                   = "発売日：#{@book.sales_date}"
                 .mt-3.mr-3
-                  = @book_read.comment
+                  = simple_format(@book_read.comment)
 
             = link_to book_path(@book), class:"ml-auto text-right", style:"width: 400px;" do
-              = image_tag(@book.image_url.chomp("?_ex=200x200"), :width => '100%')
+              = image_tag(@book.image_url.chomp("?_ex=200x200"), :width => '90%')
 
           .d-flex.flex-row
             span id="favorite_btn_#{@book_read.id}"
@@ -54,7 +54,7 @@
             });
 
 
-    .col-md-10.mx-auto
+    .col-md-11.mx-auto
       .bg-white.border
         = form_with model: ReadComment, url: book_book_read_read_comments_path(@book, @book_read), method: :post, remote: true, id:"book_read_comment_form", class:"form-inline" do |f|
           = link_to user_path(current_user) do

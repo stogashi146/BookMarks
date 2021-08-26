@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     passwords: "users/passwords",
     confirmations: "users/confirmations",
+    :omniauth_callbacks => "users/omniauth_callbacks",
   }
   devise_scope :user do
     post "users/guest_sign_in" , to: "users/sessions#guest_sign_in"

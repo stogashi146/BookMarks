@@ -20,12 +20,12 @@
                 small
                   = link_to "続きを読む", book_book_read_path(book_read.book_id,book_read, user: book_read.user_id)
 
-            .d-inline-flex.btn-group.btn-group-md
-              .btn.btn-light.align-items-end
+            .d-inline-flex.btn-group.btn-group-md.mb-2
+              = link_to book_path(book_read), class:"btn btn-light align-items-end" do
                 i.fas.fa-book-reader.text-dark.pr-1
                 span.text-center
                   = "#{book_read.book.book_reads.count}"
-              .btn.btn-light.align-items-end
+              = link_to book_path(book_read), class:"btn btn-light align-items-end" do
                 i.far.fa-plus-square.text-dark.pr-1
                 span.text-center
                   = "#{book_read.book.book_unreads.count}"

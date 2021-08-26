@@ -14,12 +14,12 @@
             p.mb-0.small
               = "発売日：#{book_unread.book.sales_date}"
 
-            .d-inline-flex.btn-group.btn-group-md
-              .btn.btn-light.align-items-end
+            .d-inline-flex.btn-group.btn-group-md.mt-2
+              = link_to book_path(book_unread), class:"btn btn-light align-items-end" do
                 i.fas.fa-book-reader.text-dark.pr-1
                 span.text-center
                   = "#{book_unread.book.book_reads.count}"
-              .btn.btn-light.align-items-end
+              = link_to book_path(book_unread), class:"btn btn-light align-items-end" do
                 i.fas.fa-plus-square.text-dark.pr-1
                 span.text-center
                   = "#{book_unread.book.book_unreads.count}"

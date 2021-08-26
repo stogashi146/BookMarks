@@ -1,4 +1,4 @@
-.container
+.container.mb-5
   .col-md-6.mx-auto.bg-white.shadow.p-3.mt-5
     h2.mb-4
       = t(".sign_up")
@@ -34,6 +34,4 @@
         = f.submit t(".sign_up"), class:"btn btn-primary btn-block"
     .my-3
       = render "devise/shared/links"
-      .text-right.mt-3
-        span ゲストログインは
-        =link_to "こちら", users_guest_sign_in_path, method: :post, class:"text-primary"
+
