@@ -8,27 +8,35 @@
         = f.label :email
         = f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", placeholder:"メールアドレス"
       - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-        div
-          = t(".currently_waiting_confirmation_for_email")
-          = resource.unconfirmed_email
+        div.alert.alert-danger
+          = t(".currently_waiting_confirmation_for_email", email: resource.unconfirmed_email)
       .form-group
         p.mb-0 = f.label :password, "パスワードを変更する場合"
         small
           = f.label :password, t(".leave_blank_if_you_don_t_want_to_change_it")
-        = f.password_field :password, autocomplete: "new-password", class:"form-control", placeholder:"新しいパスワード"
+        - if @user.provider
+          = f.password_field :password, autocomplete: "new-password", class:"form-control", placeholder:"twitterログインの場合はパスワード変更できません", readonly: true
+        - else
+          = f.password_field :password, autocomplete: "new-password", class:"form-control", placeholder:"新しいパスワード"
         - if @minimum_password_length
           em
             = @minimum_password_length
             |  characters minimum
       .form-group
         = f.label :password_confirmation
-        = f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", placeholder:"新しいパスワード（再入力）"
+        - if @user.provider
+          = f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", readonly: true
+        - else
+          = f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", placeholder:"新しいパスワード（再入力）"
       .form-group
         = f.label :current_password
         br
         small
           = t(".we_need_your_current_password_to_confirm_your_changes")
-        = f.password_field :current_password, autocomplete: "current-password", class:"form-control"
+        - if @user.provider
+          = f.password_field :current_password, autocomplete: "current-password", class:"form-control", placeholder: "twitterログインの場合はパスワード不要です", readonly: true
+        - else
+          = f.password_field :current_password, autocomplete: "current-password", class:"form-control", placeholder: "パスワードの確認"
       .actions
         = f.submit t(".update"), class:"btn btn-primary btn-block"
 

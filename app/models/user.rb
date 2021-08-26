@@ -2,7 +2,10 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable,
+         :confirmable,
+         :omniauthable, omniauth_providers:[:twitter]
+
 
   has_many :book_reads, dependent: :destroy
   has_many :book_unreads, dependent: :destroy
@@ -22,7 +25,7 @@ class User < ApplicationRecord
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
   has_one :sns_acount, dependent: :destroy
 
-  validates :name, presence: true, length: { maximum: 15 }
+  validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true
   validates :introduction, length: { maximum: 50 }
 
@@ -35,6 +38,20 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
       user.confirmed_at = Time.now
     end
+  end
+
+  # twitterログイン
+  def self.find_for_oauth(auth)
+    user = User.find_by(uid: auth.uid, provider: auth.provider)
+
+    user ||= User.new(
+      uid: auth.uid,
+      provider: auth.provider,
+      name: auth[:info][:name],
+      email: User.dummy_email(auth),
+      password: Devise.friendly_token[0, 20]
+    )
+    user
   end
 
   def self.follow_include?(follower, follow)
@@ -74,6 +91,11 @@ class User < ApplicationRecord
     current_user.followings.each do |follow_user|
       follow_user.active_notifications.where("action = ? or action = ?", "read", "release")
     end
+  end
+
+  private
+  def self.dummy_email(auth)
+    "#{auth.uid}-#{auth.provider}@bookmarks.net"
   end
 
 end

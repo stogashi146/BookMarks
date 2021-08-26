@@ -19,10 +19,11 @@
               div id="rate_#{review.id}" class="my-1"
 
               .mt-1.mr-3
-                = review.comment.truncate(50)
+                = simple_format(review.comment.truncate(50))
                 - if review.comment.size > 50
-                  small
-                    = link_to "続きを読む", book_book_read_path(review.book_id, review.id, user: review.user)
+                  .small = link_to "続きを読む", book_book_read_path(review.book_id, review.id, user: review.user)
+              .mt-2
+                = render "tag_list", tag_list: review.tag_list
 
         hr
         .d-flex.flex-row
