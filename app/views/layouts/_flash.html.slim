@@ -1,8 +1,8 @@
 - if flash[:notice]
-  p.alert.alert-secondary#notice.pl-4.py-1
+  p.alert.alert-success#notice.pl-4.py-1
     i.far.fa-check-circle.pr-2
     = flash[:notice]
 - elsif flash[:alert]
-  p.alert.alert-alert#alert.pl-4.py-1
+  p.alert.alert-danger#alert.pl-4.py-1
     i.fas.fa-exclamation-triangle.pr-2
     = flash[:alert]

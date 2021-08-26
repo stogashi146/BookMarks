@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_014759) do
     t.integer "user_id"
     t.integer "book_id"
     t.integer "rate"
-    t.text "comment"
+    t.text "comment", default: ""
     t.boolean "is_shared"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_014759) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
-    t.text "introduction"
+    t.text "introduction", default: ""
     t.string "image_id"
     t.boolean "is_mail_send", default: false, null: false
     t.boolean "is_deleted", default: false, null: false

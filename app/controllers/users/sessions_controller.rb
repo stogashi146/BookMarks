@@ -26,6 +26,12 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to root_path, notice: "ゲストユーザーでログインしました"
+  end
+
   protected
   def after_sign_in_path_for(resource_or_scope)
     stored_location_for(resource_or_scope) || timelines_path

@@ -19,24 +19,32 @@
               .form-group
                 .text-left
                   label.mr-auto for="user_name_input" ニックネーム
-                  = f.text_field :name, id:"user_name_input", class:"form-control"
+                  - if @user.email == "guest@book-marks.net"
+                    = f.text_field :name, id:"user_name_input", class:"form-control", readonly: true
+                  - else
+                    = f.text_field :name, id:"user_name_input", class:"form-control"
 
               .form-group
                 .text-left
                   label.mr-auto for="user_email_input" メールアドレス
-                  = f.text_field :email, id:"user_email_input", class:"form-control"
+                  = f.text_field :email, id:"user_email_input", readonly: true, class:"form-control"
+                  small
+                    = link_to "メールアドレス、パスワードの変更はこちら", edit_user_registration_path
 
               .form-group
                 .text-left
-                  label for="user_introduction_input"
-                    | プロフィール
+                  label for="user_introduction_input" 自己紹介
                   = f.text_area :introduction, rows:"5", id:"user_introduction_input", class:"form-control"
 
               .form-check.form-check-inline
-                - if @user.is_mail_send
-                  = f.check_box :is_mail_send, checked_value: true, unchecked_value: false, checked: true, class:"form-check-input"
+                - if @user.email == "guest@book-marks.net"
+                  = f.check_box :is_mail_send, class:"form-check-input", disabled: true
                 - else
-                  = f.check_box :is_mail_send, checked_value: true, unchecked_value: false, class:"form-check-input"
+                  - if @user.is_mail_send
+                    = f.check_box :is_mail_send, checked_value: true, unchecked_value: false, checked: true, class:"form-check-input"
+                  - else
+                    = f.check_box :is_mail_send, checked_value: true, unchecked_value: false, class:"form-check-input"
+
                 = f.label :is_mail_send, "発売前日にメールを受け取る", class:"form-check-label"
 
               .form

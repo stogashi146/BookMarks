@@ -7,7 +7,7 @@ class CreateNotifications < ActiveRecord::Migration[5.2]
       t.integer :book_read_id
       t.integer :book_unread_id
       t.integer :read_comment_id
-      t.string :action, default: '', null: false
+      t.string :action, default: "", null: false
       t.boolean :checked, default: false, null: false
 
       t.timestamps
