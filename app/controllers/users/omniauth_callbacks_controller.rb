@@ -46,7 +46,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @user.skip_confirmation!
       @user.save
       session["devise.#{provider}_data"] = request.env['omniauth.auth'].except("extra")
-      redirect_to new_user_registration_url
+      redirect_to new_user_session_path, notice: "新規登録に成功しました。"
     end
   end
 end
