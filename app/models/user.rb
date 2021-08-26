@@ -28,6 +28,15 @@ class User < ApplicationRecord
 
   attachment :image
 
+  # ゲストユーザーでログイン
+  def self.guest
+    find_or_create_by!(email: "guest@book-marks.net") do |user|
+      user.name = "ゲストユーザー"
+      user.password = SecureRandom.urlsafe_base64
+      user.confirmed_at = Time.now
+    end
+  end
+
   def self.follow_include?(follower, follow)
     follower.followings.include?(follow)
   end

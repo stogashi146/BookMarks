@@ -4,7 +4,7 @@ class CreateBookReads < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.integer :book_id
       t.integer :rate
-      t.text :comment
+      t.text :comment, default: ""
       t.boolean :is_shared
 
       t.timestamps

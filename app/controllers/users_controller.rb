@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_correct_user, only: [:edit, :update]
   before_action :set_correct_canceluser, only: [:cancel, :unsubscribe]
+  before_action :ensure_normal_user, only: [:update, :unsubscribe]
 
   def show
     @user = User.find(params[:id])
@@ -50,6 +51,12 @@ class UsersController < ApplicationController
   def set_correct_canceluser
     @user = User.find(params[:user_id])
     redirect_to root_path unless @user == current_user
+  end
+
+  def ensure_normal_user
+    # if User.find_by(email: "guest@book-marks.net")
+    #   redirect_to request.referer, alert: "ゲストユーザーの編集はできません。"
+    # end
   end
 
 end
