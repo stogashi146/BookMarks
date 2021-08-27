@@ -1,0 +1,14 @@
+.container
+  .row
+    .col-md-12
+      .col-md-10.mx-auto
+        .bg-white.text-center.py-3
+          h3 タイムライン
+
+      - if @timelines.present?
+        = render "timeline", timelines: @timelines
+      - else
+        .col-md-10.mx-auto
+          p.text-center タイムラインには何もありません
+
+

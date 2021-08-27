@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_15_015420) do
+ActiveRecord::Schema.define(version: 2021_08_20_014759) do
 
   create_table "book_reads", force: :cascade do |t|
     t.integer "user_id"
@@ -34,11 +34,30 @@ ActiveRecord::Schema.define(version: 2021_08_15_015420) do
     t.string "isbn"
     t.string "author"
     t.string "publisher_name"
-    t.string "sales_date"
+    t.date "sales_date"
     t.string "image_url"
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "book_id"
+    t.integer "book_read_id"
+    t.integer "book_unread_id"
+    t.integer "read_comment_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_notifications_on_book_id"
+    t.index ["book_read_id"], name: "index_notifications_on_book_read_id"
+    t.index ["book_unread_id"], name: "index_notifications_on_book_unread_id"
+    t.index ["read_comment_id"], name: "index_notifications_on_read_comment_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
 
   create_table "read_comments", force: :cascade do |t|
@@ -104,10 +123,16 @@ ActiveRecord::Schema.define(version: 2021_08_15_015420) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
-    t.string "name_id", null: false
     t.text "introduction"
     t.string "image_id"
+    t.boolean "is_mail_send", default: false, null: false
     t.boolean "is_deleted", default: false, null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.string "uid"
+    t.string "provider"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

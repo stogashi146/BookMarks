@@ -2,6 +2,7 @@ class Book < ApplicationRecord
   has_many :book_reads, dependent: :destroy
   has_many :book_unreads, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   validates  :isbn, presence: true
 
@@ -15,17 +16,17 @@ class Book < ApplicationRecord
       "author" => book.author,
       "publisher_name" => book.publisher_name,
       "image_url" => book.large_image_url.chomp("?_ex=200x200"),
-      "sales_date" => book.sales_date,
+      "sales_date" => book.sales_date.gsub(/年|月|日|頃/, ""),
       "url" => book.item_url,
     }
   end
 
   # 読んだ本が既にテーブルに存在するか？
-  def read_exists?(user, type)
+  def read_present?(user, type)
     if type == "read"
-      book_reads.where(user_id: user.id).exists?
+      book_reads.where(user_id: user.id).present?
     else
-      book_unreads.where(user_id: user.id).exists?
+      book_unreads.where(user_id: user.id).present?
     end
   end
 
@@ -49,14 +50,16 @@ class Book < ApplicationRecord
   #   }
 
   #  本を検索する
-  def self.search_books(keyword:"本", author:"", sort:"standard", genre:"", hits:"28")
+  def self.search_books(keyword:"本", author:"", sort:"standard", genre:"",hits: 28)
     RakutenWebService::Books::Total.search(
       keyword: keyword,
       author: author,
       sort: sort,
       booksGenreId:"001001" + genre,
       orFlag: "1",
-      hits: hits)
+      NGKeyword: "BL Jパブリッシング シュークリーム 祥伝社 英和出版社",
+      hits: hits
+      )
   end
 
   # 読んだ順

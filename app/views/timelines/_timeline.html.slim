@@ -1,0 +1,73 @@
+- timelines.each do |timeline|
+  .col-md-10.mx-auto
+    - visitor = timeline.visitor
+    - visited = timeline.visited
+    - case timeline.action
+    - when "release" then
+      .d-flex.flex-row.bg-white.border.shadow.my-3.p-3
+        .flex-column
+          .d-flex.flex-row.mb-1
+            = link_to user_path(visitor) do
+              = attachment_image_tag visitor, :image, :fill, 50, 50, fallback:"noimage.jpg", size: "50x50", class: "rounded-circle"
+            .flex-column.ml-3
+              = link_to visitor.name, user_path(visitor), class:"text-dark"
+              .small.text-muted
+                = time_ago_in_words(timeline.created_at).upcase
+          span
+            = link_to "「#{timeline.book.title.truncate(30)}」", book_path(timeline.book), class:"text-info"
+            | を読みたいに追加しました
+        = link_to book_path(timeline.book.id), class:"ml-auto text-right", style:"width: 150px;" do
+          = image_tag(timeline.book.image_url.chomp("?_ex=200x200"), :width => '60%')
+
+    - when "read" then
+      .bg-white.border.shadow.my-3.p-3
+        .d-flex.flex-row
+          .flex-column
+            .d-flex.flex-row.mb-1
+              = link_to user_path(visitor) do
+                = attachment_image_tag visitor, :image, :fill, 50, 50, fallback:"noimage.jpg", size: "50x50", class: "rounded-circle"
+              strong.flex-column.ml-3
+                = link_to "#{visitor.name}の感想・レビュー", book_book_read_path(timeline.book_id, timeline.book_read_id, user: visited), class:"text-dark"
+                .small.text-muted
+                  = time_ago_in_words(timeline.created_at).upcase
+            .ml-1
+              strong
+                = link_to timeline.book.title.truncate(30), book_path(timeline.book), class:"text-dark"
+              div id="rate_#{timeline.book_read.id}" class="my-1"
+              p.mb-0.small
+                | 著者：
+                = link_to timeline.book.author, books_path(author: timeline.book.author.gsub(" ", "") )
+              p.mb-0.small
+                | 出版社：
+                = link_to timeline.book.publisher_name, books_path(author: timeline.book.publisher_name)
+              p.mb-0.small
+                = "発売日：#{timeline.book.sales_date}"
+              .mt-1.mr-3
+                = timeline.book_read.comment.truncate(50)
+                - if timeline.book_read.comment.size > 50
+                  small
+                    = link_to "続きを読む", book_book_read_path(timeline.book_id, timeline.book_read_id, user: visited)
+
+          = link_to book_path(timeline.book.id), class:"ml-auto text-right", style:"width: 200px;" do
+            = image_tag(timeline.book.image_url.chomp("?_ex=200x200"), :width => '100%')
+
+        hr
+        .d-flex.flex-row
+          span id="favorite_btn_#{timeline.book_read.id}"
+            = render "read_favorites/favorite_btn", review: timeline.book_read
+
+          .badge.badge-pill.badge-light.pt-2
+            h6
+              = link_to book_book_read_path(timeline.book_id, timeline.book_read_id, user: visited), class:"text-secondary" do
+                i.fa.fa-comments コメント#{timeline.book_read.read_comments.count}
+
+      javascript:
+        $("#rate_#{timeline.book_read.id}").raty({
+          size: 10,
+          starOff: "#{asset_path('star-off.png')}",
+          starOn: "#{asset_path('star-on.png')}",
+          starHalf: "#{asset_path('star-half.png')}",
+          half: true,
+          readOnly: true,
+          score: "#{timeline.book_read.rate}",
+        });

@@ -1,48 +1,57 @@
 .container.show
-  .row.mt-5
-    .col-md-4.offset-1
+  .row.bg-white.p-3
+    .col-md-4
       = link_to @book.url do
-        = image_tag @book.image_url, :width => '90%', :height => '100%'
+        = image_tag @book.image_url, :width => '100%', :height => '100%'
 
-    .col-md-5.offset-1
+    .col-md-8.mr-auto
       h1
         = @book.title
       .mt-3
-        p
+        p.mb-0
           | 著者：
           = link_to @book.author, books_path(author: @book.author.gsub(" ", "") )
-        p
+        p.mb-0
           | 出版社：
           = link_to @book.publisher_name, books_path(author: @book.publisher_name)
-        p
+        p.mb-0
           = "発売日：#{@book.sales_date}"
+        div id="avg_rate_#{@book.id}"
+      = link_to "楽天ブックスで購入する", @book.url, class:"btn btn-danger text-white mt-3"
 
-  .row
-    .col-md-6.offset-6
-      - if user_signed_in?
-        .col-md-3.d-inline
-          = render "read", book: @book, book_read: @book_read, book_read_new: @book_read_new
+      .d-flex.flex-column
+        - if user_signed_in?
+          .d-flex.flex-row.align-bottom.mt-5
+            .show_read_icon
+              = render "read", book: @book, book_read: @book_read, book_read_new: @book_read_new
+            .show_unread_icon
+              = render "unread", book: @book
 
-        .col-md-3.d-inline.show_unread_icon
-          = render "unread", book: @book
+        - else
+          .d-flex.flex-row.align-bottom.mt-5
+            .d-block
+              = link_to new_user_session_path, local: true do
+                .btn.btn-light.shadow.book_show_btn
+                  i.fas.fa-book-reader.fa-2x
+                  p.text-center
+                    = "#{@book.book_reads.count}"
 
-      - else
-        .col-md-3.d-inline
-          = link_to new_user_session_path, method: :post, local: true, class: "book_show_readoff btn p-2 mb-3" do
-            i.fas.fa-bookmark.show_read_icon
-            span.show_read_text.ml-3
-              | 読んだ！
+            .d-block
+              = link_to new_user_session_path, local: true do
+                .btn.btn-light.shadow.book_show_btn.shadow
+                  i.fas.fa-plus-square.fa-2x
+                  p.text-center
+                    = "#{@book.book_unreads.count}"
 
-        .col-md-3.d-inline.show_unread_icon
-          = link_to new_user_session_path, method: :post, local: true, class: "book_show_unreadoff btn p-2" do
-            i.fas.fa-book.show_unread_icon
-            span.show_unread_text.ml-3
-              | 読みたい！
+  = render "review", reviews: @reviews
 
-  .row
-    .col-md-11.offset-1
-      = render "review", reviews: @reviews
-
-
-
-
+javascript:
+  $("#avg_rate_#{@book.id}").raty({
+    size: 10,
+    starOff: "#{asset_path('star-off.png')}",
+    starOn: "#{asset_path('star-on.png')}",
+    starHalf: "#{asset_path('star-half.png')}",
+    half: true,
+    readOnly: true,
+    score: "#{Book.reviews_avg(@book)}",
+  });

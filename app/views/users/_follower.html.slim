@@ -1,21 +1,32 @@
-.col-md-12.mt-3
-  h3
-    | フォロワー一覧
-
 - user.followers.each do |follower_user|
-  .col-md-12
-    .user_follow_list.mt-3
-      .user_follow_info.d-inline-block
-        = link_to user_path(follower_user.id)
-          = attachment_image_tag follower_user, :image, size: "80x80", fallback: "noimage.jpg", class: "rounded-circle mr-4"
-          = follower_user.name
+  .col-md-4.mt-4
+    .bg-white.p-3.border.w-100.h-100
+      .d-flex
+        = link_to user_path(follower_user.id) do
+          = attachment_image_tag follower_user, :image, :fill, 80, 80, fallback:"noimage.jpg", size: "80x80", class: "rounded-circle shadow-sm mr-4"
+        .d-flex.flex-column
+          strong.d-flex.flex-row
+            = link_to follower_user.name, user_path(follower_user.id), class:"text-dark mr-3"
+          small.mt-3
+            - if follower_user.introduction
+              = simple_format(follower_user.introduction.truncate(20))
+            - else
+              = simple_format(follower_user.introduction)
 
-      .user_follow_detail.offset-1
-        span.ml-3
-          = "読んだ本#{follower_user.book_reads.count}"
-        span.ml-3
-          = "読みたい本#{follower_user.book_unreads.count}"
-        span.ml-3
-          = "フォロー#{follower_user.followings.count}"
-        span.ml-3
-          = "フォロワー#{follower_user.followers.count}"
+      .d-flex.mt-5
+        .flex-column.w-25.text-center
+          i.fas.fa-book-reader.fa-2x.text-dark
+          p.text-center
+            = "#{follower_user.book_reads.count}"
+        .flex-column.w-25.text-center
+          i.far.fa-plus-square.fa-2x.text-dark
+          p.text-center
+            = "#{follower_user.book_unreads.count}"
+        .flex-column.w-25.text-center.mt-2
+          small フォロー
+          p.text-center
+            = "#{follower_user.followings.count}"
+        .flex-column.w-25.text-center.mt-2
+            small フォロワー
+            p.text-center
+              = "#{follower_user.followers.count}"

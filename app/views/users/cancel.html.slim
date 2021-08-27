@@ -1,2 +1,14 @@
-h1 Users#cancel
-p Find me in app/views/users/cancel.html.slim
+.col-sm-8.mx-auto.my-5
+  h2.text-center.py-3.my-4.bg-danger.text-white
+    | 本当に退会しますか？
+  .text-center
+    h4.bg-light.py-3
+     | 退会すると、会員登録情報や <br>
+      これまでの購入履歴が閲覧できなくなります。<br>
+      退会する場合は、「退会する」をクリックしてください。
+
+    .text-center
+      = link_to "退会しない", user_path(current_user), class: "btn btn-primary col-sm-2 p-2 mt-3"
+      = link_to "退会する", user_cancel_path(current_user), method: :patch, class: "btn btn-danger col-sm-2 offset-sm-1 p-2 mt-3"
+    </div>
+</div>

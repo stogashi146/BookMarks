@@ -1,0 +1,24 @@
+.container
+    .row.mt-3.bg-light
+        .col-md-4.mt-5.pt-3
+            .bg-white.p-3.text-center
+                h5 読みたいリスト
+            table.table.table-hover.table-bordered.table-striped.callender_table_text
+                - @books.order(:sales_date).each do |book|
+                    - if book.sales_date.present? && book.sales_date > Date.today-30
+                        tr
+                            td = book.sales_date.strftime('%Y/%m/%d')
+                            td = link_to book.title.truncate(20), book_path(book.id), class:"text-dark"
+
+        .col-md-8
+            .bg-white.p-3.text-center
+                h5 発売カレンダー
+            = month_calendar(events: @books, attribute: :sales_date) do |date, books|
+              = date.day
+
+              - books.each do |book|
+                div
+                    = link_to book.title.truncate(10), book_path(book.id), class:"badge badge-info"
+
+
+

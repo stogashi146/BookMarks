@@ -88,3 +88,8 @@ gem 'rakuten_web_service'
 gem "slim-rails"
 gem 'html2slim'
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'simple_calendar', '~> 2.0'
+gem 'aws-sdk-rails'
+gem 'whenever', require: false
+gem 'omniauth', '1.9.1'
+gem 'omniauth-twitter'

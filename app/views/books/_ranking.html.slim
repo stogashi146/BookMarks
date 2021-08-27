@@ -1,53 +1,94 @@
-table.table.table-hover
-  - books_rank.to_a.each.with_index(1) do |book_rank, i|
-    - if params[:marks_sort]
-      tr
-        td.text-center
-          = link_to book_path(book_rank.id), local: true do
-           = image_tag book_rank.image_url, :width => '50%'
-        td
-          h4
-            = i
-          = link_to book_path(book_rank.id), local: true do
-            h5
-             = book_rank.title
+- books_rank.to_a.each.with_index(1) do |book_rank, i|
+  - if params[:marks_sort]
+    .card.flex-md-row.mb-4.shadow-sm.h-md-250
+      .card-body.d-flex.flex-column.align-items-start.w-100
+        h4 = "#{i}位"
+        h5
+          = link_to book_path(book_rank), local: true, class:"text-dark", class:"text-dark" do
+            = book_rank.title
+        div id="rate_#{book_rank.id}" class="my-1"
+        p.mb-0
+          | 著者：
+          = link_to book_rank.author, books_path(author: book_rank.author.gsub(" ", "") ), class:"text-secondary"
+        p.mb-0
+          | 出版社：
+          = link_to book_rank.publisher_name, books_path(author: book_rank.publisher_name), class:"text-secondary"
+        p.mb-0
+          = "発売日：#{book_rank.sales_date}"
 
-          div id="rate_#{book_rank.id}"
-          p
-            | 著者名：
-            = link_to book_rank.author, books_path(author: book_rank.author.gsub(" ", "") )
-          p
-            | 出版社：
-            = link_to book_rank.publisher_name, books_path(author: book_rank.publisher_name )
-          p
-            = "発売日：#{book_rank.sales_date}"
+        .d-flex.flex-row.mt-auto
+          .d-block
+            = link_to book_path(book_rank), local: true do
+              div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2 #{"ranking_item_activebtn" if user_signed_in? && current_user.book_reads.find_by(book_id: book_rank) }"
+                i.fas.fa-book-reader.fa-2x
+                p.text-center
+                  = "#{book_rank.book_reads.count}"
 
-          javascript:
-             $("#rate_#{book_rank.id}").raty({
-             size: 20,
-             starOff: "#{asset_path('star-off.png')}",
-             starOn: "#{asset_path('star-on.png')}",
-             starHalf: "#{asset_path('star-half.png')}",
-             half: true,
-             readOnly: true,
-             score: "#{Book.reviews_avg(book_rank)}",
-             });
-    - else
-      tr
-        td.text-center
-          = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
-            = image_tag book_rank.large_image_url.chomp("?_ex=200x200"), :width => '50%'
-        td
-          h4
-            = i
-          h5
-            = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
-              = book_rank.title
-          p
-            |著者名：
-            = link_to book_rank.author, books_path(author: book_rank.author.gsub(" ", "") )
-          p
-            |出版社：
-            = link_to book_rank.publisher_name, books_path(keyword: book_rank.publisher_name)
-          p
-            = "発売日：#{book_rank.sales_date}"
+          .d-block
+            = link_to book_path(book_rank), local: true do
+              div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2 #{"ranking_item_activebtn" if user_signed_in? && current_user.book_unreads.find_by(book_id: book_rank) }"
+                i.fas.fa-plus-square.fa-2x
+                p.text-center
+                  = "#{book_rank.book_unreads.count}"
+
+      = link_to book_path(book_rank.id), local: true, class:"flex-auto text-right" do
+        = image_tag book_rank.image_url.chomp("?_ex=200x200"), :width => '60%', class:"text-right"
+
+      javascript:
+        $("#rate_#{book_rank.id}").raty({
+          size: 20,
+          starOff: "#{asset_path('star-off.png')}",
+          starOn: "#{asset_path('star-on.png')}",
+          starHalf: "#{asset_path('star-half.png')}",
+          half: true,
+          readOnly: true,
+          score: "#{Book.reviews_avg(book_rank)}",
+        });
+
+  - else
+    .card.flex-md-row.mb-4.shadow-sm
+      .card-body.d-flex.flex-column.align-items-start.w-100
+        h4 = "#{i}位"
+        h5
+          = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true, class:"text-dark" do
+            = book_rank.title
+        p.mb-0
+          | 著者：
+          = link_to book_rank.author, books_path(author: book_rank.author.gsub(" ", "") ), class:"text-secondary"
+        p.mb-0
+          | 出版社：
+          = link_to book_rank.publisher_name, books_path(author: book_rank.publisher_name), class:"text-secondary"
+        p.mb-0
+          = "発売日：#{book_rank.sales_date}"
+
+        - if book = Book.find_by(isbn: book_rank.isbn)
+          .d-flex.flex-row.mt-auto
+            .d-block
+              = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
+                div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2 #{"ranking_item_activebtn" if user_signed_in? && current_user.book_reads.find_by(book_id: book) }"
+                  i.fas.fa-book-reader.fa-2x
+                  p.text-center
+                    = "#{book.book_reads.count}"
+            .d-block
+              = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
+                div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2 #{"ranking_item_activebtn" if user_signed_in? && current_user.book_unreads.find_by(book_id: book) }"
+                  i.fas.fa-plus-square.fa-2x
+                  p.text-center
+                    = "#{book.book_unreads.count}"
+
+        - else
+          .d-flex.flex-row.mt-auto
+            .d-block
+              = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
+                div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2"
+                  i.fas.fa-book-reader.fa-2x
+                  p.text-center 0
+
+            .d-block
+              = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true do
+                div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2"
+                  i.fas.fa-plus-square.fa-2x
+                  p.text-center 0
+
+      = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true, class:"text-right" do
+        = image_tag book_rank.large_image_url.chomp("?_ex=200x200"), :width => '60%', class:"text-right"

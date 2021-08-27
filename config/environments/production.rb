@@ -91,4 +91,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # メール設定
+  config.action_mailer.default_url_options = { host: 'https://book-marks.net' }
+  config.action_mailer.delivery_method = :aws_sdk
 end

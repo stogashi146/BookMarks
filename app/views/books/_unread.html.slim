@@ -1,11 +1,16 @@
-- if book.read_exists?(current_user, "unread")
-  = link_to book_book_unreads_path(book), method: :delete, local: true, class: "book_show_unreadon p-2" do
-    i.fas.fa-book.show_unread_icon
-    span.show_unread_text.ml-3
-      | 読みたい！
+- if book.read_present?(current_user, "unread")
+  .d-block
+    = link_to book_book_unreads_path(book), method: :delete, remote: true do
+      .btn.btn-light.shadow-sm.book_show_onbtn
+        i.fas.fa-plus-square.fa-2x
+        p.text-center
+          = "#{book.book_unreads.count}"
 
 - else
-  = link_to book_book_unreads_path(book), method: :post, local: true, class: "book_show_unreadoff p-2" do
-    i.fas.fa-book.show_unread_icon
-    span.show_unread_text.ml-3
-      | 読みたい！
+  .d-block
+    = link_to book_book_unreads_path(book), method: :post, remote: true do
+      .btn.btn-light.shadow.book_show_btn.shadow-sm
+        i.fas.fa-plus-square.fa-2x
+        p.text-center
+          = "#{book.book_unreads.count}"
+

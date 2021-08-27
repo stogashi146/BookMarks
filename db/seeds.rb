@@ -14,7 +14,7 @@ Book.create!(
   isbn: "9784098505296",
   author: "オダ トモヒト",
   publisher_name: "小学館",
-  sales_date: "2021年05月18日",
+  sales_date: "20210518",
   image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5296/9784098505296.jpg",
   url: "https://books.rakuten.co.jp/rb/16694975/")
 Book.create!(
@@ -22,7 +22,7 @@ Book.create!(
   isbn: "9784088918709",
   author: "赤坂 アカ",
   publisher_name: "集英社",
-  sales_date: "2021年05月19日",
+  sales_date: "20210519",
   image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8709/9784088918709_1_2.jpg",
   url: "https://books.rakuten.co.jp/rb/16694910/")
 Book.create!(
@@ -30,7 +30,7 @@ Book.create!(
   isbn: "9784253292412",
   author: "ニャロメロン",
   publisher_name: "秋田書店",
-  sales_date: "2021年08月06日",
+  sales_date: "20210806",
   image_url: "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2412/9784253292412_1_2.jpg",
   url: "https://books.rakuten.co.jp/rb/16762961/")
 

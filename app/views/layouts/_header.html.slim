@@ -1,39 +1,72 @@
-.container-fruid.header
-  .col-12
-    nav.navbar
-      = link_to root_path
-        = image_tag asset_path("bookmarks.png"), :width => '15%', :height => '15%', class:"navbar-brand ml-2"
 
-      ul.nav.navbar.justify-content-center
-        li.nav-item
-          = form_with url: books_path, method: :get, local: true, class:"form-inline" do |f|
-            = f.text_field :keyword, required: true, class:"form-control ml-5"
-            = f.submit "検索", class:"btn btn-secondary my-2"
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  = link_to root_path, class:"navbar-brand" do
+    = image_tag asset_path("bookmarks.png"),  :height => '60'
+  button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+    span.navbar-toggler-icon
+  .collapse.navbar-collapse#navbarSupportedContent
 
+    = form_with url: books_path, method: :get, local: true, class:"form-inline my-2 my-lg-0" do |f|
+      = f.text_field :keyword, required: true, class:"form-control mr-sm-2"
+      = f.submit "検索", class:"btn btn-sm btn-secondary m-0 ml-sm-0"
 
-      ul.nav.navbar.ml-auto
-        - if user_signed_in?
-          li.nav-item
-            = link_to "About", root_path, class:"nav-link text-secondary"
-          li.nav-item
-            = link_to "ランキング", book_ranking_path(genre: "", sort: "sales"), class:"nav-link text-secondary"
-          li.nav-item
-            = link_to "本を探す", books_path(keyword: "本", page: rand(100)), class:"nav-link header_find_book"
-          li.nav-item
-            = link_to "ログアウト", destroy_user_session_path, method: :delete, class:"nav-link"
-          li.nav-item
-            = link_to user_path(current_user.id), class:"nav-link" do
-              i.fas.fa-user
+    ul.navbar-nav.ml-auto
+      - if user_signed_in?
+        li.nav-item.active.mr-3
+          = link_to "本を探す", books_path(keyword: "本", page: rand(1..100)), class:"nav-link header_find_book px-3"
+        li.nav-item.active.mr-4
+          = link_to user_path(current_user.id), class:"nav-link" do
+              i.fas.fa-user.fa-fw
+              span  マイページ
+        li.nav-item.active.mr-3
+          = link_to timelines_path, class:"nav-link" do
+            i.fa.fa-tasks
+            span タイムライン
+        li.nav-item.active.mr-3
+          = link_to book_ranking_path(genre: "", sort: "sales"), class:"nav-link" do
+            i.fas.fa-crown.fa-fw
+            span  ランキング
+        li.nav-item.active.mr-
+          = link_to user_calender_path(current_user.id), class:"nav-link" do
+            i.far.fa-calendar-alt.fa-fw
+            span  発売カレンダー
+        li.nav-item.active.mr-2
+          = render "notifications/uncheck"
 
-        - else
-          li.nav-item
-            = link_to "About", root_path, class:"nav-link text-secondary"
-          li.nav-item
-            = link_to "ランキング", book_ranking_path(genre: "", sort: "sales"), class:"nav-link text-secondary"
-          li.nav-item
-            = link_to "ログイン", new_user_session_path, class:"nav-link text-secondary"
-          li.nav-item
-            = link_to "新規登録", new_user_registration_path, class:"nav-link text-secondary"
-          li.nav-item
-            = link_to "本を探す", books_path(keyword: "少年", page: rand(100)), class:"nav-link header_find_book"
+        li.nav-item.active.dropdown.dropleft
+          a.nav-link.dropdown-toggle#navbarDropdownMenuLink href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+             i.fas.fa-user.fa-fw
 
+          .dropdown-menu.shadow aria-labelledby="navbarDropdownMenuLink m-5"
+            = link_to user_path(current_user), class:"dropdown-item text-secondary" do
+              i.fas.fa-user.fa-fw
+              span  マイページ
+            = link_to edit_user_path(current_user), class:"dropdown-item text-secondary" do
+              i.fas.fa-cog.fa-fw
+              span  プロフィール編集
+            = link_to root_path, class:"dropdown-item text-secondary" do
+              i.fas.fa-book-reader.fa-fw
+              span  About
+            = link_to destroy_user_session_path, method: :delete, class:"dropdown-item text-secondary" do
+              i.fas.fa-sign-out-alt.fa-fw
+              span  ログアウト
+
+      - else
+        li.nav-item.active.mr-4
+          = link_to "本を探す", books_path(keyword: "本", page: rand(1..100)), class:"header_find_book p-3"
+        li.nav-item.active.mr-4
+          = link_to root_path, class:"text-secondary" do
+            i.fas.fa-book-reader.fa-fw
+            span  About
+        li.nav-item.active.mr-4
+          = link_to book_ranking_path(genre: "", sort: "sales"), class:"text-secondary" do
+            i.fas.fa-crown.fa-fw
+            span  ランキング
+        li.nav-item.active.mr-4
+          = link_to new_user_session_path, class:"text-secondary" do
+            i.fas.fa-user.fa-fw
+            span  ログイン
+        li.nav-item.active.mr-4
+          = link_to new_user_registration_path, class:"text-secondary" do
+            i.fas.fa-sign-out-alt.fa-fw
+            span  新規登録
