@@ -55,7 +55,7 @@ class UsersController < ApplicationController
 
   def ensure_normal_user
     if User.find_by(email: "guest@book-marks.net")
-      redirect_to request.referer, alert: "ゲストユーザーの編集はできません。"
+      redirect_to request.referer, alert: "ゲストユーザーの退会はできません。"
     end
   end
 

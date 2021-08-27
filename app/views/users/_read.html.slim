@@ -1,9 +1,9 @@
 .col-md-12.col-md-12.mt-4
   .row
     - book_reads.each do |book_read|
-      .col-md-6.h-100
+      .col-md-6.h-100.w-100
         .card.flex-md-row.mb-4.shadow.border.h-md-250
-          .card-body.d-flex.flex-column.align-items-start.w-100
+          .card-body.d-flex.flex-column.align-items-start
             strong = link_to book_read.book.title, book_path(book_read.book.id), class:"text-dark", local: true
             div id="rate_#{book_read.id}" class="my-1"
             p.mb-0.small
@@ -42,8 +42,8 @@
             small.align-self-end
               = book_read.created_at.strftime('%Y/%m/%d')
 
-          = link_to book_path(book_read.book.id), local: true, class:"flex-auto text-right h-100" do
-            = image_tag book_read.book.image_url.chomp("?_ex=200x200"), :width => '90%', class:"text-right"
+          = link_to book_path(book_read.book.id), local: true, class:"flex-auto text-right my-auto" do
+            = image_tag book_read.book.image_url.chomp("?_ex=200x200"), :size => "255x355"
 
       javascript:
         $("#rate_#{book_read.id}").raty({
