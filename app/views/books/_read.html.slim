@@ -32,8 +32,8 @@
               = f.text_field :tag_list, value: book_read.tag_list.join(","), placeholder: "「,」区切りで複数のタグを追加できます", class:"form-control"
 
             .modal-footer.bg-light.px-5
-              = link_to "削除する", book_book_read_path(book, book_read),  method: :delete, remote: true,  class: "btn btn-secondary"
-              = f.submit "編集する", class: "btn btn-primary"
+              = link_to "削除する", book_book_read_path(book, book_read),  method: :delete, remote: true,  class: "btn btn-secondary", data: { disable_with: "送信中..." }
+              = f.submit "編集する", class: "btn btn-primary", data: { disable_with: "送信中..." }
           javascript:
             $('#star-edit').raty({
               size     : 36,

@@ -69,7 +69,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def ensure_normal_user
     if resource.email == "guest@book-marks.net"
-      redirect_to root_path, alert: "ゲストユーザーの更新・退会はできません"
+      redirect_to edit_user_path(current_user), alert: "ゲストユーザーの更新・退会はできません"
     end
   end
 

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_correct_user, only: [:edit, :update]
   before_action :set_correct_canceluser, only: [:cancel, :unsubscribe]
-  before_action :ensure_normal_user, only: [:unsubscribe]
+  before_action :ensure_normal_user, only: [:cancel, :unsubscribe]
 
   def show
     @user = User.find(params[:id])
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
   end
 
   def ensure_normal_user
-    if User.find_by(email: "guest@book-marks.net")
+    if User.find(params[:user_id]).email == "guest@book-marks.net"
       redirect_to request.referer, alert: "ゲストユーザーの退会はできません。"
     end
   end
