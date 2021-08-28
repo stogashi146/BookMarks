@@ -39,15 +39,6 @@ class Book < ApplicationRecord
       文庫: "001001006",
       その他: "001001012",
     }
-  # 楽天ブックスのジャンルID（出版社名）
-  # enum publisher_id:
-  #   { 秋田書店 少年チャンピオン: "001001001001",
-  #     スクウェア・エニックス ガンガンC: "001001002",
-  #     青年: "001001003",
-  #     レディース: "001001004",
-  #     文庫: "001001006",
-  #     その他: "001001012",
-  #   }
 
   #  本を検索する
   def self.search_books(keyword:"本", author:"", sort:"standard", genre:"",hits: 28)
@@ -57,7 +48,7 @@ class Book < ApplicationRecord
       sort: sort,
       booksGenreId:"001001" + genre,
       orFlag: "1",
-      NGKeyword: "BL Jパブリッシング シュークリーム 祥伝社 英和出版社",
+      NGKeyword: "BL Jパブリッシング シュークリーム 祥伝社 英和出版社 メディアソフト",
       hits: hits
       )
   end

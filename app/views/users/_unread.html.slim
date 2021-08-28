@@ -24,7 +24,7 @@
                 span.text-center
                   = "#{book_unread.book.book_unreads.count}"
 
-            small.align-self-end.mt-5
+            small.align-self-end
               = book_unread.created_at.strftime('%Y/%m/%d')
 
           = link_to book_path(book_unread.book.id), local: true, class:"flex-auto text-right my-auto" do

@@ -1,13 +1,13 @@
 .container
   .row
     .col-md-12.col-sm-12
-      .bg-white.pt-1
+      .bg-white.shadow.border.pt-1
         .row.mt-5
-          .col-md-8
+          .col-md-8.col-sm-8
             .d-inline-flex.align-items-center
-              = attachment_image_tag @user, :image, :fill, 130, 130, fallback:"noimage.jpg", size: "130x130", class: "rounded-circle shadow-sm ml-5"
+              = attachment_image_tag @user, :image, :fill, 130, 130, fallback:"noimage.jpg", size: "130x130", class: "rounded-circle shadow-sm ml-4"
               .d-block.ml-5
-                h3
+                h3.user_show_name
                   = @user.name
                 p
                   = simple_format(@user.introduction)
@@ -18,31 +18,31 @@
                 = render "relationships/follow_btn", user: @user
 
             - else
-              = link_to edit_user_path(current_user.id), local: true, class:"btn btn-outline-secondary px-3" do
+              = link_to edit_user_path(current_user.id), local: true, class:"btn btn-outline-secondary px-2 mr-2" do
                 i.fas.fa-cog.mx-1
                 span プロフィール編集
         hr.mb-0.mt-5
         .row
           .col-md-12.d-inline-flex
-            .d-block
+            .d-block.user_show_btns
               .btn.btn-light.user_show_btn.read_btn_active#read_btn
                 i.fas.fa-book-reader.fa-2x.text-dark
                 p.text-center
                   = "#{@book_reads.count}"
 
-            .d-block
+            .d-block.user_show_btns
               .btn.btn-light.user_show_btn#unread_btn
                 i.far.fa-plus-square.fa-2x
                 p.text-center
                   = "#{@book_unreads.count}"
 
-            .d-block
+            .d-block.user_show_btns
               .btn.btn-light.user_show_btn.pt-2#follow_btn
                 small フォロー
                 p.text-center
                   = "#{@user.followings.count}"
 
-            .d-block
+            .d-block.user_show_btns
               .btn.btn-light.user_show_btn.pt-2#follower_btn
                 small フォロワー
                 p.text-center
