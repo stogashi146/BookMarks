@@ -45,8 +45,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # メール認証をスキップして登録する
       @user.skip_confirmation!
       @user.save
-      session["devise.#{provider}_data"] = request.env['omniauth.auth'].except("extra")
-      redirect_to new_user_session_path, notice: "新規登録に成功しました。"
+      session["devise.#{provider}_data"] = request.env['omniauth.auth']["info"]
+      flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
+      sign_in_and_redirect @user
     end
   end
 end

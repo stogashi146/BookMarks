@@ -22,7 +22,7 @@
 
     - when "favorite" then
       .d-flex.flex-row.py-2
-        .flex-column.mb-5
+        .flex-column.mb-5.w-75
           .d-flex.flex-row.mb-1
             = link_to user_path(visitor) do
               = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle"
@@ -35,13 +35,14 @@
             span さんが
             = link_to "#{notification.book.title}の投稿", book_book_read_path(notification.book_read.book_id,notification.book_read.id, user: visited), class:"text-info"
             | にいいねしました
-      = link_to book_path(notification.book.id), class:"ml-auto text-right", style:"width: 150px;" do
-        = image_tag(notification.book.image_url.chomp("?_ex=200x200"), :width => '60%')
+
+        = link_to book_path(notification.book.id), class:"w-25 text-right notification_book_jacket" do
+          = image_tag(notification.book.image_url.chomp("?_ex=200x200"), :width => "100%", :height => "100%")
 
     - when "comment" then
       .d-flex.flex-row.py-2
-        .flex-column
-          .d-flex.flex-row.mb-1
+        .flex-column.w-75
+          .d-flex.flex-row.mb-4
             = link_to user_path(visitor) do
               = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle"
             .flex-column.ml-3
@@ -59,13 +60,13 @@
               small
                 = link_to "続きを読む", book_book_read_path(notification.book_id, notification.book_read_id, user: notification.visitor)
 
-      = link_to book_path(notification.book.id), class:"ml-auto text-right", style:"width: 150px;" do
-        = image_tag(notification.book.image_url.chomp("?_ex=200x200"), :width => '60%')
+        = link_to book_path(notification.book.id), class:"text-right w-25 notification_book_jacket" do
+          = image_tag(notification.book.image_url.chomp("?_ex=200x200"), :width => "100%", :height => "100%")
 
 
     - when "release" then
-      .d-flex.flex-row
-        .flex-column.pb-5
+      .d-flex.flex-row.py-2
+        .flex-column.pb-5.w-75
           .d-flex.flex-row.mb-1
             = link_to user_path(visitor) do
               = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle"
@@ -78,5 +79,5 @@
             = link_to notification.book.title, book_path(notification.book), class:"text-info"
             | が、本日発売です
 
-      = link_to book_path(notification.book.id), class:"ml-auto text-right", style:"width: 150px;" do
-        = image_tag(notification.book.image_url.chomp("?_ex=200x200"), :width => '60%')
+        = link_to book_path(notification.book.id), class:"text-right w-25 notification_book_jacket" do
+          = image_tag(notification.book.image_url.chomp("?_ex=200x200"), :width => "100%", :height => "100%")
