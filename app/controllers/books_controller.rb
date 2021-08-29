@@ -26,10 +26,6 @@ class BooksController < ApplicationController
     @reviews = @book.book_reads
   end
 
-  def detail
-    @details = params[:book]
-  end
-
   def create
     unless Book.where(isbn: params[:book][:isbn]).exists?
       book = Book.create(book_params)

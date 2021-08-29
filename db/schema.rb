@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 2021_08_20_014759) do
     t.integer "book_id"
     t.integer "rate"
     t.text "comment"
-    t.boolean "is_shared"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -82,13 +81,6 @@ ActiveRecord::Schema.define(version: 2021_08_20_014759) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "sns_acounts", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "twitter_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "taggings", force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
@@ -122,7 +114,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_014759) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "name"
+    t.string "name", null: false
     t.text "introduction"
     t.string "image_id"
     t.boolean "is_mail_send", default: false, null: false

@@ -5,7 +5,6 @@ class CreateBookReads < ActiveRecord::Migration[5.2]
       t.integer :book_id
       t.integer :rate
       t.text :comment
-      t.boolean :is_shared
 
       t.timestamps
     end
