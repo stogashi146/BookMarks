@@ -6,5 +6,6 @@ class TimelinesController < ApplicationController
     follow_user_timelines = Notification.joins(:visitor => :followers).where("relationships.follower_id = ?", current_user.id).where("action = ? or action = ?", "read", "release").distinct
     @timelines = @timelines + follow_user_timelines
     @timelines = @timelines.sort_by{|x| x.created_at}.reverse
+    @timelines = Kaminari.paginate_array(@timelines).page(params[:page]).per(10)
   end
 end

@@ -23,8 +23,6 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
   # 通知を受信
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
-  has_one :sns_acount, dependent: :destroy
-  accepts_nested_attributes_for :sns_acount
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true

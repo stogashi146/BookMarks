@@ -13,9 +13,6 @@ Rails.application.routes.draw do
 
   root to: "homes#about"
   resources :users, only: [:show, :edit, :update] do
-    get "follows" => "users#follows"
-    get "followers" => "users#followers"
-    get "welcome" => "users#welcome"
     get "calender" => "users#calender"
     get "cancel" => "users#cancel"
     patch "cancel" => "users#unsubscribe"
@@ -29,8 +26,9 @@ Rails.application.routes.draw do
     end
     resource :book_unreads,  only: [:create, :destroy]
   end
+  get "book/ranking" => "books#ranking"
   resources :timelines, only: [:index]
   resources :notifications, only: [:index]
-  get "book/ranking" => "books#ranking"
+
 
 end
