@@ -46,6 +46,7 @@
             = image_tag book_read.book.image_url.chomp("?_ex=200x200"), :size => "270x355", class:"user_show_jacket"
 
       javascript:
+        $("#rate_#{book_read.id}").empty();
         $("#rate_#{book_read.id}").raty({
           size: 10,
           starOff: "#{asset_path('star-off.png')}",

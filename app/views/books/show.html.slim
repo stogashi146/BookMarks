@@ -46,6 +46,7 @@
   = render "review", reviews: @reviews
 
 javascript:
+  $("#avg_rate_#{@book.id}").empty();
   $("#avg_rate_#{@book.id}").raty({
     size: 10,
     starOff: "#{asset_path('star-off.png')}",

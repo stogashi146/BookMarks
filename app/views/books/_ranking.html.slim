@@ -35,6 +35,7 @@
         = image_tag book_rank.image_url.chomp("?_ex=200x200"), :width => '60%', class:"text-right ranking_book_jacket"
 
       javascript:
+        $("#rate_#{book_rank.id}").empty();
         $("#rate_#{book_rank.id}").raty({
           size: 20,
           starOff: "#{asset_path('star-off.png')}",

@@ -35,7 +35,8 @@
               = link_to "削除する", book_book_read_path(book, book_read),  method: :delete, remote: true,  class: "btn btn-secondary", data: { disable_with: "送信中..." }
               = f.submit "編集する", class: "btn btn-primary", data: { disable_with: "送信中..." }
           javascript:
-            $('#star-edit').raty({
+            $("#star-edit").empty();
+            $("#star-edit").raty({
               size     : 36,
               starOff: "#{asset_path('star-off.png')}",
               starOn: "#{asset_path('star-on.png')}",
