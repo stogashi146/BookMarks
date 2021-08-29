@@ -42,7 +42,7 @@
 
 ## 設計書
 ER図
-![ER (2)](https://user-images.githubusercontent.com/83628316/128176253-e7d92f73-67b8-4ac1-88b9-1c69d70bf907.png)
+![ER](https://user-images.githubusercontent.com/83628316/131244452-2068c80f-e27f-435d-8e8a-4ed39640f499.jpg)
 
 [テーブル定義書](https://drive.google.com/file/d/1sBXaajitwdSyAf7eLtXdoQqGRA3nndCc/view?usp=sharing)
 
