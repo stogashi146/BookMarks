@@ -43,6 +43,7 @@
                     = @book_read.read_comments.count
 
           javascript:
+            $("#comment_rate_#{@book_read.id}").empty();
             $("#comment_rate_#{@book_read.id}").raty({
               size: 10,
               starOff: "#{asset_path('star-off.png')}",
@@ -50,7 +51,7 @@
               starHalf: "#{asset_path('star-half.png')}",
               half: true,
               readOnly: true,
-              score: #{@book_read.rate},
+              score: "#{@book_read.rate}",
             });
 
 
