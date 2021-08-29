@@ -62,6 +62,7 @@
                 i.fa.fa-comments コメント#{timeline.book_read.read_comments.count}
 
       javascript:
+        $("#rate_#{timeline.book_read.id}").empty();
         $("#rate_#{timeline.book_read.id}").raty({
           size: 10,
           starOff: "#{asset_path('star-off.png')}",

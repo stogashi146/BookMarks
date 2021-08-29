@@ -5,7 +5,7 @@ html
       | BookMarks
     = csrf_meta_tags
     = csp_meta_tag
-
+    meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     script "https://kit.fontawesome.com/7b10f1e4cc.js" crossorigin="anonymous"
     script type="text/javascript" src="js/slick.min.js"
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -18,7 +18,7 @@ html
     link href="https://fonts.googleapis.com/css2?family=Kosugi&display=swap" rel="stylesheet"
 
   body
-    header
+    header.sticky-top
       = render "layouts/header"
     main
       = render "layouts/flash"

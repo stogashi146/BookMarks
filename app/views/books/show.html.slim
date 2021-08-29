@@ -5,7 +5,7 @@
         = image_tag @book.image_url, :width => '100%', :height => '100%'
 
     .col-md-8.mr-auto
-      h1
+      h3
         = @book.title
       .mt-3
         p.mb-0
@@ -46,6 +46,7 @@
   = render "review", reviews: @reviews
 
 javascript:
+  $("#avg_rate_#{@book.id}").empty();
   $("#avg_rate_#{@book.id}").raty({
     size: 10,
     starOff: "#{asset_path('star-off.png')}",

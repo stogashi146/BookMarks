@@ -1,8 +1,8 @@
-.col-md-12.col-md-12.mt-4
+.col-md-12.col-sm-12.mt-4
   .row
     - book_unreads.each do |book_unread|
-      .col-md-6.h-100.w-100
-        .card.flex-md-row.mb-4.shadow.border.h-md-250
+      .col-md-6.col-sm-12.h-100.w-100
+        .card.flex-row.mb-4.shadow.border.h-md-250
           .card-body.d-flex.flex-column.align-items-start.h-100
             strong = link_to book_unread.book.title, book_path(book_unread.book.id), class:"text-dark", local: true
             p.mb-0.small
@@ -15,17 +15,17 @@
               = "発売日：#{book_unread.book.sales_date}"
 
             .d-inline-flex.btn-group.btn-group-md.mt-3
-              = link_to book_path(book_unread), class:"btn btn-light align-items-end" do
-                i.fas.fa-book-reader.text-dark.pr-1
+              .badge.badge-light.text-dark.shadow-sm.align-items-end.p-2
+                i.fas.fa-book-reader.fa-2x.text-dark.pr-1
                 span.text-center
                   = "#{book_unread.book.book_reads.count}"
-              = link_to book_path(book_unread), class:"btn btn-light align-items-end" do
-                i.fas.fa-plus-square.text-dark.pr-1
+              .badge.badge-light.text-dark.shadow-sm.align-items-end.p-2
+                i.fas.fa-plus-square.fa-2x.text-dark.pr-1
                 span.text-center
                   = "#{book_unread.book.book_unreads.count}"
 
-            small.align-self-end.mt-5
+            small.align-self-end
               = book_unread.created_at.strftime('%Y/%m/%d')
 
           = link_to book_path(book_unread.book.id), local: true, class:"flex-auto text-right my-auto" do
-            = image_tag book_unread.book.image_url.chomp("?_ex=200x200"), :size => "255x355"
+            = image_tag book_unread.book.image_url.chomp("?_ex=200x200"), :size => "270x355"

@@ -7,7 +7,7 @@
         .d-flex.flex-column
           strong.d-flex.flex-row
             = link_to follow_user.name, user_path(follow_user.id), class:"text-dark mr-3"
-          small.mb-5
+          small.mt-3
             - if follow_user.introduction
               = simple_format(follow_user.introduction.truncate(20))
             - else

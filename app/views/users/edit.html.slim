@@ -1,21 +1,21 @@
 .container
   .row
     .col-md-12
-      .bg-white.text-center.py-3
+      .bg-white.text-center.border.shadow.py-3
         h3 プロフィール編集
     = render "layouts/error_messages", obj: @user, column: :name
   .row
     .col-md-12.text-center.mt-4
       .bg-white.py-5
         = form_with model: @user, local: true do |f|
-          .d-inline-flex
-            .d-block.mr-3
+          .d-inline-flex.user_edit_flex
+            .d-block.mr-3.user_edit_jacket
               = attachment_image_tag @user, :image, :fill, 180, 180, fallback:"noimage.jpg", size: "180x180", class: "rounded-circle shadow-sm mr-4 mb-4"
               br
               small
                 = f.attachment_field :image
 
-            .d-block
+            .d-block.user_edit_input
               .form-group
                 .text-left
                   label.mr-auto for="user_name_input" ニックネーム
@@ -52,7 +52,7 @@
                   | ※読みたいリストに入れた本が発売前日に通知されます。
 
               .form-group.mt-3
-                = f.submit "変更を保存する", class:"btn btn-success"
+                = f.submit "変更を保存する", class:"btn btn-success", data: { disable_with: "送信中..." }
                 = link_to "戻る", :back, class:"btn btn-secondary ml-3"
 
               .form-group.mt-5

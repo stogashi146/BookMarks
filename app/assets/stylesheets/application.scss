@@ -60,44 +60,6 @@ header{
   display:none;
 }
 
-// header開閉
-.sidebar{
-  position: relative;
-}
-
-.sidebar > aside{
-  background-color:rgba(76,84,130,0.8);
-  width: 350px;
-  height: 100%;
-  top: 0;
-  right: 100px;
-  position: fixed;
-}
-.sidebar > aside ul{
-  margin:0;
-  padding:0;
-  top: 50px;
-  right: 114px;
-  position: absolute;
-}
-.sidebar > aside li{
-  margin: 20px auto;
-  list-style: none;
-}
-.sidebar > aside button{
-  background-color: rgba(76, 84, 130, 0.8);
-  display: block;
-  position: absolute;
-  top: 15px;
-  right: 350px;
-  width: 60px;
-  height: 60px;
-  margin: 0;
-  padding: 0;
-  border-radius: 0 5px 5px 0;
-}
-
-
 // aboutページ
 .about_bg{
   overflow-x: hidden;
@@ -123,6 +85,7 @@ header{
 }
 
 .about_what_h1{
+  font-weight: 900;
   border-bottom: medium solid #2089f1;
 }
 .about_what_span{
@@ -220,4 +183,99 @@ header{
 }
 .callender_table_text{font-size: 15px;}
 
+@media screen and (max-width: 767px){
+  // headerページ
+  .header_find_book{
+    color: black;
+    background-color: transparent;
+    border-bottom: 0px solid #ccc100;
+  }
+  .nav-item{
+    width:100%;
+    margin-top:20px;
+    margin-right: auto;
+    border-bottom: 1px solid #000000;
+  }
+  // aboutページ
+  .about_h1_item{
+    font-weight: 900;
+    font-size: 60px;
+  }
 
+  .about_intro_orangeicon{
+    margin-top:20px;
+  }
+
+  .about_intro_blueicon{
+    margin-top:20px;
+  }
+  // book-indexページ
+  .book_index_jacket{
+    width: 37%;
+  }
+  // book-rankingページ
+  .ranking_book_jacket{
+    width:100%;
+  }
+  // user-showページ
+  .user_show_name{
+    font-size: 1.3rem;
+  }
+
+  .user_show_btns{
+    width:25%;
+  }
+
+  .user_show_btn,
+  .book_show_btn{
+    width:100%;
+    height:70px;
+    opacity: 50%;
+    &:hover {
+      width:100%;
+      opacity: 100%;
+      background-color:#FFE100;
+    }
+  }
+
+  .read_btn_active{
+  width:100%;
+  opacity: 100%;
+  background-color:#FFE100;
+  }
+
+  .user_show_cardbody{
+    flex-wrap: wrap;
+  }
+
+  .user_show_jacket{
+    width: 100%;
+    height: 100%;
+  }
+
+  // user-editページ
+  .user_edit_flex{
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+
+  .user_edit_jacket{
+    margin-left: 15%;
+    margin-bottom: 5%;
+  }
+
+  .user_edit_input{
+    margin: 0 auto;
+  }
+
+  // user-cancelページ
+  .user_cancel_text{
+    font-size: 18px;
+  }
+
+  // notificationページ
+  .notification_book_jacket{
+    display: none;
+  }
+
+}
