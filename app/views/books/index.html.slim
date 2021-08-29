@@ -11,7 +11,7 @@
   .row.d-flex.justify-content-center.my-3.mb-5
     - if @books.previous_page?
       h4
-        = link_to "前のページ", books_path(keyword: @keyword, page: @page - 1), class:"btn btn-light mx-2 "
+        = link_to "前のページ", books_path(keyword: @keyword, page: @page - 1), class:"btn btn-light mx-2 ", data: { disable_with: "処理中..." }
     - if @books.next_page?
       h4
-        = link_to "次のページ", books_path(keyword: @keyword, page: @page + 1, ), class:"btn btn-light mx-2"
+        = link_to "次のページ", books_path(keyword: @keyword, page: @page + 1, ), class:"btn btn-light mx-2", data: { disable_with: "処理中..." }

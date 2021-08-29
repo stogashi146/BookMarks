@@ -26,9 +26,6 @@ class UsersController < ApplicationController
     @books = current_user.unread_books
   end
 
-  def welcome
-  end
-
   def cancel
   end
 
@@ -40,7 +37,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :is_mail_send, :introduction, :image)
+    params.require(:user).permit(:name, :email, :is_mail_send, :introduction, :image, sns_acounts_attributes: [:user_id, :twitter_id])
   end
 
   def set_correct_user

@@ -52,7 +52,7 @@
                   | ※読みたいリストに入れた本が発売前日に通知されます。
 
               .form-group.mt-3
-                = f.submit "変更を保存する", class:"btn btn-success"
+                = f.submit "変更を保存する", class:"btn btn-success", data: { disable_with: "送信中..." }
                 = link_to "戻る", :back, class:"btn btn-secondary ml-3"
 
               .form-group.mt-5
