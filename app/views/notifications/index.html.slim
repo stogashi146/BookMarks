@@ -7,11 +7,10 @@
     .col-md-8.mx-auto.bg-white.text-center.shadow.border.py-3
       h3 通知
 
-    - if notifications.exists?
-        = render notifications
-    - else
-        p.text-center
-            | 通知はありません
+  - if notifications.exists?
+      = render notifications
+  - else
+      p.text-center 通知はありません
 
   .row
     .mx-auto.my-5
