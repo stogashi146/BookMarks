@@ -32,7 +32,7 @@
                   = "#{book_rank.book_unreads.count}"
 
       = link_to book_path(book_rank.id), local: true, class:"flex-auto text-right" do
-        = image_tag book_rank.image_url.chomp("?_ex=200x200"), :width => '60%', class:"text-right ranking_book_jacket"
+        = image_tag book_rank.image_url.chomp("?_ex=200x200"), :width => '220px', :height => '100%', class:"text-right ranking_book_jacket"
 
       javascript:
         $("#rate_#{book_rank.id}").empty();
@@ -92,4 +92,4 @@
                   p.text-center 0
 
       = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true, class:"text-right" do
-        = image_tag book_rank.large_image_url.chomp("?_ex=200x200"), :width => '60%', class:"text-right ranking_book_jacket"
+        = image_tag book_rank.large_image_url.chomp("?_ex=200x200"), :width => '220px', :height => '100%', class:"text-right ranking_book_jacket"
