@@ -21,5 +21,6 @@ html
     header.sticky-top
       = render "layouts/header"
     main
-      = render "layouts/flash"
+      #flash
+        = render "layouts/flash"
       = yield
