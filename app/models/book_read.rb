@@ -7,6 +7,11 @@ class BookRead < ApplicationRecord
 
   acts_as_taggable
 
+  validates :user_id, presence: true
+  validates :book_id, presence: true
+  validates :rate, length: { in: 1..5 }, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }, allow_nil: true
+  validates :comment, length: { maximum: 50 }
+
   def favorited_by?(user)
     read_favorites.where(user_id: user.id).present?
   end

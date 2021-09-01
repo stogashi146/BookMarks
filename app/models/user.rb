@@ -6,7 +6,6 @@ class User < ApplicationRecord
          :confirmable,
          :omniauthable, omniauth_providers:[:twitter]
 
-
   has_many :book_reads, dependent: :destroy
   has_many :book_unreads, dependent: :destroy
   has_many :read_books, through: :book_reads, source: :book
@@ -24,7 +23,7 @@ class User < ApplicationRecord
   # 通知を受信
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
 
-  validates :name, presence: true, length: { maximum: 50 }
+  validates :name, presence: true, length: { maximum: 15 }
   validates :email, presence: true
   validates :introduction, length: { maximum: 50 }
 
