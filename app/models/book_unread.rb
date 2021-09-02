@@ -3,6 +3,9 @@ class BookUnread < ApplicationRecord
   belongs_to :user
   belongs_to :book
 
+  validates :user_id, presence: true
+  validates :book_id, presence: true
+
   # 発売日通知メソッド
   def create_notification_release(current_user)
     # 発売日通知
