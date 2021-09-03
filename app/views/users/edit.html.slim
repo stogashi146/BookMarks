@@ -3,11 +3,11 @@
     .col-md-12
       .bg-white.text-center.border.shadow.py-3
         h3 プロフィール編集
-    = render "layouts/error_messages", obj: @user, column: :name
   .row
     .col-md-12.text-center.mt-4
       .bg-white.py-5
         = form_with model: @user, local: true do |f|
+          = render "layouts/error_messages", obj: @user
           .d-inline-flex.user_edit_flex
             .d-block.mr-3.user_edit_jacket
               - if @user.profile_image.attached?

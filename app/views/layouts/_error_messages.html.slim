@@ -1,6 +1,6 @@
-- if obj.errors.include?(column)
-  ul.error_explanation.list-unstyled
-    - obj.errors.full_messages_for(column).each do |message|
+- if obj.errors.any?
+  ul.error_explanation.list-unstyled.alert.alert-danger
+    - obj.errors.full_messages.each do |message|
       li.text-danger.small.mt-1.ml-4
         = message
 

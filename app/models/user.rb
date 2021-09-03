@@ -23,11 +23,12 @@ class User < ApplicationRecord
   # 通知を受信
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
 
+  has_one_attached :profile_image
+
   validates :name, presence: true, length: { maximum: 15 }
   validates :email, presence: true
   validates :introduction, length: { maximum: 50 }
-
-  has_one_attached :profile_image
+  validate :profile_image_size
 
   # ゲストユーザーでログイン
   def self.guest
@@ -94,6 +95,13 @@ class User < ApplicationRecord
   private
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@bookmarks.net"
+  end
+
+  def profile_image_size
+    if profile_image.attached? && profile_image.blob.byte_size > 1.megabytes
+      profile_image.purge
+      errors.add(:profile_image, "は5MB以内にしてください")
+    end
   end
 
 end
