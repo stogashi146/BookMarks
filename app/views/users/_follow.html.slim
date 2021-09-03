@@ -3,7 +3,10 @@
     .bg-white.p-3.border.w-100.h-100
       .d-flex
         = link_to user_path(follow_user.id) do
-          = attachment_image_tag follow_user, :image, :fill, 80, 80, fallback:"noimage.jpg", size: "80x80", class: "rounded-circle shadow-sm mr-4"
+          - if follow_user.profile_image.attached?
+            = image_tag follow_user.profile_image.variant(combine_options:{gravity: :center, resize:"80x80^",crop:"80x80+0+0"}).processed, class: "rounded-circle shadow-sm mr-4"
+          - else
+            = image_tag image_url("noimage.jpg"), size:"80x80", class: "rounded-circle shadow-sm mr-4"
         .d-flex.flex-column
           strong.d-flex.flex-row
             = link_to follow_user.name, user_path(follow_user.id), class:"text-dark mr-3"

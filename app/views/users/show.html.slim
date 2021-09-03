@@ -5,7 +5,11 @@
         .row.mt-5
           .col-md-8.col-sm-8
             .d-inline-flex.align-items-center
-              = attachment_image_tag @user, :image, :fill, 130, 130, fallback:"noimage.jpg", size: "130x130", class: "rounded-circle shadow-sm ml-4"
+              - if @user.profile_image.attached?
+                = image_tag @user.profile_image.variant(combine_options:{gravity: :center, resize:"130x130^",crop:"130x130+0+0"}).processed, class: "rounded-circle shadow-sm ml-4"
+              - else
+                = image_tag image_url("noimage.jpg"), size:"130x130", class: "rounded-circle shadow-sm ml-4"
+
               .d-block.ml-5
                 h3.user_show_name
                   = @user.name

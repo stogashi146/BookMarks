@@ -10,10 +10,13 @@
         = form_with model: @user, local: true do |f|
           .d-inline-flex.user_edit_flex
             .d-block.mr-3.user_edit_jacket
-              = attachment_image_tag @user, :image, :fill, 180, 180, fallback:"noimage.jpg", size: "180x180", class: "rounded-circle shadow-sm mr-4 mb-4"
+              - if @user.profile_image.attached?
+                = image_tag @user.profile_image.variant(combine_options:{gravity: :center, resize:"180x180^",crop:"180x180+0+0"}).processed, class: "rounded-circle shadow-sm mr-4 mb-4"
+              - else
+                = image_tag image_url("noimage.jpg"), size:"180x180", class: "rounded-circle shadow-sm mr-4 mb-4"
               br
               small
-                = f.attachment_field :image
+                = f.file_field :profile_image
 
             .d-block.user_edit_input
               .form-group

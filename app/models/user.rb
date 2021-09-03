@@ -27,7 +27,7 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :introduction, length: { maximum: 50 }
 
-  attachment :image
+  has_one_attached :profile_image
 
   # ゲストユーザーでログイン
   def self.guest
