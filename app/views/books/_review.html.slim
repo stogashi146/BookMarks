@@ -26,7 +26,14 @@
                 - if review.comment.size > 50
                   .small = link_to "続きを読む", book_book_read_path(review.book_id, review.id, user: review.user)
               .mt-2
-                = render "tag_list", tag_list: review.tag_list
+                - if review.tag_list.present?
+                  br
+                  i.fas.fa-tags
+                  - review.tag_counts_on(:tags).limit(5).each do |tag|
+                    = link_to "##{tag.name}(#{tag.taggings_count})", tag_path(tag.name), class:"badge badge-pill badge-light p-2 mt-3 mx-2"
+                  - if review.tag_list.count
+                    span
+                      = link_to "....", book_book_read_path(review.book_id, review, user: review.user), class:"text-secondary"
 
         hr
         .d-flex.flex-row
