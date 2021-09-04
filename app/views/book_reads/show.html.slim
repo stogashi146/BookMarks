@@ -57,6 +57,11 @@
               score: "#{@book_read.rate}",
             });
 
+          - if @book_read.tag_list.present?
+            br
+            i.fas.fa-tags
+            - @book_read.tag_counts_on(:tags).each do |tag|
+              = link_to "#{tag.name}(#{tag.taggings_count})", tag_path(tag.name), class:"badge badge-pill badge-light p-2 mx-2"
 
     .col-md-11.mx-auto
       .bg-white.border
@@ -68,7 +73,6 @@
               = image_tag image_url("noimage.jpg"), size:"80x80", class: "rounded-circle m-2"
           = f.text_area :comment, placeholder: "コメントする", class:"form-control form-control-sm w-75 ml-3"
           = f.submit "送信", class:"btn btn-primary mx-auto"
-
 
     .col-md-10.mx-auto
       div id="book_read_comments"

@@ -1,7 +1,7 @@
 - books_rank.to_a.each.with_index(1) do |book_rank, i|
   - if params[:marks_sort]
-    .card.flex-md-row.mb-4.shadow-sm.h-md-250
-      .card-body.d-flex.flex-column.align-items-start.w-100
+    .card.flex-md-row.mb-4.shadow-sm
+      .card-body.d-flex.flex-column.align-items-start.w-100.h-25
         h4 = "#{i}位"
         h5
           = link_to book_path(book_rank), local: true, class:"text-dark", class:"text-dark" do

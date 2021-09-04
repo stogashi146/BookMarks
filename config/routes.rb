@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     end
     resource :book_unreads,  only: [:create, :destroy]
   end
+
+  get "tags/:tag" => "book_tags#index", as: :tag
   get "book/ranking" => "books#ranking"
   resources :timelines, only: [:index]
   resources :notifications, only: [:index]
