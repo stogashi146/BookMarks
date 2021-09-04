@@ -75,6 +75,7 @@ class User < ApplicationRecord
     end
   end
 
+  # 前日発売の本があるかチェック
   def notify_mail_book
     if self.is_mail_send == true
       books = []
@@ -92,6 +93,13 @@ class User < ApplicationRecord
     end
   end
 
+  # def profile_image_racy(image)
+  #   if Vision.get_image_data(image) == racy
+  #     errors.add(:profile_image, "にセンシティブな内容が含まれています")
+  #   end
+  # end
+
+
   private
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@bookmarks.net"
@@ -103,5 +111,6 @@ class User < ApplicationRecord
       errors.add(:profile_image, "は5MB以内にしてください")
     end
   end
+
 
 end
