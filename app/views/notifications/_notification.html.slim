@@ -10,9 +10,8 @@
         .flex-column
           .d-flex.flex-row.mb-1
             = link_to user_path(visitor) do
-              = attachment_image_tag visitor, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle"
-              - if comment.user.profile_image.attached?
-                = image_tag comment.user.profile_image.variant(combine_options:{gravity: :center, resize:"50x50^",crop:"50x50+0+0"}).processed, class: "rounded-circle"
+              - if visitor.profile_image.attached?
+                = image_tag visitor.profile_image.variant(combine_options:{gravity: :center, resize:"50x50^",crop:"50x50+0+0"}).processed, class: "rounded-circle"
               - else
                 = image_tag image_url("noimage.jpg"), size:"50x50", class: "rounded-circle"
             .flex-column.ml-3
@@ -65,7 +64,8 @@
             = link_to "#{notification.book.title}の投稿", book_book_read_path(notification.book_read.book_id,notification.book_read.id, user: visited), class:"text-info"
             | にコメントしました
 
-          p = notification.read_comment.comment.truncate(50)
+          p.pt-1
+            strong = notification.read_comment.comment.truncate(50)
             - if notification.read_comment.comment.size > 50
               small
                 = link_to "続きを読む", book_book_read_path(notification.book_id, notification.book_read_id, user: notification.visitor)
