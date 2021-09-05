@@ -23,7 +23,7 @@
         br
         i.fas.fa-tags
         - @tags.each do |tag|
-          = link_to "##{tag.name}(#{tag.taggings_count})", tag_path(tag.name), class:"badge badge-pill badge-light p-2 mt-3 mx-2"
+          = link_to "##{tag.name}(#{BookRead.tags_count(tag.name)})", tag_path(tag.name), class:"badge badge-pill badge-light p-2 mt-3 mx-2"
 
       - else
         .mt-3
