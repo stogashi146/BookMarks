@@ -5,24 +5,24 @@
         h3 ランキング
   .row.mt-3
     .col-md-4
-      table.table.table-hover
+      table.table
         tr.thead-light
           th
             | ジャンル
         .text-primary
-          tr.ranking_genre_item
+          tr.bg-white
             td = link_to "総合", book_ranking_path(genre: "")
-          tr
+          tr.bg-white
             td = link_to "少年漫画", book_ranking_path(genre: "001")
-          tr
+          tr.bg-white
             td = link_to "少女漫画", book_ranking_path(genre: "002")
-          tr
+          tr.bg-white
             td = link_to "青年漫画", book_ranking_path(genre: "003")
-          tr
+          tr.bg-white
             td = link_to "レディース", book_ranking_path(genre: "004")
-          tr
+          tr.bg-white
             td = link_to "文庫", book_ranking_path(genre: "006")
-          tr
+          tr.bg-white
             td = link_to "その他", book_ranking_path(genre: "012")
 
       table.table.table-hover
@@ -30,9 +30,9 @@
           th
             | BookMark内ランキング
         .text-primary
-          tr.ranking_genre_item.mt-3
+          tr.mt-3.bg-white
             td = link_to "読んだ", book_ranking_path(marks_sort: "read")
-          tr
+          tr.bg-white
             td = link_to "読みたい", book_ranking_path(marks_sort: "unread")
     .col-md-8.ml-auto
       = render "ranking", books_rank: @books_rank, book_read_new: @book_read_new

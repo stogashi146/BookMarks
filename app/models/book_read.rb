@@ -88,4 +88,9 @@ class BookRead < ApplicationRecord
     notification.save if notification.valid?
   end
 
+  # 重複するタグはカウントしないようにする
+  def self.tags_count(tag_name)
+    self.tagged_with(tag_name).select(:book_id).distinct.count
+  end
+
 end
