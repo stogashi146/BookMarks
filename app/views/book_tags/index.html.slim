@@ -47,8 +47,8 @@
 
             .d-block.pt-5
               i.fas.fa-tags
-              - tag.tag_counts_on(:tags).most_used(5).each do |book_tag|
-                = link_to "##{book_tag.name}(#{book_tag.taggings_count})", tag_path(book_tag.name), class:"badge badge-pill badge-light p-2 mt-3 mx-2"
+              - tag.book.book_reads.tag_counts_on(:tags).most_used(5).each do |book_tag|
+                = link_to "##{book_tag.name}(#{BookRead.tags_count(book_tag.name)})", tag_path(book_tag.name), class:"badge badge-pill badge-light p-2 mt-3 mx-2"
 
           = link_to book_path(tag.book.id), local: true, class:"flex-auto text-right" do
             = image_tag tag.book.image_url.chomp("?_ex=200x200"), :width => '220px', :height => '100%', class:"text-right ranking_book_jacket"
