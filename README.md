@@ -111,6 +111,7 @@ ER図
 - omniauth、omniauth-twitter（oauthログイン）
 - raty.js　（レビューの星評価）
 - slick（画像のスクロール）
+- GoogleVisionAPI（プロフィール画像に不適切な内容が含まれていないか確認）
 
 ## チャレンジ要素一覧
 <https://docs.google.com/spreadsheets/d/1UM0VgJU5HbOTElV1Mduhrn2uDL6FJvv3MqAvTWxFVYc/edit?usp=sharing>
