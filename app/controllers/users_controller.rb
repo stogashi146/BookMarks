@@ -27,9 +27,6 @@ class UsersController < ApplicationController
     elsif @user.update(user_params) || result
       redirect_to user_path(@user.id), notice: "プロフィールを更新しました！"
     end
-
-
-
   end
 
   def calender

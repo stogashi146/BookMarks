@@ -90,6 +90,6 @@
                 div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2"
                   i.fas.fa-plus-square.fa-2x
                   p.text-center 0
-
-      = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true, class:"text-right" do
-        = image_tag book_rank.large_image_url.chomp("?_ex=200x200"), :width => '220px', :height => '100%', class:"text-right ranking_book_jacket"
+      .col-4
+        = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true, class:"text-right" do
+          = image_tag book_rank.large_image_url.chomp("?_ex=200x200"), :width => '220px', :height => '100%', class:"text-right ranking_book_jacket"
