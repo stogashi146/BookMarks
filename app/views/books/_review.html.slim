@@ -10,7 +10,10 @@
           .flex-column
             .d-flex.flex-row.mb-1
               = link_to user_path(review.user_id) do
-                = attachment_image_tag review.user, :image, size: "50x50", fallback: "noimage.jpg", class: "rounded-circle"
+                - if review.user.profile_image.attached?
+                  = image_tag review.user.profile_image.variant(combine_options:{gravity: :center, resize:"50x50^",crop:"50x50+0+0"}).processed, class: "rounded-circle"
+                - else
+                  = image_tag image_url("noimage.jpg"), size:"50x50", class: "rounded-circle"
               strong.flex-column.ml-3
                 = link_to "#{review.user.name}の感想・レビュー", book_book_read_path(review.book_id, review, user: review.user), class:"text-dark"
                 .small.text-muted
@@ -23,7 +26,14 @@
                 - if review.comment.size > 50
                   .small = link_to "続きを読む", book_book_read_path(review.book_id, review.id, user: review.user)
               .mt-2
-                = render "tag_list", tag_list: review.tag_list
+                - if review.tag_list.present?
+                  br
+                  i.fas.fa-tags
+                  - review.tag_counts_on(:tags).limit(5).each do |tag|
+                    = link_to "##{tag.name}(#{BookRead.tags_count(tag.name)})", tag_path(tag.name), class:"badge badge-pill badge-light p-2 mt-3 mx-2"
+                  - if review.tag_list.count > 5
+                    span
+                      = link_to "....", book_book_read_path(review.book_id, review, user: review.user), class:"text-secondary"
 
         hr
         .d-flex.flex-row

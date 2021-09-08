@@ -4,7 +4,10 @@
       .flex-column
         .d-flex.flex-row.mb-1
           = link_to user_path(comment.user_id) do
-            = attachment_image_tag comment.user, :image, :fill, 50, 50, fallback:"noimage.jpg", size: "50x50", class: "rounded-circle"
+            - if comment.user.profile_image.attached?
+              = image_tag comment.user.profile_image.variant(combine_options:{gravity: :center, resize:"50x50^",crop:"50x50+0+0"}).processed, class: "rounded-circle"
+            - else
+              = image_tag image_url("noimage.jpg"), size:"50x50", class: "rounded-circle"
           .flex-column.ml-3
             = link_to comment.user.name, user_path(comment.user), class:"text-dark"
             .small.text-muted

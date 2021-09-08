@@ -24,6 +24,7 @@ class BooksController < ApplicationController
     @book_read_new = BookRead.new
     @book_read = @book.book_reads.find_by(user_id: current_user.id) if user_signed_in?
     @reviews = @book.book_reads
+    @tags = @book.book_reads.tag_counts_on(:tags).most_used(10)
   end
 
   def create

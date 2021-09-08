@@ -14,11 +14,18 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to user_path(@user.id), notice: "プロフィールを更新しました！"
+    if user_params[:profile_image].present?
+      result = Vision.get_image_data(user_params[:profile_image])
     else
+      result = true
+    end
+
+    if result == false || @user.update(user_params) == false
       flash[:alert] = "プロフィールを更新できませんでした"
+      flash[:alert] = "センシティブな画像が含まれています"  if result == false
       render :edit
+    elsif @user.update(user_params) || result
+      redirect_to user_path(@user.id), notice: "プロフィールを更新しました！"
     end
   end
 
@@ -37,7 +44,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :is_mail_send, :introduction, :image)
+    params.require(:user).permit(:name, :email, :is_mail_send, :introduction, :profile_image)
   end
 
   def set_correct_user

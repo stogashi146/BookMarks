@@ -1,0 +1,66 @@
+.container
+  .row
+    .col-md-12
+      .bg-white.text-center.shadow.border.py-3
+        h3 = "「##{params[:tag]}」タグの検索結果#{@tags.count}件"
+  .row.mt-3
+    .col-md-2
+      table.table.table-bordered
+        tr.thead-light
+          th
+            | 人気のタグ
+        - if @tag_ranking.present?
+          - @tag_ranking.each do |tag|
+            tr.bg-white
+              td = link_to "##{tag.name}(#{BookRead.tags_count(tag.name)})", tag_path(tag.name), class:"text-dark"
+    .col-md-10
+      - @tags.each do |tag|
+        .card.flex-md-row.mb-4.shadow-sm
+          .card-body.d-flex.flex-column.align-items-start.w-100.h-25
+            h5
+              = link_to book_path(tag.book), local: true, class:"text-dark", class:"text-dark" do
+                = tag.book.title
+            div id="rate_#{tag.book.id}" class="my-1"
+            p.mb-0
+              | 著者：
+              = link_to tag.book.author, books_path(author: tag.book.author.gsub(" ", "") ), class:"text-secondary"
+            p.mb-0
+              | 出版社：
+              = link_to tag.book.publisher_name, books_path(author: tag.book.publisher_name), class:"text-secondary"
+            p.mb-0
+              = "発売日：#{tag.book.sales_date}"
+
+            .d-flex.flex-row.mt-auto
+              .d-block
+                = link_to book_path(tag.book), local: true do
+                  div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2 #{"ranking_item_activebtn" if user_signed_in? && current_user.book_reads.find_by(book_id: tag.book) }"
+                    i.fas.fa-book-reader.fa-2x
+                    p.text-center
+                      = "#{tag.book.book_reads.count}"
+
+              .d-block
+                = link_to book_path(tag.book), local: true do
+                  div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2 #{"ranking_item_activebtn" if user_signed_in? && current_user.book_unreads.find_by(book_id: tag.book) }"
+                    i.fas.fa-plus-square.fa-2x
+                    p.text-center
+                      = "#{tag.book.book_unreads.count}"
+
+            .d-block.pt-5
+              i.fas.fa-tags
+              - tag.book.book_reads.tag_counts_on(:tags).most_used(5).each do |book_tag|
+                = link_to "##{book_tag.name}(#{BookRead.tags_count(book_tag.name)})", tag_path(book_tag.name), class:"badge badge-pill badge-light p-2 mt-3 mx-2"
+
+          = link_to book_path(tag.book.id), local: true, class:"flex-auto text-right" do
+            = image_tag tag.book.image_url.chomp("?_ex=200x200"), :width => '220px', :height => '100%', class:"text-right ranking_book_jacket"
+
+          javascript:
+            $("#rate_#{tag.book.id}").empty();
+            $("#rate_#{tag.book.id}").raty({
+              size: 20,
+              starOff: "#{asset_path('star-off.png')}",
+              starOn: "#{asset_path('star-on.png')}",
+              starHalf: "#{asset_path('star-half.png')}",
+              half: true,
+              readOnly: true,
+              score: "#{Book.reviews_avg(tag.book)}",
+            });

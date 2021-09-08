@@ -39,7 +39,6 @@
             = link_to "ログイン", new_user_session_path
             | することでコミュニティを広げることができます。
 
-
     .row.mb-5
       .col-md-12.col-sm-12.d-inline-block
         .col-md-3.col-sm-12.d-inline-block.text-center.align-top
@@ -55,10 +54,23 @@
             p.about_intro_orangetext.mt-3
               | 発売日に通知を受け取る
             p
-              | 読みたいリストに入れた本は、
-                発売前にメール通知、
-                発売当日には通知でお知らせします！
+              span
+                | 読みたいリスト
+                i.far.fa-plus-square.pr-1
+                | に入れた本は、発売前にメール通知、
+                  発売当日には通知でお知らせします！
             small ※メール通知は、プロフィール編集から設定できます
+
+        .col-md-3.col-sm-3.d-inline-block.text-center.align-top
+          i.fas.fa-book-reader.fa-5x.rounded-circle.bg-white.p-5.about_intro_blueicon
+          .col-md-10.mx-auto
+            p.about_intro_bluetext.mt-3
+              | レビューする
+            p
+            span
+              | 読んだ本は読んだリスト
+              i.fas.fa-book-reader.px-1
+              | に追加して、レビューしよう
 
         .col-md-3.col-sm-3.d-inline-block.text-center.align-top
           i.fas.fa-comments.fa-5x.rounded-circle.bg-white.p-5.about_intro_blueicon
@@ -66,13 +78,6 @@
             p.about_intro_bluetext.mt-3
               | 交流する
             p フォローしてフォロユーザーの読書記録を確認しよう
-
-        .col-md-3.col-sm-3.d-inline-block.text-center.align-top
-          i.fas.fa-book-reader.fa-5x.rounded-circle.bg-white.p-5.about_intro_blueicon
-          .col-md-10.mx-auto
-            p.about_intro_bluetext.mt-3
-              | 新しい本が見つかる
-            p ユーザーのレビューからさらに新しい本を見つけよう
 
     .text-right
       <!-- Rakuten Web Services Attribution Snippet FROM HERE -->

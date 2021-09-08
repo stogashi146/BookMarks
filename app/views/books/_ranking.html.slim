@@ -1,7 +1,7 @@
 - books_rank.to_a.each.with_index(1) do |book_rank, i|
   - if params[:marks_sort]
-    .card.flex-md-row.mb-4.shadow-sm.h-md-250
-      .card-body.d-flex.flex-column.align-items-start.w-100
+    .card.flex-md-row.mb-4.shadow-sm
+      .card-body.d-flex.flex-column.align-items-start.w-100.h-25
         h4 = "#{i}位"
         h5
           = link_to book_path(book_rank), local: true, class:"text-dark", class:"text-dark" do
@@ -32,7 +32,7 @@
                   = "#{book_rank.book_unreads.count}"
 
       = link_to book_path(book_rank.id), local: true, class:"flex-auto text-right" do
-        = image_tag book_rank.image_url.chomp("?_ex=200x200"), :width => "220px", :height => "100%", class:"text-right ranking_book_jacket"
+        = image_tag book_rank.image_url.chomp("?_ex=200x200"), :width => '220px', :height => '100%', class:"text-right ranking_book_jacket"
 
       javascript:
         $("#rate_#{book_rank.id}").empty();
@@ -90,6 +90,6 @@
                 div class="badge badge-light text-dark shadow-sm ranking_item_btn pt-2"
                   i.fas.fa-plus-square.fa-2x
                   p.text-center 0
-
-      = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true, class:"text-right" do
-        = image_tag book_rank.large_image_url.chomp("?_ex=200x200"), :width => "220px", :height => "100%", class:"text-right ranking_book_jacket"
+      .col-4
+        = link_to books_path(book: Book.book_details(book_rank)), method: :post, local: true, class:"text-right" do
+          = image_tag book_rank.large_image_url.chomp("?_ex=200x200"), :width => '220px', :height => '100%', class:"text-right ranking_book_jacket"

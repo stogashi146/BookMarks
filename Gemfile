@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -61,7 +61,6 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'faker'
@@ -93,3 +92,4 @@ gem 'aws-sdk-rails'
 gem 'whenever', require: false
 gem 'omniauth', '1.9.1'
 gem 'omniauth-twitter'
+gem 'image_processing', '~> 1.2'

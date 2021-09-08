@@ -10,6 +10,8 @@ module BookMarks
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+    # 自作のlibを読み込む
+    config.paths.add 'lib', eager_load: true
     # デフォルトlocaleを変更
     config.i18n.default_locale = :ja
     # システムの時刻を日本に変更

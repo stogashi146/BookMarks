@@ -6,7 +6,10 @@
             .flex-column
               .d-flex.flex-row.mb-1
                 = link_to user_path(@user) do
-                  = attachment_image_tag @user, :image, :fill, 80, 80, fallback:"noimage.jpg", size: "80x80", class: "rounded-circle"
+                  - if @user.profile_image.attached?
+                    = image_tag @user.profile_image.variant(combine_options:{gravity: :center, resize:"80x80^",crop:"80x80+0+0"}).processed, class: "rounded-circle"
+                  - else
+                    = image_tag image_url("noimage.jpg"), size:"80x80", class: "rounded-circle"
                 strong.flex-column.ml-3
                   = link_to "#{@user.name}の感想・レビュー", book_book_read_path(@book, @book_read, user: @user), class:"text-dark"
                   .small.text-muted
@@ -54,15 +57,22 @@
               score: "#{@book_read.rate}",
             });
 
+          - if @book_read.tag_list.present?
+            br
+            i.fas.fa-tags
+            - @book_read.tag_counts_on(:tags).each do |tag|
+              = link_to "#{tag.name}(#{tag.taggings_count})", tag_path(tag.name), class:"badge badge-pill badge-light p-2 mx-2"
 
     .col-md-11.mx-auto
       .bg-white.border
         = form_with model: ReadComment, url: book_book_read_read_comments_path(@book, @book_read), method: :post, remote: true, id:"book_read_comment_form", class:"form-inline" do |f|
           = link_to user_path(current_user) do
-            = attachment_image_tag current_user, :image, :fill, 80, 80, fallback:"noimage.jpg", size: "80x80", class: "rounded-circle m-2"
+            - if current_user.profile_image.attached?
+              = image_tag current_user.profile_image.variant(combine_options:{gravity: :center, resize:"80x80^",crop:"80x80+0+0"}).processed, class: "rounded-circle m-2"
+            - else
+              = image_tag image_url("noimage.jpg"), size:"80x80", class: "rounded-circle m-2"
           = f.text_area :comment, placeholder: "コメントする", class:"form-control form-control-sm w-75 ml-3"
           = f.submit "送信", class:"btn btn-primary mx-auto"
-
 
     .col-md-10.mx-auto
       div id="book_read_comments"

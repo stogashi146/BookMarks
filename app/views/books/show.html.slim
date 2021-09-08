@@ -19,6 +19,17 @@
         div id="avg_rate_#{@book.id}"
       = link_to "楽天ブックスで購入する", @book.url, class:"btn btn-danger text-white mt-3"
 
+      - if @tags.present?
+        br
+        i.fas.fa-tags
+        - @tags.each do |tag|
+          = link_to "##{tag.name}(#{BookRead.tags_count(tag.name)})", tag_path(tag.name), class:"badge badge-pill badge-light p-2 mt-3 mx-2"
+
+      - else
+        .mt-3
+          i.fas.fa-tags
+          span 登録されているタグはありません
+
       .d-flex.flex-column
         - if user_signed_in?
           .d-flex.flex-row.align-bottom.mt-5
