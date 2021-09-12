@@ -62,6 +62,9 @@ https://book-marks.net/
 ER図
 ![ER](https://user-images.githubusercontent.com/83628316/131244452-2068c80f-e27f-435d-8e8a-4ed39640f499.jpg)
 
+AWS構成図
+![AWS構成図](https://user-images.githubusercontent.com/83628316/132985385-a9adbd95-c7ab-4e26-9377-1b11c9f58cd1.png)
+
 [テーブル定義書](https://drive.google.com/file/d/1sBXaajitwdSyAf7eLtXdoQqGRA3nndCc/view?usp=sharing)
 
 [アプリケーション詳細設計](https://drive.google.com/file/d/1MqvGTELWrHOM01Cm26Ob-kuItxCAriNm/view?usp=sharing)
