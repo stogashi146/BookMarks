@@ -95,13 +95,18 @@ AWS構成図
 |発売前日メール通知 |× |○ |
 
 ### その他使用技術
-- SMTPサーバー(Amazon SES)
 - メール自動送信（クーロン）
 - レスポンシブ（Bootstrap)
+### AWS
+- VPC（仮想ネットワーク）
+- SMTPサーバー(Amazon SES)
+- CloudWatch(CPU異常値、ステータスチェック異常監視)
+- EventBridge(インスタンス自動停止)
+- EC2 セキュリティグループ（トラフィック制御）
 
 ### 使用ライブラリ
 - devise（ユーザー認証）
-- refile（画像投稿）
+- Active Storage（画像投稿）
 - Slim(テンプレートエンジン)
 - html2slim（htmlをslim化）
 - dotenv-rails（環境変数化）
