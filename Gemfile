@@ -93,3 +93,4 @@ gem 'whenever', require: false
 gem 'omniauth', '1.9.1'
 gem 'omniauth-twitter'
 gem 'image_processing', '~> 1.2'
+gem 'rails_admin', '~> 2.0'
