@@ -1,0 +1,27 @@
+.container.mb-5
+  .row
+    .col-md-6.col-sm-10.mx-auto.bg-white.shadow.p-3.mt-5
+      h2.mb-4
+        = t(".sign_up")
+      = form_with model: @admin, url: admin_registration_path, local: true do |f|
+        = render "devise/shared/error_messages", resource: resource
+        .form-group
+          = f.label :name
+          = f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザー", class:"form-control"
+
+        .form-group
+          = f.label :password
+          - if @minimum_password_length
+            em
+              | (
+              = @minimum_password_length
+              |  characters minimum)
+          = f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class:"form-control"
+
+        .form-group
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード再入力", class:"form-control"
+
+        .actions
+          = f.submit "sign_up", class:"btn btn-primary btn-block"
+

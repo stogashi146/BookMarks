@@ -1,3 +1,4 @@
+ja:
   activerecord:
     attributes:
       user:
@@ -9,7 +10,7 @@
         current_sign_in_at: 現在のログイン時刻
         current_sign_in_ip: 現在のログインIPアドレス
         email: Eメール
-        name: ユーザー名
+        name: ニックネーム
         name_id: ユーザーID
         encrypted_password: 暗号化パスワード
         last_sign_in_at: 最終ログイン時刻
@@ -25,8 +26,13 @@
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+      admin:
+        name: 管理者名
+        password: パスワード
+        password_confirmation: パスワード（確認用）
     models:
       user: ユーザー
+      admin: 管理者
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
