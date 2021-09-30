@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  # devise_for :users
+  devise_for :admins, controllers: {
+    sessions: "admins/sessions",
+  }
+  get "admin" => "admin/homes#top"
+  
+  mount RailsAdmin::Engine => 'admin/manage', as: 'rails_admin'
+
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
@@ -32,6 +37,5 @@ Rails.application.routes.draw do
   get "book/ranking" => "books#ranking"
   resources :timelines, only: [:index]
   resources :notifications, only: [:index]
-
 
 end

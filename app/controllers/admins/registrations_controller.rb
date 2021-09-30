@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_sign_up_params, only:[:create]
-  before_action :ensure_normal_user, only:[:update ,:edit]
-  # before_action :configure_sign_up_params, only: [:create]
+class Admins::RegistrationsController < Devise::RegistrationsController
+  before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -64,23 +62,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
   # サインアップ時にnameの登録を許可する
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :name, :is_mail_send])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
-
-  def ensure_normal_user
-    if resource.email == "guest@book-marks.net"
-      redirect_to edit_user_path(current_user), alert: "ゲストユーザーの更新・退会はできません"
-    end
-  end
-
-  # oauthユーザーの場合、アカウント編集でパスワード入力は不要
-  def update_resource(resource, params)
-    if resource.provider.present?
-      params.delete(:current_password)
-      resource.update_without_password(params)
-    else
-      resource.update_with_password(params)
-    end
-  end
-
 end
