@@ -70,6 +70,7 @@ AWS構成図
 [アプリケーション詳細設計](https://drive.google.com/file/d/1MqvGTELWrHOM01Cm26Ob-kuItxCAriNm/view?usp=sharing)
 
 ## 機能一覧
+### 一般ユーザー
 | 機能 | 未ログイン | ログイン済 |
 |:---|:---:|:---:|
 |会員登録 |○ |× |
@@ -96,9 +97,11 @@ AWS構成図
 |タグ付け |× |○ |
 |タグ検索 |○ |○ |
 
-### その他使用技術
-- メール自動送信（クーロン）
-- レスポンシブ（Bootstrap)
+### 管理者
+| 機能 | 管理ユーザー |
+|:---|:---:|
+|登録データ管理 |　◯
+
 ### AWS
 - VPC（仮想ネットワーク）
 - SMTPサーバー(Amazon SES)
@@ -121,7 +124,13 @@ AWS構成図
 - omniauth、omniauth-twitter（oauthログイン）
 - raty.js　（レビューの星評価）
 - slick（画像のスクロール）
+- Rails_admin(管理コンソール)
+- cancancan(管理者アクセス制限)
 - GoogleVisionAPI（プロフィール画像に不適切な内容が含まれていないか確認）
+
+### その他使用技術
+- メール自動送信（クーロン）
+- レスポンシブ（Bootstrap)
 
 ## チャレンジ要素一覧
 <https://docs.google.com/spreadsheets/d/1UM0VgJU5HbOTElV1Mduhrn2uDL6FJvv3MqAvTWxFVYc/edit?usp=sharing>
