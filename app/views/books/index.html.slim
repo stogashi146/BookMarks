@@ -8,6 +8,8 @@
         h3 「#{params[:keyword]}」の検索結果
       - elsif params[:author].present?
         h3 「#{params[:author]}」の一覧
+      - else
+        h3 本の一覧
   .row
     .text-center.bg-white.py-3
       - @books.each do |book|

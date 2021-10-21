@@ -16,7 +16,7 @@ describe "トップページ", type: :system do
     end
 
     describe "ヘッダー機能" do
-      context "未ログイン" do
+      context "未ログインのとき" do
         before do
           visit root_path
         end
@@ -32,7 +32,7 @@ describe "トップページ", type: :system do
         end
       end
 
-      context "ログイン済み" do
+      context "ログイン済みのとき" do
         before do
           user = create(:user)
           sign_in user
