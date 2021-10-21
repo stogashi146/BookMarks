@@ -41,14 +41,14 @@
         - else
           .d-flex.flex-row.align-bottom.mt-5
             .d-block
-              = link_to new_user_session_path, local: true do
+              = link_to new_user_session_path, local: true, class:"read_btn" do
                 .btn.btn-light.shadow.book_show_btn
                   i.fas.fa-book-reader.fa-2x
                   p.text-center
                     = "#{@book.book_reads.count}"
 
             .d-block
-              = link_to new_user_session_path, local: true do
+              = link_to new_user_session_path, local: true, class:"unread_btn" do
                 .btn.btn-light.shadow.book_show_btn.shadow
                   i.fas.fa-plus-square.fa-2x
                   p.text-center

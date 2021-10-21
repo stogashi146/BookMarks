@@ -1,7 +1,15 @@
 .container
   .row
-    .col-md-6.my-2
+    .col-md-3.my-2
       = render "sort"
+
+    .col-md-6.my-2.offset-2
+      - if params[:commit].present?
+        h3 「#{params[:keyword]}」の検索結果
+      - elsif params[:author].present?
+        h3 「#{params[:author]}」の一覧
+      - else
+        h3 本の一覧
   .row
     .text-center.bg-white.py-3
       - @books.each do |book|
