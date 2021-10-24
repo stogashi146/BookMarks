@@ -89,7 +89,8 @@ describe "本機能", type: :system do
       end
 
       it "読みたいリストに追加できる" do
-
+        find(".unread_btn").click
+        expect(page).to have_content "読みたいリストに追加しました"
       end
     end
 

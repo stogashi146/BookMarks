@@ -1,6 +1,6 @@
 - if book.read_present?(current_user, "unread")
   .d-block
-    = link_to book_book_unreads_path(book), method: :delete, remote: true do
+    = link_to book_book_unreads_path(book), method: :delete, remote: true, class:"unread_btn" do
       .btn.btn-light.shadow-sm.book_show_onbtn
         i.fas.fa-plus-square.fa-2x
         p.text-center
@@ -8,9 +8,8 @@
 
 - else
   .d-block
-    = link_to book_book_unreads_path(book), method: :post, remote: true do
+    = link_to book_book_unreads_path(book), method: :post, remote: true, class:"unread_btn" do
       .btn.btn-light.shadow.book_show_btn.shadow-sm
         i.fas.fa-plus-square.fa-2x
         p.text-center
           = "#{book.book_unreads.count}"
-
