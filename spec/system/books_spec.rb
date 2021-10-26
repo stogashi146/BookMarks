@@ -65,8 +65,8 @@ describe "本機能", type: :system do
 
     context "ログイン済みのとき" do
       before do
-        user = create(:user)
-        sign_in user
+        @user = create(:user)
+        sign_in @user
         visit book_path(book.id)
       end
 
@@ -91,6 +91,13 @@ describe "本機能", type: :system do
       it "読みたいリストに追加できる" do
         find(".unread_btn").click
         expect(page).to have_content "読みたいリストに追加しました"
+      end
+
+      it "レビューが表示される" do
+        fill_in "book_read[comment]", with: "読みました"
+        fill_in "book_read[tag_list]", with: "鬼滅,煉獄"
+        click_button "投稿する"
+        expect(page).to have_content "#{@user.name}の感想・レビュー"
       end
     end
 
