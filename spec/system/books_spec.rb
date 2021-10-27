@@ -65,8 +65,8 @@ describe "本機能", type: :system do
 
     context "ログイン済みのとき" do
       before do
-        @user = create(:user)
-        sign_in @user
+        user = create(:user)
+        sign_in user
         visit book_path(book.id)
       end
 
@@ -79,18 +79,23 @@ describe "本機能", type: :system do
         click_on book.publisher_name
         expect(page).to have_content "「#{book.publisher_name}」の一覧"
       end
+    end
+  end
 
-      it "読んだリストに追加できる" do
+  describe "レビュー機能" do
+    let(:book){ create(:book) }
+    before do
+      @user = create(:user)
+      sign_in @user
+      visit book_path(book.id)
+    end
+
+    context "読んだリストに投稿したとき" do
+      it "読んだリストに追加される" do
         fill_in "book_read[comment]", with: "読みました"
-        # find('#star').find("img[alt=4]").click
         fill_in "book_read[tag_list]", with: "鬼滅,煉獄"
         click_button "投稿する"
         expect(page).to have_selector ".alert-success", text: "レビューの投稿に成功しました"
-      end
-
-      it "読みたいリストに追加できる" do
-        find(".unread_btn").click
-        expect(page).to have_content "読みたいリストに追加しました"
       end
 
       it "レビューが表示される" do
@@ -101,6 +106,24 @@ describe "本機能", type: :system do
       end
     end
 
+    context "読みたいリストに投稿したとき" do
+      it "読みたいリストに追加される" do
+        find(".unread_btn").click
+        expect(page).to have_content "読みたいリストに追加しました"
+      end
+    end
 
+    context "いいね、コメントを押下したとき" do
+      before do
+        fill_in "book_read[comment]", with: "読みました"
+        fill_in "book_read[tag_list]", with: "鬼滅,煉獄"
+        click_button "投稿する"
+      end
+
+      it "いいねができる" do
+        find(".fav_btn").click
+        expect(page).to have_content "♡いいね1"
+      end
+    end
   end
 end

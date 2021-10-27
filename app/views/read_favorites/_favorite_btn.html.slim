@@ -1,16 +1,16 @@
 - if user_signed_in?
   - if review.favorited_by?(current_user)
     span
-      = link_to book_book_read_read_favorites_path(review.book, review), method: :delete, remote: true, class:"badge badge-pill badge-light pt-2" do
+      = link_to book_book_read_read_favorites_path(review.book, review), method: :delete, remote: true, class:"fav_btn badge badge-pill badge-light pt-2" do
         h6
           span.text-danger ♥
           span いいね#{review.read_favorites.count}
 
   - else
     span
-      = link_to book_book_read_read_favorites_path(review.book, review), method: :post, remote: true, class:"badge badge-pill badge-light pt-2 text-secondary" do
+      = link_to book_book_read_read_favorites_path(review.book, review), method: :post, remote: true, class:"fav_btn badge badge-pill badge-light pt-2 text-secondary" do
         h6 ♡いいね#{review.read_favorites.count}
 - else
     span
-      = link_to book_book_read_read_favorites_path(review.book, review), method: :post, local: true, class:"badge badge-pill badge-light pt-2 text-secondary" do
+      = link_to book_book_read_read_favorites_path(review.book, review), method: :post, local: true, class:"fav_btn badge badge-pill badge-light pt-2 text-secondary" do
         h6 ♡いいね#{review.read_favorites.count}
