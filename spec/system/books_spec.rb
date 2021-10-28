@@ -124,6 +124,11 @@ describe "本機能", type: :system do
         find(".fav_btn").click
         expect(page).to have_content "♡いいね1"
       end
+
+      it "コメント投稿ページに遷移する" do
+        find(".comment_btn").click
+        have_field "comment"
+      end
     end
   end
 end
