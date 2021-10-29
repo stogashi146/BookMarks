@@ -52,6 +52,10 @@ describe "本機能", type: :system do
         expect(page).to have_content "「#{book.publisher_name}」の一覧"
       end
 
+      it "楽天ブックスの商品ページのリンクが表示される" do
+        have_link book.url
+      end
+
       it "読んだリストに追加できない" do
         find(".read_btn").click
         expect(page).to have_content "ログイン"
@@ -123,6 +127,11 @@ describe "本機能", type: :system do
       it "いいねができる" do
         find(".fav_btn").click
         expect(page).to have_content "♡いいね1"
+      end
+
+      it "コメント投稿ページに遷移する" do
+        find(".comment_btn").click
+        have_field "comment"
       end
     end
   end
