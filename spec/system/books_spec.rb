@@ -131,7 +131,7 @@ describe "本機能", type: :system do
 
       it "コメント投稿ページに遷移する" do
         find(".comment_btn").click
-        have_field "commen"
+        have_field "comment"
       end
     end
   end
