@@ -18,12 +18,5 @@ describe "ユーザー機能", type: :system do
       expect(page).to have_content "プロフィール編集"
     end
 
-    before do
-      @book_read = create(:book_read)
-      @book_read.user_id = @user
-    end
-    it "読みたいリストの本が表示される" do
-      expect(page).to have_content @book_read.book.title
-    end
   end
 end
