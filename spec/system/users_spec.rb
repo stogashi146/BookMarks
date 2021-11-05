@@ -17,9 +17,18 @@ describe "ユーザー機能", type: :system do
       find(".user_edit_btn").click
       expect(page).to have_content "プロフィール編集"
     end
+  end
 
-    # it "読みたいリストの本が表示される" do
-    #   expect(page).to have_content @book.title
-    # end
+  describe "ユーザー編集機能" do
+    before do
+      @user = create(:user)
+      sign_in @user
+      visit edit_user_path(@user)
+    end
+
+    it "プロフィール編集画面を表示できる" do
+      expect(page).to have_content "プロフィール編集"
+    end
+
   end
 end
