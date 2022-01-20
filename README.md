@@ -2,7 +2,10 @@
 #### BookMarksはどこでも漫画の表紙買いができるWebサービスです！
 ![bookmarks_(1)](https://user-images.githubusercontent.com/83628316/131446594-8d372348-88eb-4eb3-9fa7-7f8db1f3b362.png)
 
-https://book-marks.net/
+https://book-marks-net.herokuapp.com/
+
+*2022/1/20　Herokuに移行*
+
 
 ```
 【ログイン方法】
