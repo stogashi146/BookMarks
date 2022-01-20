@@ -29,6 +29,6 @@ describe "ユーザー機能", type: :system do
     it "プロフィール編集画面を表示できる" do
       expect(page).to have_content "プロフィール編集"
     end
-
+    
   end
 end
