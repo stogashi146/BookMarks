@@ -4,7 +4,7 @@
 
 https://book-marks-net.herokuapp.com/
 
-*2022/1/20　Herokuに移行*
+*2022/1/20　AWSからHerokuに移行*
 
 
 ```
