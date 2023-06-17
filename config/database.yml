@@ -22,7 +22,7 @@ test:
 
 production:
   <<: *default
-  # database: <%= ENV['DB_DATABASE'] %>
+  database: <%= ENV['DATABASE_URL'] %>
   adapter: postgresql
   encoding: unicode
   pool: 5
