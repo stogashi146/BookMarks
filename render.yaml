@@ -1,7 +1,7 @@
 databases:
   - name: BookMarks_DB
-    databaseName: bookmarks_db_0yhb
-    user: bookmarks_db_0yhb
+    databaseName: bookmarks_db_vs3y
+    user: BookMarks_DB
     region: singapore
 
 services:
