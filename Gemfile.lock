@@ -7,6 +7,16 @@ GIT
       rest-client (~> 2)
       sinatra (~> 2.0.0.beta2)
 
+GIT
+  remote: https://github.com/rails/webpacker.git
+  revision: 3fd96bcbf495db5a24a46606465e9837fec232c1
+  specs:
+    webpacker (6.0.0.rc.6)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -256,6 +266,8 @@ GEM
       rack (>= 1.1)
     rack-protection (2.0.8.1)
       rack
+    rack-proxy (0.7.6)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.6)
@@ -361,6 +373,7 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    semantic_range (3.0.0)
     simple_calendar (2.4.3)
       rails (>= 3.0)
     sinatra (2.0.8.1)
@@ -469,10 +482,11 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  webpacker!
   whenever
 
 RUBY VERSION
-   ruby 2.6.3p62
+   ruby 2.7.0p0
 
 BUNDLED WITH
-   1.17.3
+   2.1.2
