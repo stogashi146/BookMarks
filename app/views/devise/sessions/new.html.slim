@@ -3,6 +3,11 @@
     h2.mb-4
       = t(".sign_in")
 
+    .mb-3.alert.alert-secondary
+      strong
+        | 現在はゲストユーザーでのみログインできます。
+        = link_to "ゲストユーザーでログイン", users_guest_sign_in_path, method: :post, class:"text-primary"
+
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .form-group
         = f.label :email

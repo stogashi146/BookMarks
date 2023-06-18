@@ -3,6 +3,11 @@
     .col-md-6.col-sm-10.mx-auto.bg-white.shadow.p-3.mt-5
       h2.mb-4
         = t(".sign_up")
+
+      p.mb-3.alert.alert-secondary
+        strong
+          | 現在はゲストユーザーでのみログインできます。
+          = link_to "ゲストユーザーでログイン", users_guest_sign_in_path, method: :post, class:"text-primary"
       = form_with model: @user, url: user_registration_path, local: true do |f|
         = render "devise/shared/error_messages", resource: resource
         .form-group
