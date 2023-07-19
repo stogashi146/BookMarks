@@ -5,7 +5,7 @@
 
 
 *2022/1/20　AWSからHerokuに移行*
-https://book-marks-net.herokuapp.com
+~https://book-marks-net.herokuapp.com~ 
 
 *2023/6/18　Heroku有料化に伴いrenderに移行*
 https://bookmarks-460b.onrender.com
